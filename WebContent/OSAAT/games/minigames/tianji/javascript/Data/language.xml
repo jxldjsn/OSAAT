@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<language>
+	<ch>
+		<startGame>
+			开始游戏
+		</startGame>
+		<keySetting>
+			按键设置
+		</keySetting>
+		<level>
+			难度设置
+		</level>
+		<language>
+			语言设置
+		</language>
+		<creator>
+			制作者
+		</creator>
+	</ch>
+	<en>
+		<startGame>
+			Start Game
+		</startGame>
+		<keySetting>
+			Key Setting
+		</keySetting>
+		<level>
+			Level
+		</level>
+		<language>
+			Language
+		</language>
+		<creator>
+			Creator
+		</creator>
+	</en>
+</language>
