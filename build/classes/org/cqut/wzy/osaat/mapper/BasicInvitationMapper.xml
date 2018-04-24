@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.cqut.wzy.osaat.mapper.BasicInvitationMapper">
+
+	<resultMap id="BaseInvitationIndexMap"
+		type="org.cqut.wzy.osaat.entity.view.IndexInvitationView">
+		<id column="invitation_id" property="invitationId" jdbcType="BIGINT" />
+		<result column="invitation_user_Photo" property="photo"
+			jdbcType="VARCHAR" />
+		<result column="invitation_name" property="invitationTitle"
+			jdbcType="VARCHAR" />
+		<result column="invitation_user_name" property="invitationOfPeople"
+			jdbcType="VARCHAR" />
+		<result column="lastreply_name" property="replyOfPeople"
+			jdbcType="VARCHAR" />
+		<result column="invitation_time" property="invitationOfDate"
+			jdbcType="DATE" />
+		<result column="lastreply_time" property="replyOfTime"
+			jdbcType="DATE" />
+		<result column="invitation_replycount" property="invitationReplyCount"
+			jdbcType="INTEGER" />
+	</resultMap>
+
+  <resultMap id="BaseSectionResultMap" type="org.cqut.wzy.osaat.entity.InvitationSection" >
+    <id column="section_id" property="sectionId" jdbcType="INTEGER" />
+    <result column="section_name" property="sectionName" jdbcType="VARCHAR" />
+    <result column="section_introduce" property="sectionIntroduce" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <resultMap id="IncitationReplyViewResultMap" type="org.cqut.wzy.osaat.entity.view.InvitationReplyView" >
+    <id column="replyId" property="replyId" jdbcType="BIGINT" />
+    <result column="replyContent" property="replyContent" jdbcType="LONGVARCHAR" />
+    <result column="replyTime" property="replyTime" jdbcType="TIMESTAMP" />
+    <result column="replyUserName" property="replyUserName" jdbcType="VARCHAR" />
+    <result column="replyUserPhoto" property="replyUserPhoto" jdbcType="VARCHAR" />
+    <result column="replyUserIntegral" property="replyUserIntegral" jdbcType="INTEGER" />
+  </resultMap>
+  
+  <resultMap id="DetailIncitationViewResultMap" type="org.cqut.wzy.osaat.entity.view.DetailInvitationView" >
+    <id column="invitationId" property="invitationId" jdbcType="BIGINT" />
+    <result column="userPhoto" property="userPhoto" jdbcType="VARCHAR" />
+    <result column="invitationTime" property="invitationTime" jdbcType="TIMESTAMP" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="invitationName" property="invitationName" jdbcType="VARCHAR" />
+    <result column="invitationContent" property="invitationContent" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  
+  <resultMap id="BaseSectionViewResultMap" type="org.cqut.wzy.osaat.entity.view.SectionView">
+		<id column="sectionId" property="sectionId" jdbcType="INTEGER" />
+		<result column="sectionName" property="sectionName" jdbcType="VARCHAR" />
+		<result column="todysInvitation" property="todysInvitation"
+			jdbcType="INTEGER" />
+		<result column="countSectionInvitation" property="countSectionInvitation"
+			jdbcType="BIGINT" />
+	</resultMap>
+	
+	<resultMap id="BaseInvitationResultMap" type="org.cqut.wzy.osaat.entity.Invitation" >
+    <id column="invitation_id" property="invitationId" jdbcType="BIGINT" />
+    <result column="invitation_name" property="invitationName" jdbcType="VARCHAR" />
+    <result column="invitation_sectionid" property="invitationSectionid" jdbcType="INTEGER" />
+    <result column="invitation_userid" property="invitationUserid" jdbcType="BIGINT" />
+    <result column="invitation_time" property="invitationTime" jdbcType="TIMESTAMP" />
+    <result column="is_essence" property="isEssence" jdbcType="INTEGER" />
+    <result column="lastreply_name" property="lastreplyName" jdbcType="VARCHAR" />
+    <result column="lastreply_time" property="lastreplyTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="org.cqut.wzy.osaat.entity.Invitation" extends="BaseInvitationResultMap" >
+    <result column="invitation_content" property="invitationContent" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  
+  <select id="CountInvitation" resultType="java.lang.Long">
+  	SELECT COUNT(*) FROM invitation
+  </select>
+  
+  <select id="CountTodayInvitation" resultType="java.lang.Integer">
+  	select count(*) from invitation where date(invitation_time) = curdate()
+  </select>
+  
+  <select id="CountYesterdayInvitation" resultType="java.lang.Integer">
+  	select count(*) from invitation where date(invitation_time) = date_sub(curdate(),interval 1 day)
+  </select>
+  
+  <select id="SelectAllSection" resultMap="BaseSectionResultMap">
+  	SELECT * FROM invitation_section
+  </select>
+  
+  <select id="SearchAllInvitation" parameterType="java.lang.Long" resultMap="BaseInvitationIndexMap">
+  	SELECT
+		I.invitation_id AS invitation_id,
+		I.invitation_name AS invitation_name,
+		U.photo AS invitation_user_Photo,
+		U.username AS invitation_user_name,
+		I.lastreply_name AS lastreply_name,
+		I.invitation_time AS invitation_time,
+		I.lastreply_time AS lastreply_time,
+		(
+			SELECT
+				COUNT(*)
+			FROM
+				invitation_reply
+			WHERE
+				invitationid = I.invitation_id
+		) AS invitation_replycount
+	FROM
+		invitation I
+	LEFT JOIN USER U ON I.invitation_userid = U.id
+	ORDER BY
+		invitation_id DESC
+	LIMIT #{0},#{1}
+  </select>
+  
+  <select id="CountReplyByInvitationId" parameterType="java.lang.Long" resultType="java.lang.Long">
+  	SELECT COUNT(*) FROM invitation_reply WHERE invitationid = #{invitationId}
+  </select>
+  
+  <select id="SelectPagesReplyByInvitationId" parameterType="java.lang.Long" resultMap="IncitationReplyViewResultMap">
+  	SELECT
+		R.reply_id AS replyId,
+		R.reply_content AS replyContent,
+		R.reply_time AS replyTime,
+		U.username AS replyUserName,
+		U.photo AS replyUserPhoto,
+		U.integral AS replyUserIntegral
+	FROM
+		invitation_reply R
+	LEFT JOIN USER U ON R.reply_user_id = U.id
+	WHERE
+		R.invitationid = #{0}
+	ORDER BY
+		reply_time DESC
+	LIMIT #{1},#{2}
+  </select>
+  
+  <select id="SelectInvitationDetailViewById" parameterType="java.lang.Long" resultMap="DetailIncitationViewResultMap">
+  	SELECT
+		I.invitation_id AS invitationId,
+		U.username AS username,
+		U.photo AS userPhoto,
+		U.integral AS userIntegral,
+		I.invitation_time AS invitationTime,
+		I.invitation_name AS invitationName,
+		I.invitation_content AS invitationContent
+	FROM
+		invitation I
+	LEFT JOIN USER U ON I.invitation_userid = U.id
+	WHERE
+		invitation_id = #{0}
+  </select>
+	
+  
+  <select id="SelectIndexSection" resultMap="BaseSectionViewResultMap">
+		SELECT
+			S.section_id AS sectionId,
+			S.section_name AS sectionName,
+			count(
+				CASE
+				WHEN S.section_id = I.invitation_sectionid THEN
+					1
+				ELSE
+					NULL
+				END
+			) AS countSectionInvitation,
+			count(
+				CASE
+				WHEN date(I.invitation_time) = curdate() THEN
+					1
+				ELSE
+					NULL
+				END
+			) AS todysInvitation
+		FROM
+			invitation I
+		LEFT JOIN invitation_section S ON I.invitation_sectionid = S.section_id
+		GROUP BY
+			S.section_id
+	</select>	
+
+	<select id="SearchInvitationByUserId" parameterType="java.lang.Long"
+		resultMap="BaseInvitationResultMap">
+		select * from invitation where invitation_userid = #{0} limit #{1}, #{2}
+	</select>
+	
+	<select id="CountMyInvitation" resultType="java.lang.Long">
+  		SELECT COUNT(*) FROM invitation WHERE invitation_userid = #{userId}
+  	</select>
+  	
+  	<select id="CountInvitationByNameKey" resultType="java.lang.Long">
+  		SELECT COUNT(*) FROM invitation WHERE invitation_name LIKE concat('%',#{invitationName},'%')  
+  	</select>
+  	
+  	<select id="SearchPagesInvitationByName" resultMap="BaseInvitationResultMap">
+  		SELECT * FROM invitation WHERE invitation_name LIKE concat('%',#{0},'%') order by invitation_id desc limit #{1}, #{2}
+  	</select>
+  	
+  	<select id="CountInvitationBySection" parameterType="java.lang.Integer" resultType="java.lang.Long">
+  		SELECT COUNT(*) FROM invitation WHERE invitation_sectionid = #{sectionId}
+  	</select>
+  	
+  	<select id="SearchInvitationBySectionId" resultMap="BaseInvitationResultMap">
+  		SELECT * FROM invitation WHERE invitation_sectionid = #{0} order by invitation_id desc limit #{1}, #{2}
+  	</select>
+
+</mapper>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.cqut.wzy.osaat.mapper.BasicMusicMapper">
+
+	<resultMap id="BaseResultMap" type="org.cqut.wzy.osaat.entity.Music">
+		<id column="songid" property="songid" jdbcType="INTEGER" />
+		<result column="songname" property="songname" jdbcType="VARCHAR" />
+		<result column="songsrc" property="songsrc" jdbcType="VARCHAR" />
+		<result column="time" property="time" jdbcType="TIMESTAMP" />
+		<result column="uploadperson" property="uploadperson" jdbcType="BIGINT" />
+		<result column="songtype" property="songtype" jdbcType="VARCHAR" />
+		<result column="songer" property="songer" jdbcType="VARCHAR" />
+		<result column="imagesrc" property="imagesrc" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<select id="SearchAllSystemMusic" resultMap="BaseResultMap">
+		select * from music
+		where songtype = 1 order by time desc
+	</select>
+	
+	<select id="SearchAllMyMusic" parameterType="java.lang.Long" resultMap="BaseResultMap">
+		select * from music
+		where uploadperson = #{userId} order by time desc
+	</select>
+	
+	<select id="SearchAllMusic" resultMap="BaseResultMap">
+		select * from music order by time desc
+	</select>
+
+</mapper>

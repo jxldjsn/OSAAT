@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.cqut.wzy.osaat.mapper.admin.AdminGameMapper" >
+  <resultMap id="BaseGameResultMap" type="org.cqut.wzy.osaat.entity.Game" >
+    <id column="game_id" property="gameId" jdbcType="BIGINT" />
+    <result column="game_name" property="gameName" jdbcType="VARCHAR" />
+    <result column="game_url" property="gameUrl" jdbcType="VARCHAR" />
+    <result column="game_cover_url" property="gameCoverUrl" jdbcType="VARCHAR" />
+    <result column="upload_time" property="uploadTime" jdbcType="TIMESTAMP" />
+    <result column="game_type" property="gameType" jdbcType="INTEGER" />
+    <result column="game_introduce" property="gameIntroduce" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <resultMap id="BaseGamemeResultMap" type="org.cqut.wzy.osaat.entity.GameMe" >
+    <id column="game_meid" property="gameMeid" jdbcType="BIGINT" />
+    <result column="game_me_userID" property="gameMeUserid" jdbcType="BIGINT" />
+    <result column="game_me_gameid" property="gameMeGameid" jdbcType="BIGINT" />
+  </resultMap>
+  
+  <resultMap id="BaseGameTypeResultMap" type="org.cqut.wzy.osaat.entity.GameType" >
+    <id column="type_id" property="typeId" jdbcType="INTEGER" />
+    <result column="type_name" property="typeName" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <select id="CountAllGame" resultType="java.lang.Long">
+  	select count(*) from game
+  </select>
+  
+  <select id="SearchAllGame" parameterType="java.lang.Long" resultMap="BaseGameResultMap">
+  	select * from game order by game_id desc limit #{0}, #{1}
+  </select>
+  
+  <select id="SearchAllGameType" resultMap="BaseGameTypeResultMap">
+  	select * from game_type
+  </select>
+  
+  <insert id="AddGame" parameterType="org.cqut.wzy.osaat.entity.Game">
+  	insert into game (game_id, game_name, game_url, 
+      game_cover_url, upload_time, game_type, 
+      game_introduce)
+    values (#{gameId,jdbcType=BIGINT}, #{gameName,jdbcType=VARCHAR}, #{gameUrl,jdbcType=VARCHAR}, 
+      #{gameCoverUrl,jdbcType=VARCHAR}, #{uploadTime,jdbcType=TIMESTAMP}, #{gameType,jdbcType=INTEGER}, 
+      #{gameIntroduce,jdbcType=VARCHAR})
+  </insert>
+  
+  <select id="SearchGameByID" parameterType="java.lang.Long" resultMap="BaseGameResultMap">
+  	select * from game where game_id = #{gameid}
+  </select>
+  
+  <update id="UpdateGame" parameterType="org.cqut.wzy.osaat.entity.Game">
+  	update game
+    <set >
+      <if test="gameName != null" >
+        game_name = #{gameName,jdbcType=VARCHAR},
+      </if>
+      <if test="gameUrl != null" >
+        game_url = #{gameUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="gameCoverUrl != null" >
+        game_cover_url = #{gameCoverUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadTime != null" >
+        upload_time = #{uploadTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gameType != null" >
+        game_type = #{gameType,jdbcType=INTEGER},
+      </if>
+      <if test="gameIntroduce != null" >
+        game_introduce = #{gameIntroduce,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where game_id = #{gameId,jdbcType=BIGINT}
+  </update>
+  
+  <delete id="DeleteGame" parameterType="java.lang.Long">
+  	delete from game where game_id = #{gameid}
+  </delete>
+  
+  <select id="CountSearchGame" parameterType="java.lang.String" resultType="java.lang.Long" >
+  	select count(*) from game where game_name like  concat('%',#{key},'%')
+  </select>
+  
+  <select id="SearchGameByName" resultMap="BaseGameResultMap" >
+  	select * from game where game_name like  concat('%',#{0},'%') order by game_id desc limit #{1}, #{2}
+  </select>
+  
+  <insert id="AddGameType" parameterType="org.cqut.wzy.osaat.entity.GameType" >
+    insert into game_type (type_id, type_name)
+    values (#{typeId,jdbcType=INTEGER}, #{typeName,jdbcType=VARCHAR})
+  </insert>
+  
+  <update id="UpdateGameType"  parameterType="org.cqut.wzy.osaat.entity.GameType" >
+  	update game_type
+    set type_name = #{typeName,jdbcType=VARCHAR}
+    where type_id = #{typeId,jdbcType=INTEGER}
+  </update>
+  
+  <select id="CountAllGameMe" resultType="java.lang.Long">
+  	select count(*) from game_me
+  </select>
+  
+  <select id="UserGameList" parameterType="java.lang.Long" resultMap="BaseGamemeResultMap">
+  	select * from game_me order by game_meid desc limit #{0}, #{1}
+  </select>
+  
+  <delete id="DeleteGameMe" parameterType="java.lang.Long">
+  	delete from game_me where game_meid = #{gamemeid}
+  </delete>
+  
+</mapper>

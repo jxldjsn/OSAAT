@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.cqut.wzy.osaat.mapper.InvitationReplyMapper" >
+  <resultMap id="BaseResultMap" type="org.cqut.wzy.osaat.entity.InvitationReply" >
+    <id column="reply_id" property="replyId" jdbcType="BIGINT" />
+    <result column="reply_time" property="replyTime" jdbcType="TIMESTAMP" />
+    <result column="invitationid" property="invitationid" jdbcType="BIGINT" />
+    <result column="reply_user_id" property="replyUserId" jdbcType="BIGINT" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="org.cqut.wzy.osaat.entity.InvitationReply" extends="BaseResultMap" >
+    <result column="reply_content" property="replyContent" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    reply_id, reply_time, invitationid, reply_user_id
+  </sql>
+  <sql id="Blob_Column_List" >
+    reply_content
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="org.cqut.wzy.osaat.entity.InvitationReplyExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from invitation_reply
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="org.cqut.wzy.osaat.entity.InvitationReplyExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from invitation_reply
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from invitation_reply
+    where reply_id = #{replyId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from invitation_reply
+    where reply_id = #{replyId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="org.cqut.wzy.osaat.entity.InvitationReplyExample" >
+    delete from invitation_reply
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="org.cqut.wzy.osaat.entity.InvitationReply" >
+    insert into invitation_reply (reply_id, reply_time, invitationid, 
+      reply_user_id, reply_content)
+    values (#{replyId,jdbcType=BIGINT}, #{replyTime,jdbcType=TIMESTAMP}, #{invitationid,jdbcType=BIGINT}, 
+      #{replyUserId,jdbcType=BIGINT}, #{replyContent,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.cqut.wzy.osaat.entity.InvitationReply" >
+    insert into invitation_reply
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="replyId != null" >
+        reply_id,
+      </if>
+      <if test="replyTime != null" >
+        reply_time,
+      </if>
+      <if test="invitationid != null" >
+        invitationid,
+      </if>
+      <if test="replyUserId != null" >
+        reply_user_id,
+      </if>
+      <if test="replyContent != null" >
+        reply_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="replyId != null" >
+        #{replyId,jdbcType=BIGINT},
+      </if>
+      <if test="replyTime != null" >
+        #{replyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="invitationid != null" >
+        #{invitationid,jdbcType=BIGINT},
+      </if>
+      <if test="replyUserId != null" >
+        #{replyUserId,jdbcType=BIGINT},
+      </if>
+      <if test="replyContent != null" >
+        #{replyContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="org.cqut.wzy.osaat.entity.InvitationReplyExample" resultType="java.lang.Integer" >
+    select count(*) from invitation_reply
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update invitation_reply
+    <set >
+      <if test="record.replyId != null" >
+        reply_id = #{record.replyId,jdbcType=BIGINT},
+      </if>
+      <if test="record.replyTime != null" >
+        reply_time = #{record.replyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.invitationid != null" >
+        invitationid = #{record.invitationid,jdbcType=BIGINT},
+      </if>
+      <if test="record.replyUserId != null" >
+        reply_user_id = #{record.replyUserId,jdbcType=BIGINT},
+      </if>
+      <if test="record.replyContent != null" >
+        reply_content = #{record.replyContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update invitation_reply
+    set reply_id = #{record.replyId,jdbcType=BIGINT},
+      reply_time = #{record.replyTime,jdbcType=TIMESTAMP},
+      invitationid = #{record.invitationid,jdbcType=BIGINT},
+      reply_user_id = #{record.replyUserId,jdbcType=BIGINT},
+      reply_content = #{record.replyContent,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update invitation_reply
+    set reply_id = #{record.replyId,jdbcType=BIGINT},
+      reply_time = #{record.replyTime,jdbcType=TIMESTAMP},
+      invitationid = #{record.invitationid,jdbcType=BIGINT},
+      reply_user_id = #{record.replyUserId,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="org.cqut.wzy.osaat.entity.InvitationReply" >
+    update invitation_reply
+    <set >
+      <if test="replyTime != null" >
+        reply_time = #{replyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="invitationid != null" >
+        invitationid = #{invitationid,jdbcType=BIGINT},
+      </if>
+      <if test="replyUserId != null" >
+        reply_user_id = #{replyUserId,jdbcType=BIGINT},
+      </if>
+      <if test="replyContent != null" >
+        reply_content = #{replyContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where reply_id = #{replyId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="org.cqut.wzy.osaat.entity.InvitationReply" >
+    update invitation_reply
+    set reply_time = #{replyTime,jdbcType=TIMESTAMP},
+      invitationid = #{invitationid,jdbcType=BIGINT},
+      reply_user_id = #{replyUserId,jdbcType=BIGINT},
+      reply_content = #{replyContent,jdbcType=LONGVARCHAR}
+    where reply_id = #{replyId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.cqut.wzy.osaat.entity.InvitationReply" >
+    update invitation_reply
+    set reply_time = #{replyTime,jdbcType=TIMESTAMP},
+      invitationid = #{invitationid,jdbcType=BIGINT},
+      reply_user_id = #{replyUserId,jdbcType=BIGINT}
+    where reply_id = #{replyId,jdbcType=BIGINT}
+  </update>
+</mapper>

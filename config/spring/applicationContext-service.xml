@@ -1,0 +1,55 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-3.2.xsd 
+		http://www.springframework.org/schema/mvc 
+		http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd 
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context-3.2.xsd 
+		http://www.springframework.org/schema/aop 
+		http://www.springframework.org/schema/aop/spring-aop-3.2.xsd 
+		http://www.springframework.org/schema/tx 
+		http://www.springframework.org/schema/tx/spring-tx-3.2.xsd ">
+
+	<!-- 用户的基础 service -->
+	<bean id="basicService" class="org.cqut.wzy.osaat.service.impl.BasicServiceImpl" />
+ 
+	<!-- 博客的基础 service -->
+	<bean id="blogService" class="org.cqut.wzy.osaat.service.impl.BlogServiceImpl" />
+
+	<!-- 论坛的基础 service -->
+	<bean id="bBSService" class="org.cqut.wzy.osaat.service.impl.BBSServiceImpl" />
+ 
+	<!-- 游戏的基础 service -->
+	<bean id="gameService" class="org.cqut.wzy.osaat.service.impl.GameServiceImpl" />
+
+	<!-- 音乐的基础 service -->
+	<bean id="musicService" class="org.cqut.wzy.osaat.service.impl.MusicServiceImpl" />
+
+	<!-- 管理员的基础 service -->
+	<bean id="adminService" class="org.cqut.wzy.osaat.service.impl.admin.AdminServiceImpl" />
+	
+	<!-- 管理员管理用户的基础 service -->
+	<bean id="adminUserService" class="org.cqut.wzy.osaat.service.impl.admin.AdminUserServiceImpl" />
+	
+	<!-- 管理员管理主页的基础 service -->
+	<bean id="adminIndexpageService" class="org.cqut.wzy.osaat.service.impl.admin.AdminIndexpageServiceImpl" />
+	
+	<!-- 管理员管理博客的基础 service -->
+	<bean id="adminBlogService" class="org.cqut.wzy.osaat.service.impl.admin.AdminBlogServiceImpl" />
+	
+	<!-- 管理员管理论坛的基础 service -->
+	<bean id="adminBBSService" class="org.cqut.wzy.osaat.service.impl.admin.AdminBBSServiceImpl" />
+	
+	<!-- 管理员管理游戏的基础 service -->
+	<bean id="adminGameService" class="org.cqut.wzy.osaat.service.impl.admin.AdminGameServiceImpl" />
+	
+	<!-- 管理员管理音乐的基础 service -->
+	<bean id="adminMusicService" class="org.cqut.wzy.osaat.service.impl.admin.AdminMusicServiceImpl" />
+	
+	<!-- 管理员管理资讯的基础 service -->
+	<bean id="adminNewsService" class="org.cqut.wzy.osaat.service.impl.admin.AdminNewsServiceImpl" />
+	
+</beans>

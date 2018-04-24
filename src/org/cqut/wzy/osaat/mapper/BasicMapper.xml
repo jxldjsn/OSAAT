@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.cqut.wzy.osaat.mapper.BasicMapper">
+
+    <resultMap id="BaseResultMap" type="org.cqut.wzy.osaat.entity.Indexpage" >
+	    <id column="indexpage_id" property="indexpageId" jdbcType="BIGINT" />
+	    <result column="title" property="title" jdbcType="VARCHAR" />
+	    <result column="image" property="image" jdbcType="VARCHAR" />
+	    <result column="source_url" property="sourceUrl" jdbcType="VARCHAR" />
+	    <result column="source_type" property="sourceType" jdbcType="INTEGER" />
+	    <result column="index_abstract" property="indexAbstract" jdbcType="VARCHAR" />
+	    <result column="editor_people" property="editorPeople" jdbcType="VARCHAR" />
+	    <result column="editor_time" property="editorTime" jdbcType="TIMESTAMP" />
+    </resultMap>
+    
+    <resultMap id="UserResultMap" type="org.cqut.wzy.osaat.entity.User" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="passwordkey" property="passwordkey" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="qq" property="qq" jdbcType="VARCHAR" />
+    <result column="user_type" property="userType" jdbcType="INTEGER" />
+    <result column="photo" property="photo" jdbcType="VARCHAR" />
+    <result column="gender" property="gender" jdbcType="CHAR" />
+    <result column="age" property="age" jdbcType="INTEGER" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="hobbies" property="hobbies" jdbcType="VARCHAR" />
+    <result column="introduce" property="introduce" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+    <result column="activation_code" property="activationCode" jdbcType="VARCHAR" />
+    <result column="integral" property="integral" jdbcType="INTEGER" />
+    <result column="find_already" property="findAlready" jdbcType="INTEGER" />
+    <result column="find_pw_outDate" property="findPwOutdate" jdbcType="TIMESTAMP" />
+  </resultMap>
+
+	<select id="SearchUserByUsername" parameterType="java.lang.String"
+		resultType="java.lang.Integer">
+		select count(*) from user where username = #{username}
+	</select>
+	
+	<select id="SearchUserByEmail" parameterType="java.lang.String"
+		resultType="java.lang.Integer">
+		select count(*) from user where email = #{email}
+	</select>
+	
+	<select id="SearchByEmailReturnUser" parameterType="java.lang.String"
+		resultMap="UserResultMap">
+		select * from user where email = #{email}
+	</select>
+
+	<select id="SearchByUsernameReturnUser" parameterType="java.lang.String"
+		resultMap="UserResultMap">
+		select * from user where username = #{username}
+	</select>
+
+	<select id="SearchByTypeSize"  resultMap="BaseResultMap" >
+		select * from indexpage
+		where source_type = #{0} order by indexpage_id DESC limit #{1}
+	</select>
+	
+	<select id="SearchIntegralById" parameterType="java.lang.Long" resultType="java.lang.Integer">
+		select integral from user where id = #{userId}
+	</select>
+
+</mapper>

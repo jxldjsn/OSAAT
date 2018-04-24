@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.cqut.wzy.osaat.mapper.BasicBlogMapper">
+
+	<resultMap id="BaseBlogResultMap" type="org.cqut.wzy.osaat.entity.Blog">
+		<id column="blog_id" property="blogId" jdbcType="BIGINT" />
+		<result column="blog_title" property="blogTitle" jdbcType="VARCHAR" />
+		<result column="blog_abstract" property="blogAbstract"
+			jdbcType="VARCHAR" />
+		<result column="blog_authorId" property="blogAuthorid"
+			jdbcType="BIGINT" />
+		<result column="blog_type" property="blogType" jdbcType="INTEGER" />
+		<result column="blog_date" property="blogDate" jdbcType="TIMESTAMP" />
+		<result column="blog_praise" property="blogPraise" jdbcType="INTEGER" />
+		<result column="blog_browse" property="blogBrowse" jdbcType="DOUBLE" />
+	</resultMap>
+	<resultMap id="ResultMapWithBLOBs" type="org.cqut.wzy.osaat.entity.Blog"
+		extends="BaseBlogResultMap">
+		<result column="blog_content" property="blogContent" jdbcType="LONGVARCHAR" />
+	</resultMap>
+
+
+	<resultMap id="BlogIndexMap"
+		type="org.cqut.wzy.osaat.entity.view.IndexBlogView">
+		<id column="blog_id" property="blogId" jdbcType="BIGINT" />
+		<result column="photo" property="photo" jdbcType="VARCHAR" />
+		<result column="blog_title" property="blogTitle" jdbcType="VARCHAR" />
+		<result column="blog_praise" property="blogPraise" jdbcType="INTEGER" />
+		<result column="blog_abstract" property="blogAbstract"
+			jdbcType="VARCHAR" />
+		<result column="blog_type" property="blogType" jdbcType="VARCHAR" />
+		<result column="blog_date" property="createTime" jdbcType="DATE" />
+		<result column="blog_countcomments" property="blogComment" jdbcType="INTEGER" />
+		<result column="blog_browse" property="blogbrowse" jdbcType="INTEGER" />
+	</resultMap>
+
+	<resultMap id="BlogTypeResultMap" type="org.cqut.wzy.osaat.entity.BlogType">
+		<id column="blog_typeId" property="blogTypeid" jdbcType="INTEGER" />
+		<result column="blog_type_name" property="blogTypeName"
+			jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<resultMap id="BlogBroadsideResultMap"
+		type="org.cqut.wzy.osaat.entity.view.IndexBlogBroadsideView">
+		<id column="blog_id" property="blogId" jdbcType="BIGINT" />
+		<result column="photo" property="photo" jdbcType="VARCHAR" />
+		<result column="blog_title" property="blogTitle" jdbcType="VARCHAR" />
+		<result column="blog_type" property="blogType" jdbcType="VARCHAR" />
+		<result column="blog_date" property="createTime" jdbcType="DATE" />
+	</resultMap>
+
+
+	<select id="CountBlog" resultType="java.lang.Long">
+		select count(*) from blog
+	</select>
+
+	<select id="SelectAllBlogType" resultMap="BlogTypeResultMap">
+		select * from blog_type
+	</select>
+	
+	<select id="SelectAllBlog" parameterType="java.lang.Long" resultMap="BlogIndexMap">
+		SELECT
+			B.blog_id AS blog_id,
+			U.photo AS photo,
+			B.blog_title AS blog_title,
+			B.blog_praise AS blog_praise,
+			B.blog_abstract AS blog_abstract,
+			T.blog_type_name AS blog_type,
+			B.blog_date AS blog_date,
+			(
+				SELECT
+					COUNT(*)
+				FROM
+					blog_comment
+				WHERE
+					comment_blog_id = B.blog_id
+			) AS blog_countcomments,
+			B.blog_browse AS blog_browse
+		FROM
+			blog B
+		LEFT JOIN USER AS U ON B.blog_authorId = U.id
+		LEFT JOIN blog_type AS T ON B.blog_type = T.blog_typeId
+		ORDER BY
+			blog_id DESC
+		LIMIT #{0},#{1}
+
+	</select>
+	
+	<select id="SearchNumNewBlog" parameterType="java.lang.Integer"
+		resultMap="BlogBroadsideResultMap">
+		SELECT
+			B.blog_id AS blog_id,
+			U.photo AS photo,
+			B.blog_title AS blog_title,
+			T.blog_type_name AS blog_type,
+			B.blog_date AS blog_date
+		FROM
+			blog B
+		LEFT JOIN USER AS U ON B.blog_authorId = U.id
+		LEFT JOIN blog_type AS T ON B.blog_type = T.blog_typeId
+		ORDER BY
+			blog_date DESC
+		LIMIT #{number}
+	</select>
+	
+	<select id="SearchNumHotBrowseBlog" parameterType="java.lang.Integer"
+		resultMap="BlogBroadsideResultMap">
+		SELECT
+			B.blog_id AS blog_id,
+			U.photo AS photo,
+			B.blog_title AS blog_title,
+			T.blog_type_name AS blog_type,
+			B.blog_date AS blog_date
+		FROM
+			blog B
+		LEFT JOIN USER AS U ON B.blog_authorId = U.id
+		LEFT JOIN blog_type AS T ON B.blog_type = T.blog_typeId
+		ORDER BY
+			blog_browse DESC
+		LIMIT #{number}
+	</select>
+	
+	<select id="SearchNumHotPraiseBlog" parameterType="java.lang.Integer"
+		resultMap="BlogBroadsideResultMap">
+		SELECT
+			B.blog_id AS blog_id,
+			U.photo AS photo,
+			B.blog_title AS blog_title,
+			T.blog_type_name AS blog_type,
+			B.blog_date AS blog_date
+		FROM
+			blog B
+		LEFT JOIN USER AS U ON B.blog_authorId = U.id
+		LEFT JOIN blog_type AS T ON B.blog_type = T.blog_typeId
+		ORDER BY
+			blog_praise DESC
+		LIMIT #{number}
+	</select>
+
+	<select id="SerachNumTypeBlog" parameterType="java.lang.Integer"
+		resultMap="BlogBroadsideResultMap">
+		
+		SELECT
+			B.blog_id AS blog_id,
+			U.photo AS photo,
+			B.blog_title AS blog_title,
+			T.blog_type_name AS blog_type,
+			B.blog_date AS blog_date
+		FROM
+			blog B
+		LEFT JOIN USER AS U ON B.blog_authorId = U.id
+		LEFT JOIN blog_type AS T ON B.blog_type = T.blog_typeId
+		WHERE
+			blog_type = #{0}
+		ORDER BY
+			blog_type DESC
+		LIMIT #{1}
+	</select>
+	
+	<select id="SelectUserNameById" parameterType="java.lang.Long" resultType="java.lang.String" >
+		SELECT username FROM user WHERE id = #{userId}
+	</select>
+	
+	<select id="SearchBlogByUserId" parameterType="java.lang.Long" resultMap="BaseBlogResultMap" >
+		SELECT * FROM blog WHERE blog_authorId = #{0} ORDER BY blog_id DESC LIMIT #{1},#{2}
+	</select> 
+	
+	<select id="SelectByBlogTitle"  resultMap="BlogIndexMap">
+		SELECT
+			B.blog_id AS blog_id,
+			U.photo AS photo,
+			B.blog_title AS blog_title,
+			B.blog_praise AS blog_praise,
+			B.blog_abstract AS blog_abstract,
+			T.blog_type_name AS blog_type,
+			B.blog_date AS blog_date,
+			(
+				SELECT
+					COUNT(*)
+				FROM
+					blog_comment
+				WHERE
+					comment_blog_id = B.blog_id
+			) AS blog_countcomments,
+			B.blog_browse AS blog_browse
+		FROM
+			blog B
+		LEFT JOIN USER AS U ON B.blog_authorId = U.id
+		LEFT JOIN blog_type AS T ON B.blog_type = T.blog_typeId
+		WHERE
+			blog_title LIKE concat('%',#{0},'%')  
+		ORDER BY
+			blog_id DESC LIMIT #{1},#{2}
+	</select>
+	
+	
+	<select id="SelectBlogByType" 
+		resultMap="BlogIndexMap">
+		SELECT
+			B.blog_id AS blog_id,
+			U.photo AS photo,
+			B.blog_title AS blog_title,
+			B.blog_praise AS blog_praise,
+			B.blog_abstract AS blog_abstract,
+			T.blog_type_name AS blog_type,
+			B.blog_date AS blog_date,
+			(
+				SELECT
+					COUNT(*)
+				FROM
+					blog_comment
+				WHERE
+					comment_blog_id = B.blog_id
+			) AS blog_countcomments,
+			B.blog_browse AS blog_browse
+		FROM
+			blog B
+		LEFT JOIN USER AS U ON B.blog_authorId = U.id
+		LEFT JOIN blog_type AS T ON B.blog_type = T.blog_typeId
+		WHERE
+			blog_type = #{0}  
+		ORDER BY
+			blog_id DESC
+		LIMIT #{1}, #{2}
+	</select> 
+	
+	<select id="CountBlogByUserId" parameterType="java.lang.Long" resultType="java.lang.Long" >
+		SELECT COUNT(*) FROM blog WHERE blog_authorId = #{userId}
+	</select>
+	
+	<select id="CountBlogByTitleKey" parameterType="java.lang.String" resultType="java.lang.Long">
+		SELECT	count(*) FROM 	blog  WHERE	blog_title LIKE concat('%',#{blogkey},'%')
+	</select>
+	
+	<select id="CountBlogByType" parameterType="java.lang.Integer" resultType="java.lang.Long">
+		SELECT	count(*) FROM 	blog  WHERE	blog_type = #{blogTypeid}
+	</select>
+	 
+
+</mapper>

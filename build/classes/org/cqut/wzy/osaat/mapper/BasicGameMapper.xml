@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.cqut.wzy.osaat.mapper.BasicGameMapper" >
+  <resultMap id="BaseGameResultMap" type="org.cqut.wzy.osaat.entity.Game" >
+    <id column="game_id" property="gameId" jdbcType="BIGINT" />
+    <result column="game_name" property="gameName" jdbcType="VARCHAR" />
+    <result column="game_url" property="gameUrl" jdbcType="VARCHAR" />
+    <result column="game_cover_url" property="gameCoverUrl" jdbcType="VARCHAR" />
+    <result column="upload_time" property="uploadTime" jdbcType="TIMESTAMP" />
+    <result column="game_type" property="gameType" jdbcType="INTEGER" />
+    <result column="game_introduce" property="gameIntroduce" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <select id="CountAllGame" resultType="java.lang.Long">
+  	SELECT count(*) FROM game
+  </select>
+    
+  <select id="SearchAllGame" parameterType="java.lang.Long" resultMap="BaseGameResultMap">
+  	SELECT * FROM game ORDER BY game_id DESC LIMIT #{0}, #{1}
+  </select>
+  
+  <select id="CountSearchGameByName" parameterType="java.lang.String" resultType="java.lang.Long">
+  	SELECT count(*) FROM game WHERE game_name LIKE concat('%',#{gamekey},'%') ORDER BY game_id DESC
+  </select>
+  
+  <select id="SearchGameByName" resultMap="BaseGameResultMap">
+  	SELECT * FROM game WHERE game_name LIKE concat('%',#{0},'%') ORDER BY game_id DESC LIMIT #{1}, #{2}
+  </select>
+  
+  <select id="SelectByUserAndGame" parameterType="java.lang.Long" resultType="java.lang.Long">
+  	SELECT game_meid FROM game_me WHERE game_me_userID = #{0} AND game_me_gameid = #{1}
+  </select>
+  
+  <select id="CountAllUserGame" parameterType="java.lang.Long" resultType="java.lang.Long">
+  	SELECT count(*) FROM game_me WHERE game_me_userID = #{userId}
+  </select>
+  
+  
+  <select id="SearchGameByUserId" parameterType="java.lang.Long" resultMap="BaseGameResultMap">
+  	SELECT
+		*
+	FROM
+		game
+	WHERE
+		game_id IN (
+			SELECT
+				game_me_gameid
+			FROM
+				game_me
+			WHERE
+				game_me_userID = #{0}
+		)
+	ORDER BY
+		game_id DESC
+	LIMIT #{1}, #{2}
+  </select>
+  
+  <delete id="DeleteMyGame" parameterType="java.lang.Long">
+  	DELETE FROM	game_me WHERE game_me_userID = #{0} AND game_me_gameid = #{1}
+  </delete>
+  
+</mapper>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.cqut.wzy.osaat.mapper.admin.BasicAdminMapper" >
+  <resultMap id="BaseAdminResultMap" type="org.cqut.wzy.osaat.entity.admin.Administrator" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="role_id" property="roleId" jdbcType="INTEGER" />
+    <result column="photo" property="photo" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <resultMap id="BaseAdminViewResultMap" type="org.cqut.wzy.osaat.entity.view.admin.AdministratorView" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="role_id" property="roleId" jdbcType="INTEGER" />
+    <result column="role_name" property="roleType" jdbcType="VARCHAR" />
+    <result column="photo" property="photo" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <resultMap id="BaseRoleResultMap" type="org.cqut.wzy.osaat.entity.admin.AdministratorRole" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="role_name" property="roleName" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <select id="SearchAllAdmin" resultMap="BaseAdminViewResultMap">
+  	SELECT A.id, A.name, A.photo, A.password, A.role_id, R.role_name FROM administrator A LEFT JOIN administrator_role R ON A.role_id = R.id
+  </select>
+  
+  <select id="SearchAdminByName" parameterType="java.lang.String" resultMap="BaseAdminResultMap">
+  	SELECT * FROM administrator WHERE name = #{adminName}
+  </select>
+  
+  <select id="SearchAllRole" resultMap="BaseRoleResultMap" >
+  	SELECT * FROM administrator_role
+  </select>
+  
+</mapper>

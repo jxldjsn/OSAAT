@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.cqut.wzy.osaat.mapper.admin.AdminBlogMapper" >
+  <resultMap id="BaseBlogResultMap" type="org.cqut.wzy.osaat.entity.Blog" >
+    <id column="blog_id" property="blogId" jdbcType="BIGINT" />
+    <result column="blog_title" property="blogTitle" jdbcType="VARCHAR" />
+    <result column="blog_abstract" property="blogAbstract" jdbcType="VARCHAR" />
+    <result column="blog_authorId" property="blogAuthorid" jdbcType="BIGINT" />
+    <result column="blog_type" property="blogType" jdbcType="INTEGER" />
+    <result column="blog_date" property="blogDate" jdbcType="TIMESTAMP" />
+    <result column="blog_praise" property="blogPraise" jdbcType="INTEGER" />
+    <result column="blog_browse" property="blogBrowse" jdbcType="DOUBLE" />
+  </resultMap>
+  
+  <resultMap id="BaseBlogTypeResultMap" type="org.cqut.wzy.osaat.entity.BlogType" >
+    <id column="blog_typeId" property="blogTypeid" jdbcType="INTEGER" />
+    <result column="blog_type_name" property="blogTypeName" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <resultMap id="BaseBlogCommentResultMap" type="org.cqut.wzy.osaat.entity.BlogComment" >
+    <id column="blog_commentId" property="blogCommentid" jdbcType="BIGINT" />
+    <result column="comment_blog_user" property="commentBlogUser" jdbcType="BIGINT" />
+    <result column="comment_blog_id" property="commentBlogId" jdbcType="BIGINT" />
+    <result column="comment_time" property="commentTime" jdbcType="TIMESTAMP" />
+    <result column="comment_content" property="commentContent" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <select id="CountAllBlog" resultType="java.lang.Long">
+  	select count(*) from blog
+  </select>
+  
+  <select id="SearchAllBlog" parameterType="java.lang.Long" resultMap="BaseBlogResultMap">
+  	select * from blog order by blog_id desc limit #{0}, #{1}
+  </select>
+  
+  <select id="ConntSearchBlogByTitle" parameterType="java.lang.String" resultType="java.lang.Long">
+  	select count(*) from blog where blog_title like concat('%',#{title},'%')
+  </select>
+  
+  <select id="SearchBlogByTitle" resultMap="BaseBlogResultMap">
+  	select * from blog where blog_title like concat('%',#{0},'%') order by blog_id desc limit #{1}, #{2}
+  </select>
+  
+  <delete id="DeleteBlogById" parameterType="java.lang.Long">
+  	delete from blog where blog_id = #{blogId}
+  </delete>
+  
+  <select id="SearchAllBlogType" resultMap="BaseBlogTypeResultMap">
+  	select * from blog_type
+  </select>
+  
+  <update id="AlterBlogType" parameterType="org.cqut.wzy.osaat.entity.BlogType">
+  	 update blog_type
+    set blog_type_name = #{blogTypeName,jdbcType=VARCHAR}
+    where blog_typeId = #{blogTypeid,jdbcType=INTEGER}
+  </update>
+  
+  <insert id="AddBlogType" parameterType="org.cqut.wzy.osaat.entity.BlogType" >
+    insert into blog_type (blog_typeId, blog_type_name)
+    values (#{blogTypeid,jdbcType=INTEGER}, #{blogTypeName,jdbcType=VARCHAR})
+  </insert>
+  
+  <!-- <delete id="DeleteBlogType" parameterType="java.lang.Integer">
+  	delete from blog_type where blog_typeId = #{blogid}
+  </delete> -->
+  
+  <select id="CountAllBlogComment" resultType="java.lang.Long">
+  	select count(*) from blog_comment
+  </select>
+  
+  <select id="GetAllBlogComment" parameterType="java.lang.Long" resultMap="BaseBlogCommentResultMap">
+  	select blog_commentId, comment_blog_user, comment_blog_id, left(comment_content, 60) AS comment_content, comment_time from blog_comment order by blog_commentId desc limit #{0}, #{1}
+  </select>
+  
+  <delete id="DeleteBlogComment" parameterType="java.lang.Long">
+  	delete from blog_comment where blog_commentId = #{commentid}
+  </delete>
+  
+  <select id="CountSearchComment" resultType="java.lang.Long">
+  	select count(*) from blog_comment where 
+  	<if test="commentid != null" >
+        blog_commentId = #{commentid}
+    </if>
+  	<if test="userid != null" >
+        comment_blog_user = #{userid}
+    </if>
+    <if test="blogid != null" >
+        comment_blog_id = #{blogid}
+    </if>
+  </select>
+  
+  <select id="SearchComment" resultMap="BaseBlogCommentResultMap">
+  	select blog_commentId, comment_blog_user, comment_blog_id, left(comment_content, 60) AS comment_content, comment_time from blog_comment where 
+  	<if test="commentid != null" >
+        blog_commentId = #{commentid}
+    </if>
+  	<if test="userid != null" >
+        comment_blog_user = #{userid}
+    </if>
+    <if test="blogid != null" >
+        comment_blog_id = #{blogid}
+    </if>
+    order by blog_commentId desc 
+    limit #{startPage}, #{pageSize}
+    
+  </select>
+  
+</mapper>

@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.cqut.wzy.osaat.mapper.InvitationSectionMapper" >
+  <resultMap id="BaseResultMap" type="org.cqut.wzy.osaat.entity.InvitationSection" >
+    <id column="section_id" property="sectionId" jdbcType="INTEGER" />
+    <result column="section_name" property="sectionName" jdbcType="VARCHAR" />
+    <result column="section_introduce" property="sectionIntroduce" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    section_id, section_name, section_introduce
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="org.cqut.wzy.osaat.entity.InvitationSectionExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from invitation_section
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from invitation_section
+    where section_id = #{sectionId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from invitation_section
+    where section_id = #{sectionId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="org.cqut.wzy.osaat.entity.InvitationSectionExample" >
+    delete from invitation_section
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="org.cqut.wzy.osaat.entity.InvitationSection" >
+    insert into invitation_section (section_id, section_name, section_introduce
+      )
+    values (#{sectionId,jdbcType=INTEGER}, #{sectionName,jdbcType=VARCHAR}, #{sectionIntroduce,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="org.cqut.wzy.osaat.entity.InvitationSection" >
+    insert into invitation_section
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sectionId != null" >
+        section_id,
+      </if>
+      <if test="sectionName != null" >
+        section_name,
+      </if>
+      <if test="sectionIntroduce != null" >
+        section_introduce,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sectionId != null" >
+        #{sectionId,jdbcType=INTEGER},
+      </if>
+      <if test="sectionName != null" >
+        #{sectionName,jdbcType=VARCHAR},
+      </if>
+      <if test="sectionIntroduce != null" >
+        #{sectionIntroduce,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="org.cqut.wzy.osaat.entity.InvitationSectionExample" resultType="java.lang.Integer" >
+    select count(*) from invitation_section
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update invitation_section
+    <set >
+      <if test="record.sectionId != null" >
+        section_id = #{record.sectionId,jdbcType=INTEGER},
+      </if>
+      <if test="record.sectionName != null" >
+        section_name = #{record.sectionName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sectionIntroduce != null" >
+        section_introduce = #{record.sectionIntroduce,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update invitation_section
+    set section_id = #{record.sectionId,jdbcType=INTEGER},
+      section_name = #{record.sectionName,jdbcType=VARCHAR},
+      section_introduce = #{record.sectionIntroduce,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="org.cqut.wzy.osaat.entity.InvitationSection" >
+    update invitation_section
+    <set >
+      <if test="sectionName != null" >
+        section_name = #{sectionName,jdbcType=VARCHAR},
+      </if>
+      <if test="sectionIntroduce != null" >
+        section_introduce = #{sectionIntroduce,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where section_id = #{sectionId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.cqut.wzy.osaat.entity.InvitationSection" >
+    update invitation_section
+    set section_name = #{sectionName,jdbcType=VARCHAR},
+      section_introduce = #{sectionIntroduce,jdbcType=VARCHAR}
+    where section_id = #{sectionId,jdbcType=INTEGER}
+  </update>
+</mapper>

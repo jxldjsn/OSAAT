@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.cqut.wzy.osaat.mapper.admin.AdminBBSMapper" >
+  <resultMap id="BaseInvitationResultMap" type="org.cqut.wzy.osaat.entity.Invitation" >
+    <id column="invitation_id" property="invitationId" jdbcType="BIGINT" />
+    <result column="invitation_name" property="invitationName" jdbcType="VARCHAR" />
+    <result column="invitation_sectionid" property="invitationSectionid" jdbcType="INTEGER" />
+    <result column="invitation_userid" property="invitationUserid" jdbcType="BIGINT" />
+    <result column="invitation_time" property="invitationTime" jdbcType="TIMESTAMP" />
+    <result column="is_essence" property="isEssence" jdbcType="INTEGER" />
+    <result column="lastreply_name" property="lastreplyName" jdbcType="VARCHAR" />
+    <result column="lastreply_time" property="lastreplyTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  
+  <resultMap id="BaseSectionResultMap" type="org.cqut.wzy.osaat.entity.InvitationSection" >
+    <id column="section_id" property="sectionId" jdbcType="INTEGER" />
+    <result column="section_name" property="sectionName" jdbcType="VARCHAR" />
+    <result column="section_introduce" property="sectionIntroduce" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <resultMap id="BaseReplyResultMap" type="org.cqut.wzy.osaat.entity.InvitationReply" >
+    <id column="reply_id" property="replyId" jdbcType="BIGINT" />
+    <result column="reply_time" property="replyTime" jdbcType="TIMESTAMP" />
+    <result column="invitationid" property="invitationid" jdbcType="BIGINT" />
+    <result column="reply_user_id" property="replyUserId" jdbcType="BIGINT" />
+    <result column="reply_content" property="replyContent" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <select id="CountAllInvitation" resultType="java.lang.Long">
+  	select count(*) from invitation
+  </select>
+  
+  <select id="SearchAllIncitation" resultMap="BaseInvitationResultMap">
+  	select * from invitation order by invitation_id desc limit #{0}, #{1}
+  </select>
+  
+  <delete id="DeleteInvitation">
+  	delete from invitation where invitation_id = #{invitationid}
+  </delete>
+  
+  <select id="CountSearchInvitation" parameterType="java.lang.String" resultType="java.lang.Long">
+  	select count(*) from invitation where invitation_name like concat('%',#{key},'%')
+  </select>
+  
+  <select id="SearchInvitationByname" resultMap="BaseInvitationResultMap">
+  	select * from invitation where invitation_name like concat('%',#{0},'%') order by invitation_id desc limit #{1}, #{2}
+  </select>
+  
+  <select id="SearchAllSection" resultMap="BaseSectionResultMap">
+  	select * from invitation_section
+  </select>
+  
+  <insert id="AddSection" parameterType="org.cqut.wzy.osaat.entity.InvitationSection">
+  	insert into invitation_section (section_id, section_name, section_introduce)
+    values (#{sectionId,jdbcType=INTEGER}, #{sectionName,jdbcType=VARCHAR}, #{sectionIntroduce,jdbcType=VARCHAR})
+  </insert>
+  
+  <update id="UpdateSection" parameterType="org.cqut.wzy.osaat.entity.InvitationSection" >
+    update invitation_section
+    set section_name = #{sectionName,jdbcType=VARCHAR},
+      section_introduce = #{sectionIntroduce,jdbcType=VARCHAR}
+    where section_id = #{sectionId,jdbcType=INTEGER}
+  </update>
+  
+  <select id="CountAllInvitationReply" resultType="java.lang.Long">
+  	select count(*) from invitation_reply
+  </select>
+  
+  <select id="SearchAllReply" parameterType="java.lang.Long" resultMap="BaseReplyResultMap">
+  	select reply_id, reply_time, invitationid, 
+      reply_user_id, left(reply_content, 60) AS reply_content from invitation_reply order by reply_id desc limit #{0}, #{1}
+  </select>
+  
+  <delete id="DeleteReply" parameterType="java.lang.Long">
+  	delete from invitation_reply where reply_id = #{replyId}
+  </delete>
+  
+  <select id="CountSearchReply" resultType="java.lang.Long">
+  	select count(*) from invitation_reply where 
+  	<if test="replyid != null" >
+        reply_id = #{replyid}
+    </if>
+  	<if test="userid != null" >
+        reply_user_id = #{userid}
+    </if>
+    <if test="invitationid != null" >
+        invitationid = #{invitationid}
+    </if>
+  </select>
+  
+  <select id="SearchReply" resultMap="BaseReplyResultMap">
+  	select reply_id, reply_time, invitationid, 
+      reply_user_id, left(reply_content, 60) AS reply_content from invitation_reply where 
+  	<if test="replyid != null" >
+        reply_id = #{replyid}
+    </if>
+  	<if test="userid != null" >
+        reply_user_id = #{userid}
+    </if>
+    <if test="invitationid != null" >
+        invitationid = #{invitationid}
+    </if>
+    order by reply_id desc 
+    limit #{startPage}, #{pageSize}
+  </select>
+  
+</mapper>

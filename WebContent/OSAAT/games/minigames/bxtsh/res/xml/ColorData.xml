@@ -1,0 +1,77 @@
+<foo>
+    <color id ="01"   colorValue ="0xFFFF153B" />
+    <color id ="02"   colorValue ="0xFFF52DBC" />
+    <color id ="03"   colorValue ="0xFFFAD527" />
+    <color id ="04"   colorValue ="0xFF2DB8F5" />
+    <color id ="05"   colorValue ="0xFF8DD419" />
+    <color id ="06"   colorValue ="0xFF873FDE" />
+    <color id ="07"   colorValue ="0xFFFF6D12" />
+    <color id ="08"   colorValue ="0xFF646464" />
+    <color id ="09"   colorValue ="0xFFFECFB8" />
+    <color id ="10"   colorValue ="0xFFF09686" />
+    <color id ="11"   colorValue ="0xFFFE6289" />
+    <color id ="12"   colorValue ="0xFFF02C47" />
+    <color id ="13"   colorValue ="0xFFF2B268" />
+    <color id ="14"   colorValue ="0xFFE6954A" />
+    <color id ="15"   colorValue ="0xFFDE6C2E" />
+    <color id ="16"   colorValue ="0xFFE15201" />
+    <color id ="17"   colorValue ="0xFFEBE888" />
+    <color id ="18"   colorValue ="0xFFE2DB5A" />
+    <color id ="19"   colorValue ="0xFFF2DB3F" />
+    <color id ="20"   colorValue ="0xFFE8BD16" />
+    <color id ="21"   colorValue ="0xFFA0CB62" />
+    <color id ="22"   colorValue ="0xFF31C04D" />
+    <color id ="23"   colorValue ="0xFF209E33" />
+    <color id ="24"   colorValue ="0xFF0C7418" />
+    <color id ="25"   colorValue ="0xFF82E0FE" />
+    <color id ="26"   colorValue ="0xFF51B9D9" />
+
+    <color id ="27"   colorValue ="0xFF1D99C5" />
+    <color id ="28"   colorValue ="0xFF057DBF" />
+    <color id ="29"   colorValue ="0xFFFF74E7" />
+    <color id ="30"   colorValue ="0xFFD373D2" />
+    <color id ="31"   colorValue ="0xFFBE6FF4" />
+    <color id ="32"   colorValue ="0xFFE33284" />
+
+    <color id ="33"   colorValue ="0xFF4880E9" />
+    <color id ="34"   colorValue ="0xFF3148BD" />
+    <color id ="35"   colorValue ="0xFF534EAC" />
+    <color id ="36"   colorValue ="0xFF503895" />
+
+    <!--<color id ="37"   colorValue ="0xFF8A5C5C" />-->
+    <!--<color id ="38"   colorValue ="0xFF774343" />-->
+    <!--<color id ="39"   colorValue ="0xFF6F3333" />-->
+    <!--<color id ="40"   colorValue ="0xFF562727" />-->
+
+    <color id ="37"   colorValue ="0xFFB87676" />
+    <color id ="38"   colorValue ="0xFF8C4A4A" />
+    <color id ="39"   colorValue ="0xFF662C2C" />
+    <color id ="40"   colorValue ="0xFF411919" />
+
+
+    <color id ="41"   colorValue ="0xFFACACAC" />
+    <color id ="42"   colorValue ="0xFF707070" />
+    <color id ="43"   colorValue ="0xFF4F5151" />
+    <color id ="44"   colorValue ="0xFF2E2F2F" />
+
+
+    <color id ="45"   colorValue ="0xFFF6D775" />
+    <color id ="46"   colorValue ="0xFFFEB3B7" />
+    <color id ="47"   colorValue ="0xFFD8ED85" />
+    <color id ="48"   colorValue ="0xFFF5C0E6" />
+
+
+
+    <colorGroup id ="01"  unlock ="0"  colorName ="Free" group="01,02,03,04,05,06,07,08"/>
+    <colorGroup id ="02"  unlock ="299"  colorName ="girlish" group="09,10,11,12"/>
+    <colorGroup id ="03"  unlock ="299"  colorName ="dusk" group="13,14,15,16"/>
+    <colorGroup id ="04"  unlock ="299"  colorName ="sunshine" group="17,18,19,20"/>
+    <colorGroup id ="05"  unlock ="299"  colorName ="forest" group="21,22,23,24"/>
+    <colorGroup id ="06"  unlock ="299"  colorName ="oceanic" group="25,26,27,28"/>
+    <colorGroup id ="07"  unlock ="399"  colorName ="illusion" group="29,30,31,32"/>
+    <colorGroup id ="08"  unlock ="299"  colorName ="nigthts" group="33,34,35,36"/>
+    <colorGroup id ="09"  unlock ="299"  colorName ="woods" group="37,38,39,40"/>
+    <colorGroup id ="10"  unlock ="299"  colorName ="gloomy" group="41,42,43,44"/>
+    <colorGroup id ="11"  unlock ="399"  colorName ="creamy" group="45,46,47,48"/>
+
+</foo>

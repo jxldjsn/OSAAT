@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.cqut.wzy.osaat.mapper.BasicBlogCommentMapper">
+	<resultMap id="BlogCommentViewResultMap"
+		type="org.cqut.wzy.osaat.entity.view.BlogCommentView">
+		<result column="username" property="username" jdbcType="VARCHAR" />
+		<result column="photo" property="photo" jdbcType="VARCHAR" />
+		<result column="commentContent" property="commentContent"
+			jdbcType="VARCHAR" />
+		<result column="commentTime" property="commentTime" jdbcType="DATE" />
+	</resultMap>
+
+	<select id="selectBlogCommentByBlogId" parameterType="java.lang.Long"
+		resultMap="BlogCommentViewResultMap">
+		SELECT
+		U.username AS username,
+		U.photo AS photo,
+		B.comment_content AS commentContent,
+		B.comment_time AS commentTime
+		FROM
+		blog_comment B
+		LEFT JOIN USER AS U ON B.comment_blog_user = U.id
+		WHERE
+		comment_blog_id = #{blogId};
+	</select>
+	
+	<update id="PriseBlog" parameterType="java.lang.Long">
+		update blog b set b.blog_praise = (b.blog_praise + 1) where blog_id = #{blogId}
+	</update>
+	
+</mapper>

@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.cqut.wzy.osaat.mapper.BlogMapper" >
+  <resultMap id="BaseResultMap" type="org.cqut.wzy.osaat.entity.Blog" >
+    <id column="blog_id" property="blogId" jdbcType="BIGINT" />
+    <result column="blog_title" property="blogTitle" jdbcType="VARCHAR" />
+    <result column="blog_abstract" property="blogAbstract" jdbcType="VARCHAR" />
+    <result column="blog_authorId" property="blogAuthorid" jdbcType="BIGINT" />
+    <result column="blog_type" property="blogType" jdbcType="INTEGER" />
+    <result column="blog_date" property="blogDate" jdbcType="TIMESTAMP" />
+    <result column="blog_praise" property="blogPraise" jdbcType="INTEGER" />
+    <result column="blog_browse" property="blogBrowse" jdbcType="DOUBLE" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="org.cqut.wzy.osaat.entity.Blog" extends="BaseResultMap" >
+    <result column="blog_content" property="blogContent" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    blog_id, blog_title, blog_abstract, blog_authorId, blog_type, blog_date, blog_praise, 
+    blog_browse
+  </sql>
+  <sql id="Blob_Column_List" >
+    blog_content
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="org.cqut.wzy.osaat.entity.BlogExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from blog
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="org.cqut.wzy.osaat.entity.BlogExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from blog
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from blog
+    where blog_id = #{blogId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from blog
+    where blog_id = #{blogId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="org.cqut.wzy.osaat.entity.BlogExample" >
+    delete from blog
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="org.cqut.wzy.osaat.entity.Blog" >
+    insert into blog (blog_id, blog_title, blog_abstract, 
+      blog_authorId, blog_type, blog_date, 
+      blog_praise, blog_browse, blog_content
+      )
+    values (#{blogId,jdbcType=BIGINT}, #{blogTitle,jdbcType=VARCHAR}, #{blogAbstract,jdbcType=VARCHAR}, 
+      #{blogAuthorid,jdbcType=BIGINT}, #{blogType,jdbcType=INTEGER}, #{blogDate,jdbcType=TIMESTAMP}, 
+      #{blogPraise,jdbcType=INTEGER}, #{blogBrowse,jdbcType=DOUBLE}, #{blogContent,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="org.cqut.wzy.osaat.entity.Blog" >
+    insert into blog
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="blogId != null" >
+        blog_id,
+      </if>
+      <if test="blogTitle != null" >
+        blog_title,
+      </if>
+      <if test="blogAbstract != null" >
+        blog_abstract,
+      </if>
+      <if test="blogAuthorid != null" >
+        blog_authorId,
+      </if>
+      <if test="blogType != null" >
+        blog_type,
+      </if>
+      <if test="blogDate != null" >
+        blog_date,
+      </if>
+      <if test="blogPraise != null" >
+        blog_praise,
+      </if>
+      <if test="blogBrowse != null" >
+        blog_browse,
+      </if>
+      <if test="blogContent != null" >
+        blog_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="blogId != null" >
+        #{blogId,jdbcType=BIGINT},
+      </if>
+      <if test="blogTitle != null" >
+        #{blogTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="blogAbstract != null" >
+        #{blogAbstract,jdbcType=VARCHAR},
+      </if>
+      <if test="blogAuthorid != null" >
+        #{blogAuthorid,jdbcType=BIGINT},
+      </if>
+      <if test="blogType != null" >
+        #{blogType,jdbcType=INTEGER},
+      </if>
+      <if test="blogDate != null" >
+        #{blogDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="blogPraise != null" >
+        #{blogPraise,jdbcType=INTEGER},
+      </if>
+      <if test="blogBrowse != null" >
+        #{blogBrowse,jdbcType=DOUBLE},
+      </if>
+      <if test="blogContent != null" >
+        #{blogContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="org.cqut.wzy.osaat.entity.BlogExample" resultType="java.lang.Integer" >
+    select count(*) from blog
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update blog
+    <set >
+      <if test="record.blogId != null" >
+        blog_id = #{record.blogId,jdbcType=BIGINT},
+      </if>
+      <if test="record.blogTitle != null" >
+        blog_title = #{record.blogTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.blogAbstract != null" >
+        blog_abstract = #{record.blogAbstract,jdbcType=VARCHAR},
+      </if>
+      <if test="record.blogAuthorid != null" >
+        blog_authorId = #{record.blogAuthorid,jdbcType=BIGINT},
+      </if>
+      <if test="record.blogType != null" >
+        blog_type = #{record.blogType,jdbcType=INTEGER},
+      </if>
+      <if test="record.blogDate != null" >
+        blog_date = #{record.blogDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.blogPraise != null" >
+        blog_praise = #{record.blogPraise,jdbcType=INTEGER},
+      </if>
+      <if test="record.blogBrowse != null" >
+        blog_browse = #{record.blogBrowse,jdbcType=DOUBLE},
+      </if>
+      <if test="record.blogContent != null" >
+        blog_content = #{record.blogContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update blog
+    set blog_id = #{record.blogId,jdbcType=BIGINT},
+      blog_title = #{record.blogTitle,jdbcType=VARCHAR},
+      blog_abstract = #{record.blogAbstract,jdbcType=VARCHAR},
+      blog_authorId = #{record.blogAuthorid,jdbcType=BIGINT},
+      blog_type = #{record.blogType,jdbcType=INTEGER},
+      blog_date = #{record.blogDate,jdbcType=TIMESTAMP},
+      blog_praise = #{record.blogPraise,jdbcType=INTEGER},
+      blog_browse = #{record.blogBrowse,jdbcType=DOUBLE},
+      blog_content = #{record.blogContent,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update blog
+    set blog_id = #{record.blogId,jdbcType=BIGINT},
+      blog_title = #{record.blogTitle,jdbcType=VARCHAR},
+      blog_abstract = #{record.blogAbstract,jdbcType=VARCHAR},
+      blog_authorId = #{record.blogAuthorid,jdbcType=BIGINT},
+      blog_type = #{record.blogType,jdbcType=INTEGER},
+      blog_date = #{record.blogDate,jdbcType=TIMESTAMP},
+      blog_praise = #{record.blogPraise,jdbcType=INTEGER},
+      blog_browse = #{record.blogBrowse,jdbcType=DOUBLE}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="org.cqut.wzy.osaat.entity.Blog" >
+    update blog
+    <set >
+      <if test="blogTitle != null" >
+        blog_title = #{blogTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="blogAbstract != null" >
+        blog_abstract = #{blogAbstract,jdbcType=VARCHAR},
+      </if>
+      <if test="blogAuthorid != null" >
+        blog_authorId = #{blogAuthorid,jdbcType=BIGINT},
+      </if>
+      <if test="blogType != null" >
+        blog_type = #{blogType,jdbcType=INTEGER},
+      </if>
+      <if test="blogDate != null" >
+        blog_date = #{blogDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="blogPraise != null" >
+        blog_praise = #{blogPraise,jdbcType=INTEGER},
+      </if>
+      <if test="blogBrowse != null" >
+        blog_browse = #{blogBrowse,jdbcType=DOUBLE},
+      </if>
+      <if test="blogContent != null" >
+        blog_content = #{blogContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where blog_id = #{blogId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="org.cqut.wzy.osaat.entity.Blog" >
+    update blog
+    set blog_title = #{blogTitle,jdbcType=VARCHAR},
+      blog_abstract = #{blogAbstract,jdbcType=VARCHAR},
+      blog_authorId = #{blogAuthorid,jdbcType=BIGINT},
+      blog_type = #{blogType,jdbcType=INTEGER},
+      blog_date = #{blogDate,jdbcType=TIMESTAMP},
+      blog_praise = #{blogPraise,jdbcType=INTEGER},
+      blog_browse = #{blogBrowse,jdbcType=DOUBLE},
+      blog_content = #{blogContent,jdbcType=LONGVARCHAR}
+    where blog_id = #{blogId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.cqut.wzy.osaat.entity.Blog" >
+    update blog
+    set blog_title = #{blogTitle,jdbcType=VARCHAR},
+      blog_abstract = #{blogAbstract,jdbcType=VARCHAR},
+      blog_authorId = #{blogAuthorid,jdbcType=BIGINT},
+      blog_type = #{blogType,jdbcType=INTEGER},
+      blog_date = #{blogDate,jdbcType=TIMESTAMP},
+      blog_praise = #{blogPraise,jdbcType=INTEGER},
+      blog_browse = #{blogBrowse,jdbcType=DOUBLE}
+    where blog_id = #{blogId,jdbcType=BIGINT}
+  </update>
+</mapper>

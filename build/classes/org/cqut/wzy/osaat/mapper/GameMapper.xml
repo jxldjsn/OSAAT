@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.cqut.wzy.osaat.mapper.GameMapper" >
+  <resultMap id="BaseResultMap" type="org.cqut.wzy.osaat.entity.Game" >
+    <id column="game_id" property="gameId" jdbcType="BIGINT" />
+    <result column="game_name" property="gameName" jdbcType="VARCHAR" />
+    <result column="game_url" property="gameUrl" jdbcType="VARCHAR" />
+    <result column="game_cover_url" property="gameCoverUrl" jdbcType="VARCHAR" />
+    <result column="upload_time" property="uploadTime" jdbcType="TIMESTAMP" />
+    <result column="game_type" property="gameType" jdbcType="INTEGER" />
+    <result column="game_introduce" property="gameIntroduce" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    game_id, game_name, game_url, game_cover_url, upload_time, game_type, game_introduce
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="org.cqut.wzy.osaat.entity.GameExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from game
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from game
+    where game_id = #{gameId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from game
+    where game_id = #{gameId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="org.cqut.wzy.osaat.entity.GameExample" >
+    delete from game
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="org.cqut.wzy.osaat.entity.Game" >
+    insert into game (game_id, game_name, game_url, 
+      game_cover_url, upload_time, game_type, 
+      game_introduce)
+    values (#{gameId,jdbcType=BIGINT}, #{gameName,jdbcType=VARCHAR}, #{gameUrl,jdbcType=VARCHAR}, 
+      #{gameCoverUrl,jdbcType=VARCHAR}, #{uploadTime,jdbcType=TIMESTAMP}, #{gameType,jdbcType=INTEGER}, 
+      #{gameIntroduce,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.cqut.wzy.osaat.entity.Game" >
+    insert into game
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="gameId != null" >
+        game_id,
+      </if>
+      <if test="gameName != null" >
+        game_name,
+      </if>
+      <if test="gameUrl != null" >
+        game_url,
+      </if>
+      <if test="gameCoverUrl != null" >
+        game_cover_url,
+      </if>
+      <if test="uploadTime != null" >
+        upload_time,
+      </if>
+      <if test="gameType != null" >
+        game_type,
+      </if>
+      <if test="gameIntroduce != null" >
+        game_introduce,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="gameId != null" >
+        #{gameId,jdbcType=BIGINT},
+      </if>
+      <if test="gameName != null" >
+        #{gameName,jdbcType=VARCHAR},
+      </if>
+      <if test="gameUrl != null" >
+        #{gameUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="gameCoverUrl != null" >
+        #{gameCoverUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadTime != null" >
+        #{uploadTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gameType != null" >
+        #{gameType,jdbcType=INTEGER},
+      </if>
+      <if test="gameIntroduce != null" >
+        #{gameIntroduce,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="org.cqut.wzy.osaat.entity.GameExample" resultType="java.lang.Integer" >
+    select count(*) from game
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update game
+    <set >
+      <if test="record.gameId != null" >
+        game_id = #{record.gameId,jdbcType=BIGINT},
+      </if>
+      <if test="record.gameName != null" >
+        game_name = #{record.gameName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gameUrl != null" >
+        game_url = #{record.gameUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gameCoverUrl != null" >
+        game_cover_url = #{record.gameCoverUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uploadTime != null" >
+        upload_time = #{record.uploadTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.gameType != null" >
+        game_type = #{record.gameType,jdbcType=INTEGER},
+      </if>
+      <if test="record.gameIntroduce != null" >
+        game_introduce = #{record.gameIntroduce,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update game
+    set game_id = #{record.gameId,jdbcType=BIGINT},
+      game_name = #{record.gameName,jdbcType=VARCHAR},
+      game_url = #{record.gameUrl,jdbcType=VARCHAR},
+      game_cover_url = #{record.gameCoverUrl,jdbcType=VARCHAR},
+      upload_time = #{record.uploadTime,jdbcType=TIMESTAMP},
+      game_type = #{record.gameType,jdbcType=INTEGER},
+      game_introduce = #{record.gameIntroduce,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="org.cqut.wzy.osaat.entity.Game" >
+    update game
+    <set >
+      <if test="gameName != null" >
+        game_name = #{gameName,jdbcType=VARCHAR},
+      </if>
+      <if test="gameUrl != null" >
+        game_url = #{gameUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="gameCoverUrl != null" >
+        game_cover_url = #{gameCoverUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadTime != null" >
+        upload_time = #{uploadTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gameType != null" >
+        game_type = #{gameType,jdbcType=INTEGER},
+      </if>
+      <if test="gameIntroduce != null" >
+        game_introduce = #{gameIntroduce,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where game_id = #{gameId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.cqut.wzy.osaat.entity.Game" >
+    update game
+    set game_name = #{gameName,jdbcType=VARCHAR},
+      game_url = #{gameUrl,jdbcType=VARCHAR},
+      game_cover_url = #{gameCoverUrl,jdbcType=VARCHAR},
+      upload_time = #{uploadTime,jdbcType=TIMESTAMP},
+      game_type = #{gameType,jdbcType=INTEGER},
+      game_introduce = #{gameIntroduce,jdbcType=VARCHAR}
+    where game_id = #{gameId,jdbcType=BIGINT}
+  </update>
+</mapper>

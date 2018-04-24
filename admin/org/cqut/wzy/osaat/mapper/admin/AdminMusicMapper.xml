@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.cqut.wzy.osaat.mapper.admin.AdminMusicMapper" >
+  <resultMap id="BaseMusicResultMap" type="org.cqut.wzy.osaat.entity.Music" >
+    <id column="songid" property="songid" jdbcType="BIGINT" />
+    <result column="songname" property="songname" jdbcType="VARCHAR" />
+    <result column="songsrc" property="songsrc" jdbcType="VARCHAR" />
+    <result column="time" property="time" jdbcType="TIMESTAMP" />
+    <result column="uploadperson" property="uploadperson" jdbcType="BIGINT" />
+    <result column="songtype" property="songtype" jdbcType="VARCHAR" />
+    <result column="songer" property="songer" jdbcType="VARCHAR" />
+    <result column="imagesrc" property="imagesrc" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <resultMap id="BaseMusicTypeResultMap" type="org.cqut.wzy.osaat.entity.MusicType" >
+    <id column="type_id" property="typeId" jdbcType="INTEGER" />
+    <result column="type_name" property="typeName" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <select id="CountAllMusic" resultType="java.lang.Long">
+  	select count(*) from music
+  </select>
+  
+  <select id="SearchAllMusic" parameterType="java.lang.Long" resultMap="BaseMusicResultMap">
+  	select * from music order by songid desc limit #{0}, #{1}
+  </select>
+  
+  <insert id="AddMusic"  parameterType="org.cqut.wzy.osaat.entity.Music" >
+    insert into music (songid, songname, songsrc, 
+      time, uploadperson, songtype, 
+      songer, imagesrc)
+    values (#{songid,jdbcType=BIGINT}, #{songname,jdbcType=VARCHAR}, #{songsrc,jdbcType=VARCHAR}, 
+      #{time,jdbcType=TIMESTAMP}, #{uploadperson,jdbcType=BIGINT}, #{songtype,jdbcType=VARCHAR}, 
+      #{songer,jdbcType=VARCHAR}, #{imagesrc,jdbcType=VARCHAR})
+  </insert>
+  
+  <select id="SearchMusicById" parameterType="java.lang.Long" resultMap="BaseMusicResultMap" >
+  	select * from music where songid = #{musicid}
+  </select>
+  
+  <update id="UpdateMusic" parameterType="org.cqut.wzy.osaat.entity.Music" >
+    update music
+    <set >
+      <if test="songname != null" >
+        songname = #{songname,jdbcType=VARCHAR},
+      </if>
+      <if test="songsrc != null" >
+        songsrc = #{songsrc,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null" >
+        time = #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uploadperson != null" >
+        uploadperson = #{uploadperson,jdbcType=BIGINT},
+      </if>
+      <if test="songtype != null" >
+        songtype = #{songtype,jdbcType=VARCHAR},
+      </if>
+      <if test="songer != null" >
+        songer = #{songer,jdbcType=VARCHAR},
+      </if>
+      <if test="imagesrc != null" >
+        imagesrc = #{imagesrc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where songid = #{songid,jdbcType=BIGINT}
+  </update>
+  
+  <delete id="DeleteMusic" parameterType="java.lang.Long" >
+  	delete from music where songid = #{musicid}
+  </delete>
+  
+  <select id="CountMusicByName" parameterType="java.lang.String" resultType="java.lang.Long" >
+  	select count(*) from music where songname like concat('%',#{key},'%')
+  </select>
+  
+  <select id="SearchMusicByName" resultMap="BaseMusicResultMap">
+  	select * from music where  songname like concat('%',#{0},'%') order by songid desc limit #{1}, #{2}
+  </select>
+  
+</mapper>

@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.cqut.wzy.osaat.mapper.MusicMapper" >
+  <resultMap id="BaseResultMap" type="org.cqut.wzy.osaat.entity.Music" >
+    <id column="songid" property="songid" jdbcType="BIGINT" />
+    <result column="songname" property="songname" jdbcType="VARCHAR" />
+    <result column="songsrc" property="songsrc" jdbcType="VARCHAR" />
+    <result column="time" property="time" jdbcType="TIMESTAMP" />
+    <result column="uploadperson" property="uploadperson" jdbcType="BIGINT" />
+    <result column="songtype" property="songtype" jdbcType="VARCHAR" />
+    <result column="songer" property="songer" jdbcType="VARCHAR" />
+    <result column="imagesrc" property="imagesrc" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    songid, songname, songsrc, time, uploadperson, songtype, songer, imagesrc
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="org.cqut.wzy.osaat.entity.MusicExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from music
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from music
+    where songid = #{songid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from music
+    where songid = #{songid,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="org.cqut.wzy.osaat.entity.MusicExample" >
+    delete from music
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="org.cqut.wzy.osaat.entity.Music" >
+    insert into music (songid, songname, songsrc, 
+      time, uploadperson, songtype, 
+      songer, imagesrc)
+    values (#{songid,jdbcType=BIGINT}, #{songname,jdbcType=VARCHAR}, #{songsrc,jdbcType=VARCHAR}, 
+      #{time,jdbcType=TIMESTAMP}, #{uploadperson,jdbcType=BIGINT}, #{songtype,jdbcType=VARCHAR}, 
+      #{songer,jdbcType=VARCHAR}, #{imagesrc,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.cqut.wzy.osaat.entity.Music" >
+    insert into music
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="songid != null" >
+        songid,
+      </if>
+      <if test="songname != null" >
+        songname,
+      </if>
+      <if test="songsrc != null" >
+        songsrc,
+      </if>
+      <if test="time != null" >
+        time,
+      </if>
+      <if test="uploadperson != null" >
+        uploadperson,
+      </if>
+      <if test="songtype != null" >
+        songtype,
+      </if>
+      <if test="songer != null" >
+        songer,
+      </if>
+      <if test="imagesrc != null" >
+        imagesrc,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="songid != null" >
+        #{songid,jdbcType=BIGINT},
+      </if>
+      <if test="songname != null" >
+        #{songname,jdbcType=VARCHAR},
+      </if>
+      <if test="songsrc != null" >
+        #{songsrc,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null" >
+        #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uploadperson != null" >
+        #{uploadperson,jdbcType=BIGINT},
+      </if>
+      <if test="songtype != null" >
+        #{songtype,jdbcType=VARCHAR},
+      </if>
+      <if test="songer != null" >
+        #{songer,jdbcType=VARCHAR},
+      </if>
+      <if test="imagesrc != null" >
+        #{imagesrc,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="org.cqut.wzy.osaat.entity.MusicExample" resultType="java.lang.Integer" >
+    select count(*) from music
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update music
+    <set >
+      <if test="record.songid != null" >
+        songid = #{record.songid,jdbcType=BIGINT},
+      </if>
+      <if test="record.songname != null" >
+        songname = #{record.songname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.songsrc != null" >
+        songsrc = #{record.songsrc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.time != null" >
+        time = #{record.time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.uploadperson != null" >
+        uploadperson = #{record.uploadperson,jdbcType=BIGINT},
+      </if>
+      <if test="record.songtype != null" >
+        songtype = #{record.songtype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.songer != null" >
+        songer = #{record.songer,jdbcType=VARCHAR},
+      </if>
+      <if test="record.imagesrc != null" >
+        imagesrc = #{record.imagesrc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update music
+    set songid = #{record.songid,jdbcType=BIGINT},
+      songname = #{record.songname,jdbcType=VARCHAR},
+      songsrc = #{record.songsrc,jdbcType=VARCHAR},
+      time = #{record.time,jdbcType=TIMESTAMP},
+      uploadperson = #{record.uploadperson,jdbcType=BIGINT},
+      songtype = #{record.songtype,jdbcType=VARCHAR},
+      songer = #{record.songer,jdbcType=VARCHAR},
+      imagesrc = #{record.imagesrc,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="org.cqut.wzy.osaat.entity.Music" >
+    update music
+    <set >
+      <if test="songname != null" >
+        songname = #{songname,jdbcType=VARCHAR},
+      </if>
+      <if test="songsrc != null" >
+        songsrc = #{songsrc,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null" >
+        time = #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uploadperson != null" >
+        uploadperson = #{uploadperson,jdbcType=BIGINT},
+      </if>
+      <if test="songtype != null" >
+        songtype = #{songtype,jdbcType=VARCHAR},
+      </if>
+      <if test="songer != null" >
+        songer = #{songer,jdbcType=VARCHAR},
+      </if>
+      <if test="imagesrc != null" >
+        imagesrc = #{imagesrc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where songid = #{songid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.cqut.wzy.osaat.entity.Music" >
+    update music
+    set songname = #{songname,jdbcType=VARCHAR},
+      songsrc = #{songsrc,jdbcType=VARCHAR},
+      time = #{time,jdbcType=TIMESTAMP},
+      uploadperson = #{uploadperson,jdbcType=BIGINT},
+      songtype = #{songtype,jdbcType=VARCHAR},
+      songer = #{songer,jdbcType=VARCHAR},
+      imagesrc = #{imagesrc,jdbcType=VARCHAR}
+    where songid = #{songid,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<your_game>
+
+	<!--Facebook-->
+	
+	<id>YOUR ID APP FACEBOOK</id>
+	<!--EXAMPLE: 637119926359209 -->
+	
+	<message>YOUR MESSAGE OR GAME NAME</message>
+	<!--EXAMPLE: Princess Goldblade and the Dangerous Waters -->
+		
+	<link>YOUR LINK GAME</link>
+	<!--EXAMPLE: http://codecanyon.net/user/wall-e/portfolio -->
+		
+	<caption>YOUR CAPTION</caption>
+	<!--EXAMPLE: Come play this incredible adventure! -->
+	
+	<picture>YOUR URL PICTURE</picture>
+	<!--EXAMPLE: http://filippileonardo.com/_temp/envato/princess_goldblade_01/pg_share_01.png -->
+	
+	<description>YOUR DESCRIPTION</description>
+	<!--EXAMPLE: In a magical world far away, there is an island where Trinks live, very friendly creatures. They have the loyalty of his courageous Princess Goldblade. It protects from all dangers. 
+
+Something terrible has happened! The monsters from the waters stole all the treasures of Trinks. And worse, stolen children also! 
+
+Now Princess Goldblade will recover children and treasures. In this incredible adventure, she will have to face many monsters, traps and challenges of various sizes. -->
+
+	<!--Twitter-->
+	
+	<message_twitter>YOUR MESSAGE</message_twitter>
+	<!--EXAMPLE: Princess Goldblade and the Dangerous Waters http://codecanyon.net/user/wall-e/portfolio -->
+	
+</your_game>

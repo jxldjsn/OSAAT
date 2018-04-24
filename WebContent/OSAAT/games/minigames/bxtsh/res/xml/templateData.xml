@@ -1,0 +1,20 @@
+<foo>
+
+<template id="01"   unlock="0" bonus="100"  offsetX="150" offsetY="450" />
+<template id="02"  unlock="0" bonus="100"  offsetX="180" offsetY="450"  />
+<template id="03"   unlock="0" bonus="100"  offsetX="150" offsetY="450"  />
+<template id="04"   unlock="0" bonus="100"   offsetX="100" offsetY="420" />
+<template id="05"   unlock="500" bonus="220"   offsetX="100" offsetY="450" />
+<template id="06"   unlock="500" bonus="220"  offsetX="50" offsetY="400"  />
+<template id="07"   unlock="500" bonus="220"   offsetX="150" offsetY="450" />
+<template id="08"  unlock="700" bonus="340"   offsetX="150" offsetY="450" />
+<template id="09"   unlock="700" bonus="340"   offsetX="100" offsetY="460" />
+<template id="10"   unlock="700" bonus="340"  offsetX="80" offsetY="450"  />
+<template id="11"   unlock="700" bonus="340"   offsetX="150" offsetY="450" />
+<template id="12"   unlock="1000" bonus="480"  offsetX="100" offsetY="410"  />
+<template id="13"   unlock="1000" bonus="480"   offsetX="170" offsetY="460" />
+<template id="14"   unlock="1000" bonus="480"   offsetX="180" offsetY="450" />
+<template id="15"   unlock="1000" bonus="480"   offsetX="150" offsetY="450" />
+<template id="16"  unlock="1200" bonus="560"  offsetX="230" offsetY="460"  />
+
+</foo>

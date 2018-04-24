@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.cqut.wzy.osaat.mapper.admin.AdminIndexpageMapper" >
+  <resultMap id="BaseIndexpageResultMap" type="org.cqut.wzy.osaat.entity.Indexpage" >
+    <id column="indexpage_id" property="indexpageId" jdbcType="BIGINT" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="image" property="image" jdbcType="VARCHAR" />
+    <result column="source_url" property="sourceUrl" jdbcType="VARCHAR" />
+    <result column="source_type" property="sourceType" jdbcType="INTEGER" />
+    <result column="index_abstract" property="indexAbstract" jdbcType="VARCHAR" />
+    <result column="editor_people" property="editorPeople" jdbcType="VARCHAR" />
+    <result column="editor_time" property="editorTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  
+  <select id="CountAllIndexPage" resultType="java.lang.Long">
+  	SELECT count(*) FROM indexpage
+  </select>
+  
+  <select id="SearchAllIndexpage" parameterType="java.lang.Long" resultMap="BaseIndexpageResultMap">
+  	SELECT * FROM indexpage ORDER BY indexpage_id DESC LIMIT #{0}, #{1}
+  </select>
+  
+  <insert id="AddIndexPage" parameterType="org.cqut.wzy.osaat.entity.Indexpage">
+  	insert into indexpage (indexpage_id, title, image, 
+      source_url, source_type, index_abstract, 
+      editor_people, editor_time)
+    values (#{indexpageId,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, #{image,jdbcType=VARCHAR}, 
+      #{sourceUrl,jdbcType=VARCHAR}, #{sourceType,jdbcType=INTEGER}, #{indexAbstract,jdbcType=VARCHAR}, 
+      #{editorPeople,jdbcType=VARCHAR}, #{editorTime,jdbcType=TIMESTAMP})
+  </insert>
+  
+  <select id="SelectIndexpageById" parameterType="java.lang.Long" resultMap="BaseIndexpageResultMap">
+  	select * from indexpage where indexpage_id = #{id}
+  </select>
+  
+  <update id="UpdateIndexPage" parameterType="org.cqut.wzy.osaat.entity.Indexpage">
+  	update indexpage
+    <set >
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null" >
+        image = #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="sourceUrl != null" >
+        source_url = #{sourceUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="sourceType != null" >
+        source_type = #{sourceType,jdbcType=INTEGER},
+      </if>
+      <if test="indexAbstract != null" >
+        index_abstract = #{indexAbstract,jdbcType=VARCHAR},
+      </if>
+      <if test="editorPeople != null" >
+        editor_people = #{editorPeople,jdbcType=VARCHAR},
+      </if>
+      <if test="editorTime != null" >
+        editor_time = #{editorTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where indexpage_id = #{indexpageId,jdbcType=BIGINT}
+  </update>
+  
+  <delete id="DeleteIndexpageById" parameterType="java.lang.Long">
+  	delete from indexpage where indexpage_id = #{id}
+  </delete>
+  
+  <select id="ConntSearchIndexpageByTitle" parameterType="java.lang.String" resultType="java.lang.Long">
+  	select count(*) from indexpage where title like concat('%',#{key},'%')
+  </select>
+  
+  <select id="SearchIndexpageByTitle" resultMap="BaseIndexpageResultMap">
+  	select * from indexpage where title like concat('%',#{0},'%') LIMIT #{1}, #{2} 
+  </select>
+  
+</mapper>

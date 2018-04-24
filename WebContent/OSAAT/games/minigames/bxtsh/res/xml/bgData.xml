@@ -1,0 +1,14 @@
+<foo>
+    <frameBg id ="01"   unlock ="0" bonus = "30"  offsetX="20"  offsetY="5"   />
+    <frameBg id ="02"   unlock ="0" bonus = "30"  offsetX="5"  offsetY="15"  />
+    <frameBg id ="03"  unlock ="0" bonus = "30" offsetX="15"  offsetY="25"  />
+    <frameBg id ="04"  unlock ="0" bonus = "90" offsetX="75"  offsetY="35"/>
+    <frameBg id ="05"   unlock ="99" bonus = "210"  offsetX="27"  offsetY="34"   />
+    <frameBg id ="06"  unlock ="99" bonus = "225"  offsetX="35"  offsetY="34" />
+    <frameBg id ="07"   unlock ="99" bonus = "240"  offsetX="45"  offsetY="20" />
+    <frameBg id ="08"   unlock ="149" bonus = "255" offsetX="30"  offsetY="15" />
+    <frameBg id ="09"   unlock ="149" bonus = "270"  offsetX="35"  offsetY="55" />
+    <frameBg id ="10"   unlock ="149" bonus = "345"  offsetX="25"  offsetY="25" />
+    <frameBg id ="11"   unlock ="299" bonus = "450"  offsetX="45"  offsetY="35" />
+    <frameBg id ="12"   unlock ="299" bonus = "450" offsetX="50"  offsetY="50"/>
+</foo>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.cqut.wzy.osaat.mapper.admin.AdminNewsMapper" >
+  
+  <resultMap id="BaseNewsResultMap" type="org.cqut.wzy.osaat.entity.admin.News" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="author" property="author" jdbcType="VARCHAR" />
+    <result column="news_abstract" property="newsAbstract" jdbcType="VARCHAR" />
+    <result column="time" property="time" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="org.cqut.wzy.osaat.entity.admin.News" extends="BaseNewsResultMap" >
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  
+  <select id="CountAllNews" resultType="java.lang.Long" >
+  	select count(*) from news
+  </select>
+  
+  <select id="SearchAllNews" parameterType="java.lang.Long" resultMap="BaseNewsResultMap">
+  	select * from news order by id desc limit #{0}, #{1}
+  </select>
+  
+  <select id="CountAllSearchNews" parameterType="java.lang.String" resultType="java.lang.Long">
+  	select count(*) from news where title like concat('%',#{key},'%')
+  </select>
+  
+  <select id="SearchNewsByKey" resultMap="BaseNewsResultMap">
+  	select * from news where title like concat('%',#{0},'%') order by id desc limit #{1}, #{2}
+  </select>
+  
+</mapper>
