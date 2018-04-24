@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<!-- saved from url=(0044)http://www.jq22.com/demo/jquery-tcs20150930/ -->
+<html><head lang="en"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title></title>
+
+<style>
+*{
+margin: 0;
+	padding: 0;
+}
+body{
+	/*background-color: #f0f0f0;*/
+	background-image: url(image/snake3.jpg);
+	background-repeat: no-repeat;
+	background-size:95% 100%;
+	opacity: .8;
+}
+#myCanvas{
+	border: 3px solid #4a4a4a;
+	margin:0px 0px 0px 500px;
+	box-shadow: 3px 3px 3px 3px #969696,-3px -3px 3px 3px #969696;
+}
+h2{
+	/*font-size: 35px;*/
+	color: #878787;
+	padding:0 0 0 570px;
+	font-weight: bolder;
+	/*font-family: "Gungsuh";*/
+	font-family: "Algerian";
+	/*margin-left: 650px;*/
+}
+#score {
+	color: #737375;
+	font-weight:bolder;
+	font-size:20px;
+	position: absolute;
+	margin-top: -636px;
+	margin-left: 1000px;
+}
+#btn{
+	width: 150px;
+	height: 35px;
+	background-color: #388328;
+	color: #ffffff;
+	font-family: "微软雅黑";
+	font-weight: bolder;
+	font-size: 20px;
+	border-radius: 10px;
+	box-shadow:3px 3px 6px #29611e;
+	margin-left: 260px;
+	position: absolute;
+	margin-top: 200px;
+}
+
+#btn1{
+	width: 150px;
+	height: 35px;
+	background-color: #388328;
+	color: #ffffff;
+	font-family: "微软雅黑";
+	font-weight: bolder;
+	font-size: 20px;
+	border-radius: 10px;
+	box-shadow:3px 3px 6px #29611e;
+	margin-left: 260px;
+	position: absolute;
+	margin-top: 350px;
+}
+
+#resize{
+	width: 220px;
+	height: 220px;
+	border: 2px dashed #183811;
+	position: absolute;
+	color: #214d18;
+	font-size: 19px;
+	font-weight: bold;
+	font-family: "华文新魏";
+	box-shadow: 4px 4px 6px #29611e,-3px -3px 6px #29611e;
+	margin-left: 30px;
+	margin-top: 200px;
+}
+#btn:hover{
+	cursor: pointer;
+   background-color:#214E18 ;
+   color: #c6c6c6;
+}
+#btn1:hover{
+	cursor: pointer;
+	background-color:#214E18 ;
+	color: #c6c6c6;
+}
+#Name{
+	position: absolute;
+	margin-left: 60px;
+	margin-top: 80px;
+	font-size: 40px;
+	font-family: "方正舒体";
+
+}
+</style>
+</head>
+<body>
+
+<input type="button" value="开 始 游 戏" id="btn" onclick="btnStart()" class="btn">
+<a href="index.html"><input type="button" value="重 新 开 始" id="btn1" class="btn"></a>
+
+<div id="resize">
+    <h3>游戏说明：</h3>
+    <br>
+    <p>点击开始游戏，游戏开
+        始，按电脑上下左右键移动贪吃蛇去吃食物，
+    <br>  贪吃蛇碰到边界，和碰到自身，游戏结束！！</p>
+</div>
+<div id="Name">
+    <h3>贪 吃 蛇</h3>
+</div>
+<h2>贪 &nbsp; 吃 &nbsp; 蛇</h2>
+<canvas id="myCanvas" height="600" width="600"></canvas>
+<div id="score">
+    得分： <span id="score_one">0</span>
+</div>
+<audio src="source/beginmusic.mp3" loop id="beginmusic"></audio>
+<audio src="source/scored.mp3" id="bomb"></audio>
+<!--<audio src="source/shot.mp3" id="shot"></audio>-->
+
+<script>
+
+    function btnStart(){
+        timer = setInterval(move,150);
+        document.onkeydown = function(e){
+            e = e || window.event;
+            keyDown(e);
+        }
+    }
+
+    var canvas = document.getElementById('myCanvas');
+    var ctx = canvas.getContext('2d');
+    var score_one = document.getElementById('score_one');
+    var score = document.getElementById('score');
+    var beginmusic=document.getElementById("beginmusic");
+    var bomb=document.getElementById("bomb");
+    var shot=document.getElementById("shot");
+//    var btn=document.getElementById("btn");
+    var BLOCK_SIZE = 20;
+    var COLS = 30;
+    var ROWS = 30;
+    var foodX = 0;
+    var foodY= 0;
+    var snakes = [];
+    var snakeCount = 4;
+    var timer = null;
+    var toGo = 3;
+    score_one.innerText = '0';
+
+    beginmusic.pause();
+    beginmusic.load();
+    beginmusic.play();
+    function draw(){
+        //画网格
+        //画横线
+        var s = 600;
+        for(var i=0;i<=s;i+=20){
+            ctx.strokeStyle = "#4a4a4a";
+            ctx.lineWidth =1;
+
+            ctx.moveTo(0,i+20);
+            ctx.lineTo(600,i+20);
+            ctx.moveTo(i+20,0);
+            ctx.lineTo(i+20,600);
+            ctx.stroke();
+        }
+        for(var i=0;i<snakes.length;i++){
+            ctx.beginPath();
+            ctx.fillRect(snakes[i].x,snakes[i].y,BLOCK_SIZE,BLOCK_SIZE);
+            ctx.strokeStyle = "gray";
+            ctx.moveTo(snakes[i].x,snakes[i].y);
+            ctx.lineTo(snakes[i].x + BLOCK_SIZE, snakes[i].y);
+            ctx.lineTo(snakes[i].x + BLOCK_SIZE, snakes[i].y + BLOCK_SIZE);
+            ctx.lineTo(snakes[i].x, snakes[i].y + BLOCK_SIZE);
+            ctx.lineTo(snakes[i].x,snakes[i].y);
+            ctx.stroke();
+        }
+        ctx.fillRect(foodX,foodY,20,20);
+        ctx.fill();
+        //画随机出现的食物
+        //注意食物出现的时间
+        //addFood()能直接放在这里吗？
+    }
+
+    function start(){
+        for(var i=0;i<snakeCount;i++){
+            snakes[i] = {x:i*BLOCK_SIZE,y:0};
+        }
+        addFood();
+        draw();
+    }
+
+    function addFood(){
+        foodX = Math.floor(Math.random()*(ROWS-1)) * BLOCK_SIZE;
+        foodY = Math.floor(Math.random()*(COLS-1)) * BLOCK_SIZE;
+    }
+
+    function move(){
+        switch (toGo){
+            case 1: //左
+                snakes.push({x:snakes[snakeCount - 1].x -BLOCK_SIZE,y:snakes[snakeCount - 1].y});
+                    ctx.clearRect(0,0,600,600);
+                break;
+            case 2: //上
+                snakes.push({x:snakes[snakeCount - 1].x,y:snakes[snakeCount - 1].y - BLOCK_SIZE});
+                ctx.clearRect(0,0,600,600);
+                break;
+            case 3: //右
+                snakes.push({x:snakes[snakeCount - 1].x +BLOCK_SIZE,y:snakes[snakeCount - 1].y});
+                ctx.clearRect(0,0,600,600);
+                break;
+            case 4: //下
+                snakes.push({x:snakes[snakeCount - 1].x,y:snakes[snakeCount - 1].y+BLOCK_SIZE});
+                ctx.clearRect(0,0,600,600);
+                break;
+        }
+        snakes.shift();
+        isEat();
+        isDead();
+        draw();
+    }
+
+    function isEat(){
+        if(snakes[snakeCount - 1].x == foodX && snakes[snakeCount - 1].y == foodY){
+            snakeCount ++;
+            addFood();
+            snakes.unshift({x:-100,y:-100});
+            score_one.innerText = parseInt(score_one.innerText)+50;
+            bomb.pause();
+            bomb.load();
+            bomb.play();
+        }
+    }
+    function isDead(){
+        //判断边界
+       if(snakes[snakes.length - 1].x>580 || snakes[snakes.length - 1].y>580 ||
+               snakes[snakes.length - 1].x<0 || snakes[snakes.length - 1].y<0)
+            {
+                alert("game over！！" +
+                        ""+"此次得分："+score_one.innerText+"   "+"碰壁了，还要继续加油哦！");
+//                if(score_one.innerText=200){
+////                score.innerHTML= "您神速般的升了一级";
+//                }
+                window.location.reload();
+           shot.pause();
+           shot.load();
+           shot.play();
+            }
+
+            //判断有没有碰到蛇身
+            for(var i=0;i<snakes.length-1;i++){
+                if(snakes[snakes.length - 1].x == snakes[i].x &&
+                  snakes[snakes.length - 1].y == snakes[i].y){
+                    alert("game over！！" +
+                            ""+"此次得分："+score_one.innerText+"   "+"撞到自己了，骚年，且撞且珍惜啊！");
+                    window.location.reload();
+                    shot.pause();
+                    shot.load();
+                    shot.play();
+                }
+            }
+    }
+
+    function keyDown(e){
+        switch (e.keyCode){
+            case 37:
+                if(toGo != 1 || toGo != 3) toGo = 1;
+                break;
+            case  38:
+                if(toGo != 2 || toGo !=3) toGo = 2;
+                break;
+            case  39:
+                if(toGo != 3 || toGo !=2) toGo = 3;
+                break;
+            case  40:
+                if(toGo != 4|| toGo !=3) toGo = 4;
+                break;
+        }
+    }
+    window.onload =function(){
+        start();
+//        btnStart();
+//        timer = setInterval(move,150);
+//        document.onkeydown = function(e){
+//            e = e || window.event;
+//            keyDown(e);
+//        }
+    }
+
+
+</script>
+
+
+</body></html>

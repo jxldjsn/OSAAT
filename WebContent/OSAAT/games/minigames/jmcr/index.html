@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>芥末超人-微游戏</title>
+    <!--<meta name="x-share-icon" content="h"><meta name="x-share-desc" content="你是吃货么？你有梦想么？和芥末超人一起飞翔！" data-custom="我得到{s}分，芥末超人带你卖萌带你飞！"><meta name="x-key" content="60a35a6985dec75090c58eef247c732f"><meta name="x-id" content="1882"><meta name="screen-orientation" content="portrait">-->
+    <!-- Define the viewport -->
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=0, target-densitydpi=device-dpi">-->
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+	
+	<link rel="shortcut icon" href="icon.png">
+<link rel="icon" href="icon.png">
+<link type="text/css" href="http://www.doudou.in/play/common/common.css" rel="stylesheet" />
+
+
+
+    <style>
+        * {
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        }
+
+        html {
+            overflow: hidden;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            background-color: #111111;
+            height: 100%;
+            width: 100%;
+            display: block;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            text-align: center;
+        }
+
+        #canvas {
+            background-color: #3082AF;
+            margin: 0;
+            padding: 0;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-top: -172px;
+            margin-left: -160px;
+            z-index: 1;
+
+        }
+        #loader {
+            width: 50px;
+            height: 50px;
+            top: 50%;
+            left: 50%;
+            position: absolute;
+            margin-top: -25px;
+            margin-left: -25px;
+            background: url('assets/logo_spele.png') no-repeat 50% 50%;
+            display: block !important;
+            z-index: 2;
+        }
+    </style>
+    <script type="text/javascript" src="wasabi_files/game.min.js?v1.0"></script>
+
+<body onload="MyGame.init()">
+
+<img id="wxsicon" src="logo.jpg" width="0" height="0" style="position:absolute">
+
+    <canvas id="canvas" width="814" height="814" style="background-color: rgb(48, 130, 175); margin-top: 0px; margin-left: 0px; left: 433px; top: 0px;"></canvas>
+	
+	<input id="bt-game-id" type="hidden" value="16-jmcr">
+
+	
+</body>
+
+
+</html>

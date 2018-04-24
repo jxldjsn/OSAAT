@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>WZY音乐播放器</title>
+    <link rel="stylesheet" type="text/css" href="Css/tplayer.css" />
+    <link rel="stylesheet" type="text/css" href="Plugins/FontAwesome4.1/css/font-awesome.min.css" />
+    <script type="text/javascript" src="Js/animateManage.js"></script>
+    <script src="Js/jquery.js"></script>
+    <script src="Js/jquery-ui.js"></script>
+    <script src="Js/tPlayer.js"></script>
+</head>
+<body>
+	<div id="WZYmusic">
+    	WZY音乐
+        <p align="right" style="margin-top:-65px;">
+        	<a href="index.jsp" class="btn twitter">
+            	<i class="icons fi-social-twitter"></i>
+    			<span class="text">
+            		我的所有歌曲
+                </span>
+            </a>
+            <span>&nbsp;&nbsp;</span>
+            <a href="index.jsp" class="btn twitter">
+            	<i class="icons fi-social-twitter"></i>
+    			<span class="text">
+            		上传我的歌曲
+                </span>
+            </a>
+            &nbsp;</p>
+    </div>
+    <div id="t_wrapper">
+        <div id="t_cover">
+        	<img src="Images/logo.png">
+        </div>
+    	<div id="t_top">
+    		<div id="t_title_info">
+    			<span class="artist"></span>
+    			<span class="title"></span>
+    		</div>
+    	</div>
+    	<div id="t_middle">
+    		<div id="play"></div>
+    		<div id="pause" class="hidden">
+    		</div>
+    		<div class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" id="t_progress">
+                <div id="trackInfo">
+                    <div id="error">
+    				</div>
+                    <div id="current">0:00</div>
+                    <div id="duration">0:00</div>
+    			</div>
+    			<div style="width: 0%;" class="ui-slider-range ui-widget-header ui-corner-all ui-slider-range-min"></div>
+            	<span style="left: 0%;" class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0"></span>
+            </div>
+    		<span id="prev"></span>
+            <span id="next"></span>
+    	</div>
+    	<div id="t_bottom">
+            <div id="range">
+                <div id="val"></div>
+                <div id="vol"></div>
+                <div id="rangeVal"></div>
+            </div>
+            <div id="t_pls_show" class="noselectpls"></div>
+    	</div>
+    </div>
+    
+    <div id="playlist">
+        <ul>
+        	<div class="musictitle">
+    			<p align="center">我的音乐</p>
+    		</div>
+            
+            <li t_cover="wlh.jpg" t_artist="就是现在" t_name="王力宏" id="lifirst">
+            	<a href="#">就是现在 – 王力宏 </a>
+            	<audio preload="none">
+                    <source src="Media/jiushixianzai.mp3" type="audio/mp3">
+                    <source src="Media/Transformers2.htm" type="audio/ogg; codecs=vorbis">
+            	</audio>
+            </li>
+        </ul>
+    </div>
+    
+    <div id="liubiao" style="height:15px;">
+    </div>
+   
+    <div id="playlist">
+        <ul>
+        	<div class="musictitle">
+    			<p align="center">系统音乐</p>
+    		</div>
+            <li t_cover="wlh.jpg" t_artist="就是现在" t_name="王力宏" id="lifirst">
+            	<a href="#">就是现在 – 王力宏</a>
+            	<audio preload="none">
+                    <source src="Media/jiushixianzai.mp3" type="audio/mp3">
+                    <source src="Media/Transformers2.htm" type="audio/ogg; codecs=vorbis">
+            	</audio>
+            </li>
+             
+            <li t_cover="liujia.jpg" t_artist="一个人走" t_name="刘佳">
+            	<a href="#">一个人走 – 刘佳</a>
+                <audio preload="none">
+                    <source src="Media/yigerenzhou.mp3" type="audio/mp3">
+                    <source src="Media/Transformers2.htm" type="audio/ogg; codecs=vorbis">
+                </audio>
+            </li>
+            <li t_cover="shudalv.jpg" t_artist="小情歌" t_name="苏打绿">
+            	<a href="#">小情歌– 苏打绿</a>
+                <audio preload="none">
+                    <source src="Media/xiaoqingge.mp3" type="audio/mp3">
+                    <source src="Media/Transformers2.htm" type="audio/ogg; codecs=vorbis">
+                </audio>
+            </li>
+            <li t_cover="wsl.jpg" t_artist="年轮" t_name="汪苏泷">
+            	<a href="#">年轮 – 汪苏泷</a>
+                <audio preload="none">
+                    <source src="Media/nianlun.mp3" type="audio/mp3">
+                    <source src="Media/Transformers2.htm" type="audio/ogg; codecs=vorbis">
+                </audio>
+            </li>
+            <li t_cover="dzq.jpg" t_artist="泡沫" t_name="邓紫棋">
+            	<a href="#">泡沫 – 邓紫棋</a>
+                <audio preload="none">
+                    <source src="Media/paomo.mp3" type="audio/mp3">
+                    <source src="Media/Transformers2.htm" type="audio/ogg; codecs=vorbis">
+                </audio>
+            </li>
+             <li t_cover="xd.jpg" t_artist="我终于明白" t_name="星弟">
+            	<a href="#">我终于明白 – 星弟</a>
+                <audio preload="none">
+                    <source src="Media/wozhongyumingbai.mp3" type="audio/mp3">
+                    <source src="Media/Transformers2.htm" type="audio/ogg; codecs=vorbis">
+                </audio>
+            </li>
+            <li t_cover="xusong.jpg" t_artist="千古" t_name="许嵩">
+            	<a href="#">千古 – 许嵩</a>
+                <audio preload="none">
+                    <source src="Media/qiangu.mp3" type="audio/mp3">
+                    <source src="Media/Transformers2.htm" type="audio/ogg; codecs=vorbis">
+                </audio>
+            </li>
+            <li t_cover="shudalv.jpg" t_artist="我好想你" t_name="苏打绿">
+            	<a href="#">我好想你 – 苏打绿</a>
+                <audio preload="none">
+                    <source src="Media/wohaoxiangni.mp3" type="audio/mp3">
+                    <source src="Media/Transformers2.htm" type="audio/ogg; codecs=vorbis">
+                </audio>
+            </li>
+             <li t_cover="fzm.jpg" t_artist="最好的我" t_name="房祖名">
+            	<a href="#">最好的我 – 房祖名</a>
+                <audio preload="none">
+                    <source src="Media/zuighaodewo.mp3" type="audio/mp3">
+                    <source src="Media/Transformers2.htm" type="audio/ogg; codecs=vorbis">
+                </audio>
+            </li>
+            <li t_cover="tfboys.jpg" t_artist="青春修炼手册" t_name="TFBOYS">
+            	<a href="#">青春修炼手册 – TFBOYS</a>
+                <audio preload="none">
+                    <source src="Media/qcxlsc.mp3" type="audio/mp3">
+                    <source src="Media/Transformers2.htm" type="audio/ogg; codecs=vorbis">
+                </audio>
+            </li>
+            <li t_cover="MikePosner.jpg" t_artist="I Took a Pill In Ibiza" t_name="Mike Posner">
+            	<a href="#">I Took a Pill In Ibiza – Mike Posner</a>
+                <audio preload="none">
+                    <source src="Media/I Took a Pill In Ibiza.mp3" type="audio/mp3">
+                    <source src="Media/Transformers2.htm" type="audio/ogg; codecs=vorbis">
+                </audio>
+            </li>
+            <li t_cover="JustinBieber.jpg" t_artist="Love Yourself" t_name="Justin Bieber">
+            	<a href="#">Love Yourself – Justin Bieber</a>
+                <audio preload="none">
+                    <source src="Media/Love Yourself.mp3" type="audio/mp3">
+                    <source src="Media/Transformers2.htm" type="audio/ogg; codecs=vorbis">
+                </audio>
+            </li>
+            <li t_cover="aqgy4.jpg" t_artist="Gentleman" t_name="戴爱玲">
+            	<a href="#">Gentleman – 戴爱玲</a>
+                <audio preload="none">
+                    <source src="Media/Gentleman.mp3" type="audio/mp3">
+                    <source src="Media/Transformers2.htm" type="audio/ogg; codecs=vorbis">
+                </audio>
+            </li>
+            <li t_cover="ayq.jpg" t_artist="笑着说再见" t_name="安又琪">
+            	<a href="#">笑着说再见 –  安又琪</a>
+                <audio preload="none">
+                    <source src="Media/xiaozheshuozaijian.mp3" type="audio/mp3">
+                    <source src="Media/Transformers2.htm" type="audio/ogg; codecs=vorbis">
+                </audio>
+            </li>
+            <li t_cover="cx.jpg" t_artist="烟火" t_name="陈翔">
+            	<a href="#">烟火 - 陈翔</a>
+                <audio preload="none">
+                    <source src="Media/yanhuo.mp3" type="audio/mp3">
+                    <source src="Media/Transformers2.htm" type="audio/ogg; codecs=vorbis">
+                </audio>
+            </li>
+            <li t_cover="lwy.jpg" t_artist="分手后不要做朋友" t_name="梁文音">
+            	<a href="#">分手后不要做朋友 - 梁文音</a>
+                <audio preload="none">
+                    <source src="Media/fenshouhoujiubuyaozuopengyou.mp3" type="audio/mp3">
+                    <source src="Media/Transformers2.htm" type="audio/ogg; codecs=vorbis">
+                </audio>
+            </li>
+            <li t_cover="xusong.jpg" t_artist="七夕" t_name="许嵩">
+            	<a href="#">七夕 - 许嵩</a>
+                <audio preload="none">
+                    <source src="Media/qixi.mp3" type="audio/mp3">
+                    <source src="Media/Transformers2.htm" type="audio/ogg; codecs=vorbis">
+                </audio>
+            </li>
+             <li t_cover="lyc.jpg" t_artist="蜀绣" t_name="李宇春">
+            	<a href="#">蜀绣 - 李宇春</a>
+                <audio preload="none">
+                    <source src="Media/suxiu.mp3" type="audio/mp3">
+                    <source src="Media/Transformers2.htm" type="audio/ogg; codecs=vorbis">
+                </audio>
+            </li> 
+        </ul>
+    </div>
+	<div id="WZYmusicfoolter">
+    	<p align="center">
+    		版权所有@WZY社区
+        </p>
+    </div>
+</body>
+</html>

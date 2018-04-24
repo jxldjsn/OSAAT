@@ -1,0 +1,166 @@
+<!doctype html>
+<html>
+<head>
+
+<title>68微游戏</title>
+
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="description" content="最好玩的免费手机网页小游戏就在68微游戏！免下载，即点即玩！">
+<meta name="keywords" content="游戏,手机游戏,手机页游,手机小游戏,H5,HTML5,H5游戏,HTML5游戏,小游戏,手游,轻游戏,68微游戏,微游戏,微信游戏,跨平台,跨平台游戏,免费游戏,免费,线上游戏,ios游戏,iphone游戏,ipad游戏,android游戏,安卓游戏,平板游戏,玩游戏,休闲游戏,休闲益智游戏,web游戏,web games,web game,webgames,webgame">
+<meta name="apple-mobile-web-app-title" content="68微游戏">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,maximum-scale=1.0, initial-scale=1.0, user-scalable=no, minimal-ui">
+
+
+<link type="text/css" rel="stylesheet"  href="/resources/css/error.css" />
+<link type="text/css" rel="stylesheet" href="/resources/css/public.css"/>
+
+<link rel="shortcut icon" type="/resources/images/x-icon" href="favicon.ico" />
+<link rel="icon" type="/resources/images/png" href="favicon.png" />
+<style type="text/css">
+a{ text-align:none;}
+.bottom1_e_error{ width:20%; position:absolute;  height:auto; top:20%; left:79.6875%; }
+.bottom1_e_error li img{ width:34.375%; height:auto;padding-left:32.8125%;padding-right:32.8125%;}
+bottom1_e_error .guany{ position:absolute; width:227%; left:-60%; bottom:120%; }	 
+
+</style>
+<!--Google Analytics-->
+<!--<script src="resources/js/googleanalytics.js"></script>-->
+
+<meta name="apple-mobile-web-app-capable" content="no">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+
+
+<script type="text/javascript" src="/resources/js/jquery-1.8.3.min.js"></script>
+
+<script type="text/javascript">
+
+$(document).ready(function(e) {
+ $(".bottom1_e_error").click( function(event){
+
+		    menu1();
+			event.stopPropagation();
+			$(".game-h").addClass("hide");
+			$(".fnr").find("img").attr("src","/resources/images/batton_fenlei.png") ;
+		
+		 });
+		 
+	
+			function menu1() {
+				 $(".guany").toggleClass("hide");
+				 if ($(".gengd").find("img").attr("src") == "/resources/images/batton_gengduo.png"){
+					$(".gengd").find("img").attr("src","/resources/images/batton_gengduo_1.png") 
+					
+					}else{
+						
+					$(".gengd").find("img").attr("src","/resources/images/batton_gengduo.png") 
+				  }
+			 }
+})
+
+</script>
+
+</head>
+  
+<body>
+<div class="nav">
+        <div class="nav1">
+                     <div class="top" >
+                                    <img src="/resources/images/bg_biaoti.png" width="640" height="78">
+                                 <div class="top_1">
+                                            <li onclick="javascript:history.back(-1);" style="cursor:pointer;">
+                                            <img src="/resources/images/cj/batton_fanhui.png" width="98" height="48">
+                                            </li>
+                                            <li><img src="/resources/images/top2.png" width="120" height="44"></li>
+                                 </div><!--top_1-->
+                     </div><!--top-->
+      </div><!--nav1-->
+      <div class="content" >
+               <div class="content1">
+               <img src="/resources/images/error/bg_cuowu.png" width="178" height="186"> 
+               </div>
+               <div class="content2">找不到相关的游戏，玩玩其他游戏先啦~</div>
+              <a href="/index.php?r=Index/index">
+              <div class="content3" >
+              <img src="/resources/images/error/batton_huishouye.png" width="220" height="50" />
+                                     <span>(5)</span>
+               </div>
+               </a>
+              <script type="text/javascript">
+                function _go_home(t){
+                  $(".content .content3 span").html("("+t+")");
+                  if(t == 0){
+                    window.location.href = "/";
+                    return;
+                  }
+                  t--;
+                  setTimeout(function(){
+                      _go_home(t)
+                  }, 1000);
+                }
+                _go_home(5);
+              </script>    
+      </div><!--content-->
+      
+    
+
+            <div class="bottom">
+           <div class="bottom1">
+                       <li><a href="#"><img src="/resources/images/bg_daohanglan.png" width="640" height="96"/></a></li>
+                  <div class="bottom1_a">
+                       <li><a href="/index.php?r=Index/index">
+					                          <img src="/resources/images/batton_youxi.png" width="44" height="66">
+                                              </a></li>
+                  </div>
+                  <div class="bottom1_b">
+                       <li><a href="/index.php?r=Search/search1">
+					                          <img src="/resources/images/batton_sousuo.png" width="44" height="66">
+                                              </a></li> 
+                  </div>
+                  <div class="bottom1_c">
+                       <li><a href="/index.php?r=Achievement/index">
+					                          <img src="/resources/images/batton_chengjiu.png" width="44" height="66">
+                                              </a> <li>
+                  </div>
+                  <div class="bottom1_d">
+                       <li>
+                                              <img class='userbtn' src="/resources/images/batton_geren.png" width="44" height="66" onclick="showlogin();" style="cursor:pointer;">
+                                              </li>
+                  </div> 
+                  <div class="bottom1_e_error" style="cursor:pointer;">
+                       <li class="gengd">
+                                              <img src="/resources/images/batton_gengduo.png" width="44" height="66">
+                                              </li>
+                           <div class="guany hide">
+                                    <li><a href="/index.php?r=More/about"><img src="/resources/images/batton_guanyu.png" width="99" height="99"></a> </li>
+                                    <li><a href="/index.php?r=More/view"><img src="/resources/images/batton_fankui.png" width="99" height="99"></a> </li>
+                                    <li style="cursor:pointer;"><img src="/resources/images/batton_fenxiang.png" width="99" height="99" onClick="showshare();"></li>
+                           </div>
+                  </div>
+           </div>
+     </div><!--bottom-->
+           
+
+</div><!--nav-->
+<script type="text/javascript" src="/resources/js/share.js"></script>
+<script type="text/javascript" src="/resources/js/public.js"></script>
+<script type="text/javascript">
+
+function showlogin(){
+   
+  window.LoginUi.show();
+
+}
+function showshare(){
+	
+	show_share();
+	
+	}
+
+</script>
+
+</body>
+</html>
+
+

@@ -1,0 +1,279 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>WZY小游戏之经典贪吃蛇游戏</title>
+
+<style type="text/css">
+*{margin:0;padding:0;list-style-type:none;}
+div{
+	background:-webkit-gradient(linear,0 0, 0 100%, from(yellow), to(red));/**Chrom Safari**/
+	background:-moz-linear-gradient(top, yellow, red); /** FireFox **/
+	background:-o-linear-gradient(top, yellow,red);/** Opear **/ 
+	background:-ms-linear-gradient(yellow 0%,red 100%);/** IE9 IE10 **/ 
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='yellow',endColorstr='red',grandientType=1); /** IE7 **/ 
+	-ms-filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='yellow',endColorstr='red',grandientType=1); /** IE8 **/ 
+	box-shadow:3px 3px 8px yellow;border-radius:5px;
+}
+input{
+	margin: 50px 0 0 50px;cursor:pointer;width:100px;height:50px;
+	
+	-webkit-transform:rotate(20deg);
+	-moz-transform:rotate(20deg);
+	transform:rotate(20deg);
+	-webkit-transition:0.8s;
+	-moz-transition:0.8s;
+}
+input:hover{
+	-webkit-transform:rotate(360deg) scale(1.3);
+	-moz-transform:rotate(360deg) scale(1.3);
+	transform:rotate(360deg) scale(1.3);
+	
+	box-shadow:10px 10px 15px #111;
+}
+</style>
+
+<script type="text/javascript">
+	var snake=[];
+	var oDiv=null;
+	var oDivSize=600;
+	var dir="left";
+	var fruit=null;
+	var snakeWidth=20;
+	var t=null;
+	var aInp=null;
+	var aSpan=null;
+	window.onload=function(){
+		oDiv=document.getElementsByTagName('div')[0];
+		aInp=document.getElementsByTagName('input');
+		aSpan=document.getElementsByTagName('span')[0];
+		oDiv.style.position='absolute';
+		oDiv.style.width=oDivSize+'px';
+		oDiv.style.height=oDivSize+'px';
+		oDiv.style.left ='350px';
+	    oDiv.style.top ='20px';
+	    oDiv.style.border = "15px solid rgba(35,150,60,1)";
+	    init(500);
+	    // t=setInterval(move,interval);
+	    aInp[0].onclick=function(){
+	    	var first = snake[0];
+	var fruitLeft = parseInt(fruit.style.left);
+	var fruitTop = parseInt(fruit.style.top);
+	var firstLeft = parseInt(first.style.left);
+	var firstTop = parseInt(first.style.top);
+	    	if(!(firstLeft == - snakeWidth || firstLeft == oDivSize|| firstTop == - snakeWidth || firstTop == oDivSize)){
+	    	clearInterval(t);
+	    	t=setInterval(move,600);
+	    	for(var i=0;i<aInp.length;i++){
+	    		aInp[i].style.background='';
+	    	}
+	    	this.style.background="#ae5";
+	    } 
+	}
+	    aInp[1].onclick=function(){
+	    	var first = snake[0];
+	var fruitLeft = parseInt(fruit.style.left);
+	var fruitTop = parseInt(fruit.style.top);
+	var firstLeft = parseInt(first.style.left);
+	var firstTop = parseInt(first.style.top);
+	    	if(!(firstLeft == - snakeWidth || firstLeft == oDivSize|| firstTop == - snakeWidth || firstTop == oDivSize)){
+	    clearInterval(t);
+	    	t=setInterval(move,280);
+	    	for(var i=0;i<aInp.length;i++){
+	    		aInp[i].style.background='';
+	    	}
+	    	this.style.background="#f66";
+	    }
+	}
+	     aInp[2].onclick=function(){
+	     	var first = snake[0];
+	var fruitLeft = parseInt(fruit.style.left);
+	var fruitTop = parseInt(fruit.style.top);
+	var firstLeft = parseInt(first.style.left);
+	var firstTop = parseInt(first.style.top);
+	     	if(!(firstLeft == - snakeWidth || firstLeft == oDivSize|| firstTop == - snakeWidth || firstTop == oDivSize)){
+	     	 clearInterval(t);
+	    	t=setInterval(move,150);
+	    	for(var i=0;i<aInp.length;i++){
+	    		aInp[i].style.background='';
+	    	}
+	    	this.style.background="lightblue"
+	    }
+	}
+	     aInp[3].onclick=function(){
+	     	var first = snake[0];
+	var fruitLeft = parseInt(fruit.style.left);
+	var fruitTop = parseInt(fruit.style.top);
+	var firstLeft = parseInt(first.style.left);
+	var firstTop = parseInt(first.style.top);
+	     	if(!(firstLeft == - snakeWidth || firstLeft == oDivSize|| firstTop == - snakeWidth || firstTop == oDivSize)){
+	     	 clearInterval(t);
+	    	t=setInterval(move,100);
+	    	for(var i=0;i<aInp.length;i++){
+	    		aInp[i].style.background='';
+	    	}
+	    	this.style.background="red";
+	    }
+	}
+	    aInp[4].onclick=function(){
+	    	var first = snake[0];
+	var fruitLeft = parseInt(fruit.style.left);
+	var fruitTop = parseInt(fruit.style.top);
+	var firstLeft = parseInt(first.style.left);
+	var firstTop = parseInt(first.style.top);
+	    	if(!(firstLeft == - snakeWidth || firstLeft == oDivSize|| firstTop == - snakeWidth || firstTop == oDivSize)){
+	    	 clearInterval(t);
+	    	t=setInterval(move,50);
+	    	for(var i=0;i<aInp.length;i++){
+	    		aInp[i].style.background='';
+	    	}
+	    	this.style.background="#fd5"
+	    }
+	}
+	}
+function move(){
+	for(var i=snake.length-1;i>0;i--){
+		var s = snake[i];
+		var s2 = snake[i-1];
+		s.style.left = s2.style.left ;
+		s.style.top =  s2.style.top ;
+	}
+		var ss = snake[0];
+	if(dir == "left"){
+		ss.style.left =  (parseInt(ss.style.left) - snakeWidth) + "px";
+	} else if(dir == "right"){
+		ss.style.left =  (parseInt(ss.style.left) + snakeWidth) + "px";
+	} else if(dir == "top"){
+		ss.style.top =  (parseInt(ss.style.top) - snakeWidth) + "px";
+	}else if(dir == "buttom"){
+		ss.style.top =  (parseInt(ss.style.top) + snakeWidth) + "px";
+	} 
+			check();
+	}
+	function init(appear){
+		var oneSnake=create(appear,snakeWidth * 2);
+		snake.push(oneSnake);
+		oDiv.appendChild(oneSnake);
+
+		var oneSnake=create(appear+snakeWidth,snakeWidth * 2);
+		snake.push(oneSnake);
+		oDiv.appendChild(oneSnake);
+
+		var oneSnake=create(appear+snakeWidth+snakeWidth,snakeWidth * 2);
+		snake.push(oneSnake);
+		oDiv.appendChild(oneSnake);
+
+		addFruit();
+	}
+
+	function create(left,top){
+		var div=document.createElement('div');
+		div.style.position='absolute';
+		div.style.left=left+'px';
+		div.style.top=top+'px';
+		div.style.width=snakeWidth+'px';
+		div.style.height=snakeWidth+'px';
+		div.style.border = "1px solid aqua";
+		return div;
+	}
+	function addFruit(){
+	var left=Math.floor(Math.random()*(oDivSize/snakeWidth))*snakeWidth;
+	var top=Math.floor(Math.random()*(oDivSize/snakeWidth))*snakeWidth;
+	for(i=0;i<snake.length;i++){
+		var s=snake[i];
+		if(left == parseInt(s.style.left)&&parseInt(top == s.style.top)){
+			addFruit();
+			return;
+		}
+	}
+		fruit=create(left,top);
+		oDiv.appendChild(fruit);
+	}
+
+	function onKeyupEvent(event){
+		var code = event.keyCode
+		if(code == 38 && dir != "buttom"){
+			dir = "top";
+		} if(code == 40 && dir != "top"){
+			dir = "buttom";
+		}if(code == 37 && dir != "right"){
+			dir = "left";
+		}if(code == 39 && dir != "left"){
+			dir = "right";
+		}
+		check();
+}
+
+
+	function check(){
+		var num=0;
+	var first = snake[0];
+	var fruitLeft = parseInt(fruit.style.left);
+	var fruitTop = parseInt(fruit.style.top);
+	var firstLeft = parseInt(first.style.left);
+	var firstTop = parseInt(first.style.top);
+
+	if(firstLeft == - snakeWidth || firstLeft == oDivSize|| firstTop == - snakeWidth || firstTop == oDivSize){
+
+
+		clearInterval(t);
+ var M = confirm('撞到墙上了,游戏结束！亲，是否重新开始？');
+                if(M){
+                    document.location.reload();
+                }else{
+                    return false;
+                }
+		return;//检验是否撞到墙上了 
+	}
+	for(var i = 1; i < snake.length ; i++){
+		var s = snake[i];
+		if(firstLeft == parseInt(s.style.left) && firstTop == parseInt(s.style.top)){
+			clearInterval(t);
+			var N = confirm('一不小心撞到自己了，游戏结束！亲，是否重新开始？')
+			if(N){
+				document.location.reload();
+			}else{
+				return false;
+			}
+			return; //检验是否撞到自身
+		}
+	}
+	
+	if((dir == "buttom" && (fruitTop - firstTop == snakeWidth) && fruitLeft == firstLeft) || 
+	   (dir == "top" && (fruitTop - firstTop == -snakeWidth) && fruitLeft == firstLeft) ||
+	   (dir == "right" && (fruitLeft - firstLeft == snakeWidth) && fruitTop == firstTop)||
+	   (dir == "left" && (fruitLeft - firstLeft == -snakeWidth) && fruitTop == firstTop)){	
+		var temp = [];
+		temp.push(fruit);
+		snake = temp.concat(snake);//吃了
+		num++;
+		addFruit();
+	}
+
+}
+</script>
+
+</head>
+
+<body onkeyup="onKeyupEvent(event)" style="background:rgba(50,50,50,1)">
+<article><p align="left" style="color:#DF48E8">欢迎来到WZY休闲小游戏专区:</p></article>
+	<font color="#22E5DC" size="+2">经典贪吃蛇</font>
+
+	<div></div>
+	
+	<ul>
+		<li><input type="button" value="初级"></li>
+		<li><input type="button" value="中级"></li>
+		<li><input type="button" value="高级"></li>
+		<li><input type="button" value="超高级"></li>
+		<li><input type="button" value="变态"></li>
+	</ul>
+
+	<span style="font-size:25px;color:#ae5;font-family:微软雅黑;margin-left:30px;position:absolute;left:10px;bottom:40px;";>请选择难度开始游戏<br>游戏过程中可以随时难度</span>
+    <br><br><br><br><br>
+    <p align="left" style="margin-left:50px; color:#D5B8B9;"><a href="../../index.html" onMouseOver="this.style.background='#13E1CB'" onMouseOut="this.style.background=''">点此返回</a></p>
+	
+	<br><br><br><br>
+
+</body>
+</html>

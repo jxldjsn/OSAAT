@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<title>WZY小游戏之台球天王</title>
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="keywords" content="台球天王手机小游戏,台球天王h5小游戏"/>
+<meta name="description" content="WZY社区为您提供台球天王在线玩"/>
+<link rel="apple-touch-icon" href="icon.png" />
+<link rel="shortcut icon" href="icon.png" />
+<link rel="icon" href="icon.png" />
+<meta charset="utf-8">
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="viewport" content="initial-scale=1.0,maximum-scale=1.01, minimal-ui" />
+<style>
+body {
+margin: 0px;
+padding: 0px;
+width: 100%;
+background-color:black;
+} 
+canvas {
+-ms-touch-action: none;
+image-rendering: -o-crisp-edges;           
+image-rendering: optimize-contrast;        
+-ms-interpolation-mode: nearest-neighbor;  
+-webkit-tap-highlight-color: rgba(0,0,0,0);
+-moz-tap-highlight-color: rgba(0,0,0,0);
+tap-highlight-color: rgba(0,0,0,0);
+user-select: none;
+-webkit-touch-callout: none;
+-webkit-user-select: none;
+-moz-user-select: none;
+-ms-user-select: none;
+} 
+</style>
+<script src="viewporter.js"></script>
+</head>
+<body>
+<div id="viewporter">
+<canvas id="canvas" moz-opaque></canvas>
+</div>
+</body>
+<script src="TweenMax.min.js"></script>
+<script src="howler.js"></script>
+<script src="app.js"></script>
+<!--百度统计 //-->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?cbf20f554ba43aeba396a009eb4ab5f7";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+</html>

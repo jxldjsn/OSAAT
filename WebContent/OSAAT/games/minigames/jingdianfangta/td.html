@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Cache-Control" content="no-cache" />
+<meta http-equiv="Expires" content="Thu, 01 Jan 1970 00:00:01 GMT" />
+<meta http-equiv="Expires" content="0" />
+<title>WZY小游戏之经典防塔</title>
+<link href="css/c.css?fmts=1290394250.8" rel="stylesheet" type="text/css" media="screen" />
+<!--
+# Last Update: 2010-11-22 16:40:13
+-->
+</head>
+
+<body id="tower-defense">
+<center>
+	<div id="wrapper">
+		<div id="td-wrapper">
+			<h1>经典防塔</h1>
+			<div id="td-loading">加载中...</div>
+			<div id="td-board">
+				<canvas id="td-canvas">抱歉，您的浏览器不支持 HTML 5 Canvas 标签！</canvas>
+			</div>
+			<div id="td-info"></div>
+		</div>
+		<div id="about">
+			请使用 Chrome / Opera 等浏览器浏览本页以获得最佳效果。<br />
+			<a href="http://oldj.net/article/html5-tower-defense/" target="_blank">关于</a> |
+			<a href="http://oldj.net/">oldj.net</a> &copy; 2010
+		</div>
+	</div>
+
+	<script type="text/javascript" src="js/loader.js?fmts=1290160726.2"></script>
+	<script type="text/javascript" src="js/td.js?fmts=1290415101.6"></script>
+	<script type="text/javascript" src="js/td-lang.js?fmts=1290389674.5"></script>
+	<script type="text/javascript" src="js/td-event.js?fmts=1290410109.6"></script>
+	<script type="text/javascript" src="js/td-stage.js?fmts=1290397304.6"></script>
+	<script type="text/javascript" src="js/td-element.js?fmts=1290396232.7"></script>
+	<script type="text/javascript" src="js/td-obj-map.js?fmts=1290414914.6"></script>
+	<script type="text/javascript" src="js/td-obj-grid.js?fmts=1290415101.6"></script>
+	<script type="text/javascript" src="js/td-obj-building.js?fmts=1290410284.8"></script>
+	<script type="text/javascript" src="js/td-obj-monster.js?fmts=1290409305.6"></script>
+	<script type="text/javascript" src="js/td-obj-panel.js?fmts=1290403820.8"></script>
+	<script type="text/javascript" src="js/td-data-stage-1.js?fmts=1290398162.0"></script>
+	<script type="text/javascript" src="js/td-cfg-buildings.js?fmts=1290389674.5"></script>
+	<script type="text/javascript" src="js/td-cfg-monsters.js?fmts=1290408555.3"></script>
+	<script type="text/javascript" src="js/td-render-buildings.js?fmts=1290397712.1"></script>
+	<script type="text/javascript" src="js/td-msg.js?fmts=1290389674.5"></script>
+	<script type="text/javascript" src="js/td-walk.js?fmts=1290389674.5"></script>
+	<script type="text/javascript">
+		window.onload = function () {
+			_TD.init("td-board", "td-info");
+			document.getElementById("td-loading").style.display = "none";
+			document.getElementById("td-board").style.display = "block";
+		};
+	</script>
+    </center>
+</body>
+</html>

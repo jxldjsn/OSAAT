@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+
+<title>WZY小游戏之勇士与公主</title>
+
+<meta name="description" content="最好玩的免费网页小游戏就在WZY社区小游戏！，即点即玩！">
+<meta name="keywords" content="最好玩的免费网页小游戏就在WZY社区小游戏！，即点即玩！">
+<meta name="apple-mobile-web-app-title" content="最好玩的免费网页小游戏就在WZY社区小游戏！，即点即玩！">
+
+
+<meta name="apple-mobile-web-app-capable" content="no">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="viewport" content="width=device-width, maximum-scale=1.0, initial-scale=1.0, user-scalable=no, minimal-ui">
+
+<title>WZY小游戏之勇士与公主</title>
+<link href="./files/xiangq.css" rel="stylesheet">
+<link href="./files/paix1.css" rel="stylesheet">
+<link href="./files/pinglu1.css" rel="stylesheet">
+<link href="./files/xunz.css" rel="stylesheet">
+<link href="./files/jiangl.css" rel="stylesheet">
+<style type="text/css">
+.flow_box{
+    position: absolute;
+    font-size:18px;
+    color:#FFF;
+    top: 30%;
+    left: 10%;
+    width: 80%;
+    height: 75px;
+    line-height: 75px;
+    z-index: 9999999;
+    text-align: center;
+    border-radius:10px;
+    background: rgba(0,0,0,.6);
+}
+.toum{
+    float:left;opacity:0.5;cursor:crosshair;filter:alpha(opacity=50);
+}
+</style>
+<script type="text/javascript">
+    var PLAY_URL = "#";
+    //var GAME_URL = window.location.href;
+    var GAMEID = "133";
+    var achievement = [{"name":"\u5fc3\u5fc3\u76f8\u5370","desc":"\u5728\u52c7\u58eb\u4e0e\u516c\u4e3b\u4e2d\u95ef\u8fc7\u7b2c5\u5173","conid":"2","conDesc":"\u8fbe\u52305\u5206","conVal":"5","img":"bg_xunzhang_xinxinxiangyin.png","achieved":0}];
+	
+		
+	var obj = new Object;
+window.onload=function () {
+    if(document.documentElement.scrollHeight <= document.documentElement.clientHeight) {
+	bodyTag = document.getElementsByTagName('body')[0];
+	bodyTag.style.height = document.documentElement.clientWidth / screen.width * screen.height + 'px';
+    }
+    setTimeout(function() {window.scrollTo(0, -1)}, 0);
+};
+
+
+//Method 1 
+/*function addRule(style,selectorText,cssText,position){ 
+    //style标签  选择器   样式   位置 
+    if(style.insertRule){ //chrome | FF |IE9+ 
+        style.insertRule(selectorText+'{'+cssText+'}',position); 
+    }else if(style.addRule){ //IE8 IE7 IE6 
+        style.addRule(selectorText,cssText,position); 
+    } 
+} 
+var game_window_css = "width:"+window.innerWidth+"px; height:"+window.innerHeight+"px; position:fixed; top: 0; left: 0; border:0;";
+if(document.getElementsByTagName('style')[0]){ 
+     //这里原本用document.styleSheets[0]进行判断结果在IE低版本下会有问题，然后就换用这种方式了 
+    addRule(document.styleSheets[0],'#game_window',game_window_css,0);     
+}else{ 
+    var oStyle=document.createElement('style'); 
+    var oHead=document.getElementsByTagName('head')[0]; 
+    oHead.appendChild(oStyle); 
+    if(window.addEventListener){ 
+        //IE8以下没有.sheet属性 
+        addRule(oStyle.sheet,'#game_window',game_window_css,0);    
+    }else{ 
+        //用styleSheet 
+        addRule(oStyle.styleSheet,'#game_window',game_window_css,0); 
+    } 
+     
+} */
+	
+	
+	
+</script></head>
+
+<body><script src="./files/jiathis.php" charset="utf-8"></script><link href="./files/jiathis_share.css" rel="stylesheet" type="text/css"><iframe frameborder="0" style="position: absolute; display: none; opacity: 0;"></iframe><div class="jiathis_style" style="position: absolute; z-index: 1000000000; display: none; top: 50%; left: 50%; overflow: auto;"></div><div class="jiathis_style" style="position: absolute; z-index: 1000000000; display: none; overflow: auto;"></div><iframe frameborder="0" src="./files/jiathis_utility.html" style="display: none;"></iframe>
+
+<div class="jiangl" style="display:none;">
+         <div class="jiangl1">
+                    <div class="jiangl1_a">
+                         恭喜获得<span> "游戏积极分子" </span>徽章    
+                     </div><!--jiangl1_a-->
+         </div><!--jiangl1-->
+</div><!--jiangl-->
+
+<div class="xunz" style="display:none;">
+    <div class="xunz1">
+        <div class="xunz1_a">
+            <div class="xun_bg">
+                <img src="./files/bg_beijingdikuang.png" width="584" height="444">
+                <li><img src="./files/batton_guanbi.png" width="38" height="38"></li>
+            </div>
+            <div class="lubo">
+                <div id="focus" class="focus">
+                    <div class="hd">
+                        <ul></ul>
+                    </div>
+                    <div class="bd">
+                        <div class="a">
+                            <div class="b">
+                                <div id="tmpXunz" style="display:none;">
+                                <div class="b1">
+                                    <div class="b1_a">
+                                        <img {{toum}}="" src="./files/{{IMG}}" width="108" height="110">
+                                    </div>
+                                    <div class="b1_b">
+                                        <p class="mingc">{{NAME}}</p> 
+                                        <p class="pingl">{{DESC}}</p>  
+                                    </div>
+                                    <p class="clear"></p>
+                                </div>
+                                </div>
+                            </div> <!--b-->
+                        </div><!--a-->
+                    </div>
+                </div>
+            </div>
+        </div><!--xunz1_a-->
+    </div><!--xunz1-->
+</div><!--勋章-->
+
+<div class="pinglu" style="display:none;">
+    <div class="pinglu1">
+        <div class="pinglu1_a">
+            <div class="pinglu1_a_1">
+                <img src="./files/bg_pinglun.png" width="640" height="104">
+                <li><img src="./files/batton_guanbi(1).png" width="38" height="38"></li>
+            </div>       
+            <div class="content">
+                <div id="tmpComment" style="display:none;">
+                <div class="content1">
+                    <div class="content1_a">
+                        <img src="./files/{{HEAD}}" width="92" height="92">
+                    </div>
+                    <div class="content1_b" style="height:300px;"></div>
+                    <div class="content1_c">
+                        <div class="content1_c_1">
+                            <div class="mingc"> 
+                                <span style=" color:#d76404;">{{NAME}}</span><span class="shijian">{{TIME}}</span>
+                            </div>
+                            <div class="pingl">
+                               {{CONTENT}}
+                            </div>
+                        </div><!--content1_c_1-->
+                        <div class="pic">
+                            <img src="./files/bg_sanjiaoxing.png" width="40" height="46">
+                        </div>
+                    </div><!--content1_c--> 
+                    <p class="clear"></p>                
+                </div> <!--content1-->
+                </div>
+            </div> <!--content-->
+                                   
+            <div class="bottom">
+                <div style="position:relative;">
+
+                     <div class="pic">
+                        <ul>
+                             <li><a href="#"><img v="1" src="./files/bg_xingxing.png" width="46" height="42"></a></li>
+                             <li><a href="#"><img v="2" src="./files/bg_xingxing.png" width="46" height="42"></a></li>
+                             <li><a href="#"><img v="3" src="./files/bg_xingxing.png" width="46" height="42"></a></li>
+                             <li><a href="#"><img v="4" src="./files/bg_xingxing.png" width="46" height="42"></a></li>
+                             <li><a href="#"><img v="5" src="./files/bg_xingxing.png" width="46" height="42"></a></li>
+                             <p class="clear"></p>
+                             <span class="fenshu"></span>
+                         </ul>
+                          <div class="bottom1">
+                                 <img src="./files/bg_shurukuang.png" width="490" height="48">
+                                 <div class="text">
+                                     <input type="text" class="text1" value="" placeholder="说点什么吧~">
+                                 </div> 
+                          </div>
+                          <div class="fas"><img src="./files/batton_fasong.png" width="98" height="48"></div>
+                     </div> <!--pic-->
+                </div>
+            </div><!--bottom-->     
+        </div><!--pinglu1_a-->
+    </div><!--pinglu1-->
+</div><!--评论-->
+
+<div class="paix" style="display:none;">
+    <div class="paix1">
+        <div class="paix1_a">
+            <div class="paix1_a_1">
+                <img src="./files/bg_paihangbang.png" width="574" height="98"> 
+                <li><img src="./files/batton_guanbi(1).png" width="38" height="38"></li>
+            </div>      
+            <div class="content"> 
+                <div id="contentTmp" style="display:none;">
+                <div class="content1">
+                    <div class="content1_a shuzi">
+                        {{INDEX}}
+                    </div>
+                    <div class="content1_b">
+                        <li><img src="./files/{{HEAD}}" width="92" height="92"></li>
+                        <div class="content1_b_1">
+                            <p class="mingc">{{NAME}}</p>
+                            <p class="guangshu">{{SCORE}}</p>
+                        </div>
+                        <p class="clear"></p>
+                    </div>
+                </div>
+                </div>
+            </div> <!--content-->
+        </div><!--paix1_a-->
+    </div><!--paix1-->
+</div><!--排行-->
+
+<div class="youxi">
+    <div class="youxi1">
+        <iframe id="game_window" name="game_window" src="./files/saved_resource.html" scrolling="no" frameborder="0px" style="width: 1600px; overflow: hidden; height: 757px;">&lt;!--style="width:100%;overflow: hidden; height:auto;"--&gt;
+    </iframe>
+    </div>
+<script>
+    	var GameFrame = document.getElementById('game_window');
+		function setGameWindow(){
+			GameFrame.style.width = window.innerWidth+"px";
+			GameFrame.style.height = window.innerHeight+"px";
+			GameFrame.style.overflow = "hidden";
+		}
+		setGameWindow();
+    	window.addEventListener("resize",function(){
+			setGameWindow();
+		});
+		window.onload = function(){
+			GameFrame.src = "http://play.play68.com/TheEn/";
+		}
+    </script>
+</div>
+<div id="cover" style="position: absolute; top: 0px; left: 0px; width: 100%; height: 761px; display: none;"></div>
+<div class="nav">
+    <div class="top">
+        <li id="s0" draggable="true" src="/resources/images/xiangq/batton_shouqi_1.png" style="top: 50px; left: 0px; right: auto; bottom: auto; display: list-item;"><img src="./files/batton_shouqi.png" width="94" height="94"></li>
+        <li id="s1" style="top: 50px; left: 0px; right: auto; bottom: auto; display: none;"><img src="./files/batton_tanchu.png" width="94" height="94"></li>
+
+        <li id="s11" style="left: 2.0004605464072e-14px; top: 50px; right: auto; bottom: auto; display: none;"><img src="./files/batton_paihang.png" width="99" height="99"></li>
+        <li id="s12" style="left: 1.33364036427147e-14px; top: 50px; right: auto; bottom: auto; display: none;"><img src="./files/batton_chengjiu.png" width="99" height="99"></li>
+        <li id="s13"><img src="./files/batton_wanfa.png" width="99" height="99"></li>
+        <li id="s14" style="left: 6.66820182135734e-15px; top: 50px; right: auto; bottom: auto; display: none;"><img src="./files/batton_fanhui.png" width="99" height="99"></li>
+
+        <li id="s21" style="top: 50px; left: 0px; right: auto; bottom: auto; display: none;"><img src="./files/batton_chongwan.png" width="99" height="99"></li>
+        <li id="s23" style="top: 50px; left: 0px; right: auto; bottom: auto; display: none;"><img src="./files/batton_fenxiang.png" width="99" height="99"></li>
+        <!--<li id="s22" style="top: 50px; left: 0px; right: auto; bottom: auto; display: none;"><img src="./files/batton_pinglun.png" width="99" height="99"></li>  -->
+    </div>
+</div><!--nav-->
+<script src="./files/jquery-1.8.3.min.js"></script>
+<script src="./files/TouchSlide.1.1.js"></script>
+<script src="./files/share.js"></script><div id="wx-qr" style="position: fixed; top: 0px; left: 0px; width: 100%; height: 736px; z-index: 10000; display: none; background: rgba(0, 0, 0, 0.8);"><p style="text-align: center; width: 220px; color: rgb(255, 255, 255); margin: 50px auto 0px; font-weight: bold; font-style: normal; font-variant: normal; font-stretch: normal; font-size: 16px; line-height: normal; font-family: Arial, Helvetica, &#39;Microsoft Yahei&#39;, 微软雅黑, STXihei, 华文细黑, sans-serif;">分享给朋友一起玩！</p><p style="text-align: center; margin: 16px;"><img src="./files/icon.png" id="wx-qr-img" style="max-width: 75px;"></p><p style="text-align: center; width: 210px; color: rgb(255, 255, 255); padding-top: 5px; margin: 0px auto; font-weight: bold; font-style: normal; font-variant: normal; font-stretch: normal; font-size: 20px; line-height: normal; font-family: Arial, Helvetica, &#39;Microsoft Yahei&#39;, 微软雅黑, STXihei, 华文细黑, sans-serif;">"最好玩的小游戏就在68微游戏"</p><p style="text-align: center; width: 265px; padding-top: 20px; margin: 0px auto; font-weight: bold; font-style: normal; font-variant: normal; font-stretch: normal; font-size: 20px; line-height: normal; font-family: Arial, Helvetica, sans-serif;"><div class="jiathis_style_32x32"><a class="jiathis_button_weixin" title="分享到微信"><span class="jiathis_txt jiathis_separator jtico_weixin" style="text-align: left; overflow: hidden; cursor: pointer; width: 32px; margin-left: 15px; background: url(http://www.play68.com/resources/images/button_weixin.png) 0% 50% no-repeat;">&nbsp;</span></a><a class="jiathis_button_tsina" title="分享到新浪微博"><span class="jiathis_txt jiathis_separator jtico_tsina" style="text-align: left; overflow: hidden; cursor: pointer; width: 32px; margin-left: 15px; background: url(http://www.play68.com/resources/images/button_tsina.png) 0% 50% no-repeat;">&nbsp;</span></a><a class="jiathis_button_qzone" title="分享到QQ空间"><span class="jiathis_txt jiathis_separator jtico_qzone" style="text-align: left; overflow: hidden; cursor: pointer; width: 32px; margin-left: 15px; background: url(http://www.play68.com/resources/images/button_qzone.png) 0% 50% no-repeat;">&nbsp;</span></a><a class="jiathis_button_tqq" title="分享到腾讯微博"><span class="jiathis_txt jiathis_separator jtico_tqq" style="text-align: left; overflow: hidden; cursor: pointer; width: 32px; margin-left: 15px; background: url(http://www.play68.com/resources/images/button_tqq.png) 0% 50% no-repeat;">&nbsp;</span></a><a class="jiathis_button_renren" title="分享到人人网"><span class="jiathis_txt jiathis_separator jtico_renren" style="text-align: left; overflow: hidden; cursor: pointer; width: 32px; margin-left: 15px; background: url(http://www.play68.com/resources/images/button_renren.png) 0% 50% no-repeat;">&nbsp;</span></a></div></p></div><script type="text/javascript" src="./files/jia.js" charset="utf-8"></script>
+<script src="./files/xiangq.js"></script>
+
+
+</body></html>

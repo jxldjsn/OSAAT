@@ -1,0 +1,194 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://"
+			+ request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
+%>
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>博客搜索</title>
+<link href="../../media/css/bootstrap.css" rel='stylesheet' type='text/css' />
+<script src="../../media/js/jquery.min.js" type="text/javascript"></script>
+
+<link href="../../media/css/indexstyle.css" rel="stylesheet"
+	type="text/css" media="all" />
+<link href="../../media/css/search.css" rel="stylesheet" type="text/css" />
+<link href="../../media/css/searchresult.css" rel="stylesheet" type="text/css" />
+<link href="../../media/css/menu.css" rel="stylesheet" type="text/css"  />
+<link href="../../media/page/Pager.css" rel="stylesheet" type="text/css">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords"
+	content="My Pets Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
+
+
+<script src="../../media/page/jquery.pager.js" type="text/javascript"></script>
+</head>
+<body>
+<input type="hidden" value="${blogkey}" id="blogkey">
+<!-- header-section-starts -->
+	<div class="header">
+
+
+			<div class="header-top">
+				<div class="container">
+				<div class="clearfix">
+					<p class="location">
+						<i class="location">Welcome to you</i>
+					</p>
+
+					<c:if test="${not empty sessionScope.username}">
+						<a href="../../OSAAT/basic/Logout.action"><p class="logout">注销</p></a> <a
+							href="../../OSAAT/basic/selfInformation.jsp"><p class="username">${sessionScope.username}
+								&nbsp;&nbsp;|&nbsp;&nbsp;</p></a>
+					</c:if>
+					
+
+					<c:if test="${empty sessionScope.username}">
+						<div class="nav-account">
+							<a href="../../OSAAT/basic/login.jsp" class="nav-account-login" id="nav-login">登录&注册</a>
+						</div>
+					</c:if>
+
+					</div>
+				</div>
+			</div>
+
+
+			<div class="header-bottom">
+
+			<div class="container1">
+				<ul class="menu">
+					<li id="setlogo"><span><img src="../../media/image/logo.png"></span></li>
+					<li><a href="../../OSAAT/basic/IndexAction.action">主页</a></li>
+
+					<li class="active"><a href="../../OSAAT/blog/BlogIndex.action?startPage=1">博客</a>
+
+						<ul class="submenu">
+
+							<li><a href="../../OSAAT/blog/searchBlog.jsp">博客搜索</a></li>
+
+							<li><a href="../../OSAAT/blog/MyBlog.action?startPage=1">我的博客</a></li>
+
+							<li><a href="../../OSAAT/blog/PreAddBlog.action">写博客</a></li>
+
+						</ul>
+
+					</li>
+
+					<li class="active"><a href="../../OSAAT/bbs/InvitationIndex.action?startPage=1">论坛</a>
+
+						<ul class="submenu">
+
+							<li><a href="../../OSAAT/bbs/SectionIndex.action">板块</a></li>
+
+							<li><a href="../../OSAAT/bbs/searchinvitation.jsp">帖子搜索</a></li>
+
+							<li><a href="../../OSAAT/bbs/MyInvitation.action">我的帖子</a></li>
+
+							<li><a href="../../OSAAT/bbs/PreAddInvitation.action">我要发帖</a></li>
+
+						</ul>
+
+					</li>
+
+					<li class="active"><a href="../../OSAAT/games/AllGames.action">小游戏</a>
+
+						<ul class="submenu">
+
+							<li><a href="#">游戏搜索</a></li>
+
+						</ul>
+
+					</li>
+
+					<li class="active"><a href="../../OSAAT/music/MusicIndex.action" target="_blank">音乐</a>
+					
+						<ul class="submenu">
+
+								<li><a href="#">我的音乐</a></li>
+
+								<li><a href="#">上传音乐</a></li>
+
+						</ul>
+					
+					</li>
+
+					<li class="active"><a href="../../OSAAT/search/index.html">搜索</a></li>
+
+
+				</ul>
+
+		</div>
+
+		</div>
+
+
+	</div>
+
+<!-- header-section-ends --> 
+
+<!-- 主体-->
+<div class="container">
+
+  
+  <div class="component">
+    <div class="sticky-wrap">
+      <table class="sticky-enabled" style="margin: 0px; width: 100%;">
+        <thead>
+          <tr>
+            <th>序号</th>
+            <th>标题</th>
+            <th>发博时间</th>
+            <th>博客类型</th>
+          </tr>
+        </thead>
+        <tbody>
+	        <c:forEach items="${BlogList}" var="item" varStatus="status">
+	          <tr>
+	            <td class="user-name" width="15%">${status.count}</td>
+	            <td class="user-email" width="50%"><a href="../../OSAAT/blog/BlogDetail.action?blogId=${item.blogId}">${item.blogTitle}</a></td>
+	            <td class="user-phone" width="20%">${item.createTime}</td>
+	            <td class="user-mobile" width="15%">${item.blogType}</td>
+	          </tr>
+	        </c:forEach>
+        </tbody>
+      </table>
+      
+      <script>
+
+		$(document).ready(function() {
+			$("#pager").pager({ pagenumber: ${pagenumber}, pagecount: ${pagecount}, buttonClickCallback: PageClick });
+		});
+		
+		PageClick = function(pageclickednumber) {
+
+			window.location.href = "SearchBlogByTitle.action?blogkey=" + $("#blogkey").val() + "&startPage=" + pageclickednumber;
+		}
+	  </script>
+      
+      <table width="100%">
+	                        <tr><th colspan="4" bgcolor="#FDFDFD" align="center">
+	                        	<div id="pager"><ul class="pages"><li class="pgNext pgEmpty">首页</li><li class="pgNext pgEmpty">上一页</li><li class="page-number pgCurrent">1</li><li class="page-number">2</li><li class="page-number">3</li><li class="page-number">4</li><li class="page-number">5</li><li class="pgNext">下一页</li><li class="pgNext">末页</li></ul></div>
+	                        </th></tr>
+	                        <tr height="20px"><th colspan="4" bgcolor="#FDFDFD"></th></tr>
+      </table>
+    </div>
+  </div>
+</div>
+<!--主体结束--> 
+<!-- footer-section-ends -->
+<div class="container">
+  <div style="margin-top:20px; margin-bottom:30px; width:100%; ">
+    <div style="margin-left:26%; margin-bottom:10px">我们是一群自信、乐观、开朗、活泼的人。如果你喜欢我们，请加入我们QQ群：314484333</div>
+    <div style="margin-left:30%; margin-bottom:10px">Copyright © 2015 <a href="#">WZY社区</a> All Rights Reserved | 理工QQ群 314484333号</div>
+  </div>
+</div>
+</body>
+</html>

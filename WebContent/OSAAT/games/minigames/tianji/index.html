@@ -1,0 +1,613 @@
+<html>
+	<head>
+		<link href="css/style.css" type="text/css" rel="stylesheet">
+		<title>WZY小游戏之《天机》</title>
+		<script type="text/javascript" src="javascript/framework/Language.js"></script>
+		<script type="text/javascript" src="javascript/framework/Entity.js"></script>
+		<script type="text/javascript" src="javascript/framework/ObjectDisposition.js"></script>
+		<script type="text/javascript" src="javascript/framework/Timer.js"></script>
+		<script type="text/javascript" src="javascript/framework/CustomsEventsDefine.js"></script>
+		<script type="text/javascript" src="javascript/framework/CustomsEvent.js"></script>
+		<script type="text/javascript" src="javascript/framework/Screen.js"></script>
+		<script type="text/javascript" src="javascript/framework/Scope.js"></script>
+		<script type="text/javascript" src="javascript/framework/MoveController.js"></script>
+		
+		<script type="text/javascript" src="javascript/framework/Base.js"></script>
+		<script type="text/javascript" src="javascript/framework/Animation.js"></script>
+		<script type="text/javascript" src="javascript/framework/Bullet.js"></script>
+		<script type="text/javascript" src="javascript/framework/BulletCollection.js"></script>
+		<script type="text/javascript" src="javascript/framework/Emplacement.js"></script>
+		<script type="text/javascript" src="javascript/framework/ConcentrationPower.js"></script>
+		
+		<script type="text/javascript" src="javascript/framework/Power.js"></script>
+		<script type="text/javascript" src="javascript/framework/Bomb.js"></script>
+		<script type="text/javascript" src="javascript/framework/Gold.js"></script>
+		<script type="text/javascript" src="javascript/framework/Enemy.js"></script>
+		<script type="text/javascript" src="javascript/framework/Plane.js"></script>
+		<script type="text/javascript" src="javascript/framework/XMLObject.js"></script>
+
+
+
+		<script type="text/javascript" src="javascript/EnemyDefine/EnemyShot.js"></script>
+		<script type="text/javascript" src="javascript/EnemyDefine/EnemyFactory.js"></script>
+		<script type="text/javascript" src="javascript/StageDefine/Stage.js"></script>
+		<script type="text/javascript" src="javascript/StageDefine/StageEntity.js"></script>
+		
+		<script type="text/javascript" src="javascript/UI/stages/stage1.js"></script>
+		<script type="text/javascript" src="javascript/UI/stages/stage2.js"></script>
+		<script type="text/javascript" src="javascript/UI/stages/stage3.js"></script>
+		<script type="text/javascript" src="javascript/UI/stages/stage4.js"></script>
+		<script type="text/javascript" src="javascript/UI/stages/stageStart.js"></script>
+		<script type="text/javascript" src="javascript/UI/initializeScreenElement.js"></script>
+		<script type="text/javascript" src="javascript/UI/Menu.js"></script>
+
+		
+		<script type="text/javascript">
+			
+			function initialize()
+			{
+				global.keyCodeList.push({text:"keyUp",code:global.keyUp});
+				global.keyCodeList.push({text:"keyDown",code:global.keyDown});
+				global.keyCodeList.push({text:"keyLeft",code:global.keyLeft});
+				global.keyCodeList.push({text:"keyRight",code:global.keyRight});
+				global.keyCodeList.push({text:"keyShot",code:global.keyShot});
+				global.keyCodeList.push({text:"keyBomb",code:global.keyBomb});
+				
+				if(document.addEventListener)
+				{
+					document.addEventListener("keydown",function(event){eventKeyDown(event);return false;},true);
+					document.addEventListener("keyup",function(event){eventKeyUp(event);return false;},true);
+				}
+				else
+				{
+					document.onkeydown=function(){eventKeyDown(event);return false;};
+					document.onkeyup=function(){eventKeyUp(event);return false;};
+				}
+				oScreen.show();
+				loadMainPicture();
+			};
+			
+			function initializeMenu()
+			{
+				var subMenuKeySetting=document.createElement("div");
+				var levelSetting=document.createElement("div");
+				var languageSetting=document.createElement("div");
+				var creator=document.createElement("div");
+				subMenuKeySetting.id="subMenuKeySetting";
+				levelSetting.id="levelSetting";
+				languageSetting.id="languageSetting";
+				creator.id="creator";
+				
+				global.mainMenu=new Menu();
+				global.mainMenu.setPosition(oScreen.elementMoveArea.left+oScreen.width/2-global.mainMenu.width/2,
+																		oScreen.elementMoveArea.top+oScreen.height/2+40);
+				
+				global.mainMenu.addOption("op1",unescape(global.languageResource.startGame),loadGame);
+				global.mainMenu.addOption("op2",unescape(global.languageResource.keySetting),function(){global.mainMenu.popSubMenu(subMenuKeySetting)});
+				global.mainMenu.addOption("op3",unescape(global.languageResource.level),function(){global.mainMenu.popSubMenu(levelSetting);});
+				global.mainMenu.addOption("op4",unescape(global.languageResource.languageSetting),function(){global.mainMenu.popSubMenu(languageSetting);});
+				global.mainMenu.addOption("op5",unescape(global.languageResource.creator),function(){global.mainMenu.popSubMenu(creator);});
+				global.mainMenu.setCurrentOption(global.mainMenu.options[0]);
+				
+				global.subMenu1=new Menu("op2");
+				global.subMenu1.addOption(1,"<span>"+unescape(global.languageResource.keyUp)+" :</span><span id='keyUp' style='color:red;font-size:15px;padding:0 10px 0 10px;'>"+String.fromCharCode(global.keyUp)+"</span>",function(){
+																																																																							if(global.keyListenState!="setGameKeys")
+																																																																							{
+																																																																								global.keyListenState="setGameKeys";
+																																																																								global.currentSettingKey="keyUp";
+																																																																								$(global.currentSettingKey).style.backgroundColor="#abc123";
+																																																																							}
+																																																																						});
+				global.subMenu1.addOption(2,"<span>"+unescape(global.languageResource.keyDown)+" :</span><span id='keyDown' style='color:red;font-size:15px;padding:0 10px 0 10px;'>"+String.fromCharCode(global.keyDown)+"</span>",function(){
+																																																																							if(global.keyListenState!="setGameKeys")
+																																																																							{
+																																																																								global.keyListenState="setGameKeys";
+																																																																								global.currentSettingKey="keyDown";
+																																																																								$(global.currentSettingKey).style.backgroundColor="#abc123";
+																																																																							}
+																																																																						});
+				global.subMenu1.addOption(3,"<span>"+unescape(global.languageResource.keyLeft)+" :</span><span id='keyLeft' style='color:red;font-size:15px;padding:0 10px 0 10px;'>"+String.fromCharCode(global.keyLeft)+"</span>",function(){
+																																																																							if(global.keyListenState!="setGameKeys")
+																																																																							{
+																																																																								global.keyListenState="setGameKeys";
+																																																																								global.currentSettingKey="keyLeft";
+																																																																								$(global.currentSettingKey).style.backgroundColor="#abc123";
+																																																																							}
+																																																																						});
+				global.subMenu1.addOption(4,"<span>"+unescape(global.languageResource.keyRight)+" :</span><span id='keyRight' style='color:red;font-size:15px;padding:0 10px 0 10px;'>"+String.fromCharCode(global.keyRight)+"</span>",function(){
+																																																																							if(global.keyListenState!="setGameKeys")
+																																																																							{
+																																																																								global.keyListenState="setGameKeys";
+																																																																								global.currentSettingKey="keyRight";
+																																																																								$(global.currentSettingKey).style.backgroundColor="#abc123";
+																																																																							}
+																																																																						}); 
+				global.subMenu1.addOption(5,"<span>"+unescape(global.languageResource.keyShot)+" :</span><span id='keyShot' style='color:red;font-size:15px;padding:0 10px 0 10px;'>"+String.fromCharCode(global.keyShot)+"</span>",function(){
+																																																																							if(global.keyListenState!="setGameKeys")
+																																																																							{
+																																																																								global.keyListenState="setGameKeys";
+																																																																								global.currentSettingKey="keyShot";
+																																																																								$(global.currentSettingKey).style.backgroundColor="#abc123";
+																																																																							}
+																																																																						});
+				global.subMenu1.addOption(6,"<span>"+unescape(global.languageResource.keyBomb)+" :</span><span id='keyBomb' style='color:red;font-size:15px;padding:0 10px 0 10px;'>"+String.fromCharCode(global.keyBomb)+"</span>",function(){
+																																																																							if(global.keyListenState!="setGameKeys")
+																																																																							{
+																																																																								global.keyListenState="setGameKeys";
+																																																																								global.currentSettingKey="keyBomb";
+																																																																								$(global.currentSettingKey).style.backgroundColor="#abc123";
+																																																																							}
+																																																																						});
+				global.subMenu1.setCurrentOption(global.subMenu1.options[0]);
+				global.subMenu1.canBeChoose=false;
+				global.subMenu1.entity.style.position="relative";
+				
+				subMenuKeySetting.innerHTML="<div style='position:relative;padding:20px 0 0 110px;margin:0 0 30px 0'>"+unescape(global.languageResource.gameKeyConfigure)+"</div>";
+				subMenuKeySetting.appendChild(global.subMenu1.entity);
+				global.subMenu1.entity.style.margin="0 0 0 90px";
+				
+				
+				
+				
+				
+				
+				
+				global.subMenu2=new Menu("op3");
+				global.subMenu2.addOption(1,unescape(global.languageResource.normal),function(){gameLevelSetting(1);});
+				global.subMenu2.addOption(2,unescape(global.languageResource.hard),function(){gameLevelSetting(2);});
+				global.subMenu2.addOption(3,unescape(global.languageResource.crazy),function(){gameLevelSetting(3);});
+				global.subMenu2.setCurrentOption(global.subMenu2.options[0]);
+				global.subMenu2.canBeChoose=false;
+				global.subMenu2.entity.style.position="relative";
+				
+				
+				levelSetting.innerHTML="<div style='text-align:center;position:static;padding:20px 0 0 15px;margin:0 0 10px 0'>"+unescape(global.languageResource.currentGameLevel)+" : <span id='gameLevelText' style='color:#12C6EE'>"+unescape(global.levelText)+"</span></div>";
+				levelSetting.appendChild(global.subMenu2.entity);
+				global.subMenu2.entity.style.margin="0 0 0 90px";
+				
+				
+				
+				
+				
+				global.subMenu3=new Menu("op4");
+				global.subMenu3.addOption(1,unescape(global.languageResource.chinese),function(){gameLanguageSetting('chinese');});
+				global.subMenu3.addOption(2,unescape(global.languageResource.english),function(){gameLanguageSetting('english');});
+				
+				global.subMenu3.setCurrentOption(global.subMenu3.options[0]);
+				global.subMenu3.canBeChoose=false;
+				global.subMenu3.entity.style.position="relative";
+				
+				languageSetting.innerHTML="<div style='text-align:center;position:static;padding:20px 0 0 15px;margin:0 0 10px 0'>"+unescape(global.languageResource.languageSetting)+"</div>";
+				languageSetting.appendChild(global.subMenu3.entity);
+				global.subMenu3.entity.style.margin="0 0 0 90px";
+				
+				
+
+				
+				creator.innerHTML="<div id='creatorContent'>"+
+															"<span class='creatorTitle'>"+unescape(global.languageResource.gameDesigner)+"</span>"+
+															"<span class='creatorContent'>"+unescape(global.languageResource.creatorFullName)+"</span>"+
+															"<span class='creatorTitle'>"+unescape(global.languageResource.graphicDesigner)+"</span>"+
+															"<span class='creatorContent'>"+unescape(global.languageResource.creatorFullName)+"</span>"+
+															"<span class='creatorTitle'>"+unescape(global.languageResource.programer)+"</span>"+
+															"<span class='creatorContent'>"+unescape(global.languageResource.creatorFullName)+"</span>"+
+
+															"<span class='creatorContent'></span>"+
+															"<div style='position:relative;font-size:20px;'>"+unescape(global.languageResource.contentMe)+"</div>"+
+															"<div style='position:relative;font-size:16px;'>"+unescape(global.languageResource.email)+"</div>"+
+															"<span class='creatorTitle'></span>"+
+															"<span style='font-size:14px;display:block;text-align:right;padding:0 20px 0 0'>"+unescape(global.languageResource.creatorName)+"</span>"+
+															"<span style='font-size:14px;display:block;text-align:right;padding:0 20px 0 0'>"+unescape(global.languageResource.created)+"</span>"+
+													"</div>";
+				
+				global.mainMenu.addSubMenu(global.subMenu1);
+				global.mainMenu.addSubMenu(global.subMenu2);
+				global.mainMenu.addSubMenu(global.subMenu3);
+			};
+			
+			function loadGame()
+			{
+				var barLength=300;
+				global.mainMenu.entity.style.display="none";
+				$("progress").style.display="block";
+				$("progress").style.left=oScreen.elementMoveArea.left+oScreen.width/2-barLength/2+"px";
+				$("progress").style.top=oScreen.elementMoveArea.top+300+"px";
+				
+				$("proBarBorder").style.width=barLength+"px";
+				setTimeout(loading,500);
+				function loading()
+				{
+					global.entity=new Entity();
+					var percentage=0;
+					var timerBuffer=new Timer(buffer,1);
+					timerBuffer.start();
+					function buffer()
+					{
+						percentage=global.entity.getLoadPercentage();
+						$("proValue").innerHTML=parseInt(percentage*100)+"%";
+						$("proBar").style.width=$("proValue").innerHTML;
+						
+						if(percentage==1)
+						{
+							timerBuffer.dispose();
+							setTimeout(startGame,1000);
+						}
+					};
+				}
+			};
+
+			function startGame()
+			{
+				$("progress").style.display="none";
+
+				global.plane1=new Plane("plane1");
+				var planeEm=new Emplacement("planeShot1",global.entity.planeBullet1);
+				
+				global.plane1.bulletSpeed=30;
+				global.plane1.setPosition(300,600);
+				global.plane1.setFeature(global.entity.plane1);
+				global.plane1.beOverlapAreaLeftOffset=20;
+				global.plane1.beOverlapAreaRightOffset=20;
+				global.plane1.beOverlapAreaTopOffset=10;
+				global.plane1.beOverlapAreaBottomOffset=10;
+				global.plane1.speed=9;
+				global.plane1.addEmplacement(planeEm,global.plane1.getPositionX()+global.plane1.width/2-planeEm.width/2,global.plane1.getPositionY()-global.plane1.height);
+				global.plane1.appear();
+				
+				global.keyListenState="gameStarted";
+				
+				initializeScreenElement();
+				stageStart();
+				
+			};
+			
+			
+			function eventKeyDown(e)
+			{
+				var keyCode=e.keyCode?e.keyCode:e.which;
+				if(global.keyListenState=="setGameKeys")
+				{
+					gameKeyConfig(keyCode);
+				}
+				else if(global.keyListenState=="gameStarted")
+				{
+					if(!e.repeat && global.plane1.canBeControl)
+					{
+						if(String.fromCharCode(keyCode)==String.fromCharCode(global.keyUp))
+						{
+							global.plane1.move("up");
+						}
+						if(String.fromCharCode(keyCode)==String.fromCharCode(global.keyDown))
+						{
+							global.plane1.move("down");
+						}
+						if(String.fromCharCode(keyCode)==String.fromCharCode(global.keyLeft))
+						{
+							global.plane1.move("left");
+						}
+						if(String.fromCharCode(keyCode)==String.fromCharCode(global.keyRight))
+						{
+							global.plane1.move("right");
+						}
+						
+						if(global.plane1.canShot && !global.plane1.shotting && String.fromCharCode(keyCode)==String.fromCharCode(global.keyShot))
+						{
+							global.plane1.shot();
+							global.plane1.concentratingPower();
+							global.plane1.shotting=true;
+						}
+						
+						if(!global.plane1.isThrowingBomb && String.fromCharCode(keyCode)==String.fromCharCode(global.keyBomb))
+						{
+							global.plane1.throwBomb();
+						}
+					}
+				}
+				else if(global.keyListenState=="setMenuOption" && global.mainMenu && global.mainMenu.options)
+				{
+					if(keyCode==38)
+					{
+						if(global.mainMenu.canBeChoose)
+						{
+							global.mainMenu.moveUp();
+						}
+						for(var i=0;i<global.mainMenu.subMenus.length;i++)
+						{
+							if(global.mainMenu.subMenus[i].canBeChoose)
+							{
+								global.mainMenu.subMenus[i].moveUp();
+							}
+						}
+					}
+					
+					if(keyCode==40)
+					{
+						if(global.mainMenu.canBeChoose)
+						{
+							global.mainMenu.moveDown();
+						}
+						for(var i=0;i<global.mainMenu.subMenus.length;i++)
+						{
+							if(global.mainMenu.subMenus[i].canBeChoose)
+							{
+								global.mainMenu.subMenus[i].moveDown();
+							}
+						}
+					}
+					
+					if(keyCode==13)
+					{
+						if(global.mainMenu.canBeChoose && global.mainMenu.options[global.mainMenu.currentOption].actived)
+						{
+							global.mainMenu.options[global.mainMenu.currentOption].doFunction();
+						}
+						
+						for(var i=0;i<global.mainMenu.subMenus.length;i++)
+						{
+							if(global.mainMenu.subMenus[i].canBeChoose && global.mainMenu.subMenus[i].options[global.mainMenu.subMenus[i].currentOption].actived)
+							{
+								global.mainMenu.subMenus[i].options[global.mainMenu.subMenus[i].currentOption].doFunction();
+							}
+						}
+					}
+					
+					if(keyCode==27 && !global.mainMenu.canBeChoose)
+					{
+						global.mainMenu.closeSubMenu();
+					}
+				}
+				else if(global.keyListenState=="gameOver" || global.keyListenState=="missionCompleted")
+				{
+					global.keyListenState="setMenuOption";
+					if(global.currentStage)
+					{
+						global.currentStage.clear();
+						if(global.currentStage.stage.finallyScoreEntity)
+						{
+							oScreen.removeElement(global.currentStage.stage.finallyScoreEntity);
+							global.currentStage.stage.finallyScoreEntity=null;
+						}
+						if(global.currentStage.stage.gameOverEntity)
+						{
+							oScreen.removeElement(global.currentStage.stage.gameOverEntity);
+							global.currentStage.stage.gameOverEntity=null;
+						}
+						if(global.currentStage.stage.missionCompletedEntity)
+						{
+							oScreen.removeElement(global.currentStage.stage.missionCompletedEntity);
+							global.currentStage.stage.missionCompletedEntity=null;
+						}
+					}
+					resetMenu();
+				}
+				
+			};
+			
+			function eventKeyUp(e)
+			{
+				var keyCode=e.keyCode?e.keyCode:e.which;
+				
+				if(global.keyListenState=="gameStarted")
+				{
+					if(global.plane1.canBeControl)
+					{
+						if(String.fromCharCode(keyCode)==String.fromCharCode(global.keyUp))
+						{
+							global.plane1.stop("up");
+						}
+						if(String.fromCharCode(keyCode)==String.fromCharCode(global.keyDown))
+						{
+							global.plane1.stop("down");
+						}
+						if(String.fromCharCode(keyCode)==String.fromCharCode(global.keyLeft))
+						{
+							global.plane1.stop("left");
+						}
+						if(String.fromCharCode(keyCode)==String.fromCharCode(global.keyRight))
+						{
+							global.plane1.stop("right");
+						}
+						if(String.fromCharCode(keyCode)==String.fromCharCode(global.keyShot))
+						{
+							global.plane1.shotConcentratedPower();
+							global.plane1.shotting=false;
+						}
+					}
+				}
+			};
+			
+			
+			function gameKeyConfig(keyCode)
+			{	
+				var keyCodeString;
+				var keyObj=$(global.currentSettingKey);
+				var keyCodeList="13,16,17,32"
+				if(!(keyCode>32 && keyCode<127) && keyCodeList.indexOf(keyCode.toString())==-1)
+				{
+					keyObj.style.backgroundColor="";
+					global.keyListenState="setMenuOption";
+					return;
+				}
+
+				keyObj.style.backgroundColor="";
+				eval("global."+global.currentSettingKey+"=keyCode;");
+				global.keyListenState="setMenuOption";
+				if(keyCode>32 && keyCode<127)
+				{
+					keyCodeString=String.fromCharCode(keyCode);
+				}
+				
+				switch(keyCode)
+				{
+					case 13:
+						keyCodeString="Enter";
+						break;
+						
+					case 16:
+						keyCodeString="Shift";
+						break;
+						
+					case 17:
+						keyCodeString="Ctrl";
+						break;
+						
+					case 32:
+						keyCodeString="Space";
+						break;
+						
+					case 38:
+						keyCodeString=unescape("%u2191");
+						break;
+						
+					case 40:
+						keyCodeString=unescape("%u2193");
+						break;
+						
+					case 37:
+						keyCodeString=unescape("%u2190");
+						break;
+						
+					case 39:
+						keyCodeString=unescape("%u2192");
+						break;
+				}
+				
+				
+				keyObj.innerHTML=keyCodeString;
+				
+				for(var i=0;i<global.keyCodeList.length;i++)
+				{
+					if(global.currentSettingKey!=global.keyCodeList[i].text
+					&& String.fromCharCode(global.keyCodeList[i].code)==String.fromCharCode(keyCode))
+					{
+						global.keyCodeList[i].code=-1;
+						$(global.keyCodeList[i].text).innerHTML="&nbsp";
+						eval("global."+global.keyCodeList[i].text+"=global.keyCodeList[i].code");
+					}
+					
+					if(global.keyCodeList[i].text==global.currentSettingKey)
+					{
+						global.keyCodeList[i].code=keyCode;
+					}
+				}
+				
+				keyObj=null;
+			};
+			
+			function gameLevelSetting(levelValue)
+			{
+				if(!isNaN(levelValue) && levelValue>=1 && levelValue<=3)
+				{
+					global.level=levelValue;
+					global.mainMenu.closeSubMenu();
+					updateLevelText();
+					$("gameLevelText").innerHTML=global.levelText;
+				}
+			};
+			
+			function updateLevelText()
+			{
+				switch(global.level)
+				{
+					case 1:
+						global.levelText=unescape(global.languageResource.normal);
+						break;
+						
+					case 2:
+						global.levelText=unescape(global.languageResource.hard);
+						break;
+						
+					case 3:
+						global.levelText=unescape(global.languageResource.crazy);
+						break;
+				}
+			};
+			
+			
+			function gameLanguageSetting(languageCode)
+			{
+				Language.changeTo(languageCode);
+				
+				updateLevelText();
+				global.mainMenu.closeSubMenu();
+				
+				setTimeout(resetMenu,320);
+			};
+			
+			function resetMenu()
+			{
+					updateMainPicture();
+					global.mainMenu.dispose();
+					global.subMenu1.dispose();
+					global.subMenu2.dispose();
+					global.subMenu3.dispose();
+					document.body.removeChild(global.mainMenu.entity);
+					
+					initializeMenu();
+			};
+			
+			function loadMainPicture()
+			{
+				global.mainPicture=new Image();
+				global.mainPicture.style.position="absolute";
+				global.mainPicture.style.zIndex=1;
+				global.mainPicture.style.left=oScreen.elementMoveArea.left+"px";
+				global.mainPicture.style.top=oScreen.elementMoveArea.top+"px";
+				global.mainPicture.onload=function()
+				{
+					global.mainTitleCh=new Image();
+					global.mainTitleCh.style.position="absolute";
+					global.mainTitleCh.style.zIndex=2;
+					global.mainTitleCh.style.left=oScreen.elementMoveArea.left+50+"px";
+					global.mainTitleCh.style.top=oScreen.elementMoveArea.top+60+"px";
+					global.mainTitleCh.src="images/background/mainTitleCh.gif";
+					
+					global.mainTitleEn=new Image();
+					global.mainTitleEn.style.position="absolute";
+					global.mainTitleEn.style.zIndex=2;
+					global.mainTitleEn.style.left=oScreen.elementMoveArea.left+50+"px";
+					global.mainTitleEn.style.top=oScreen.elementMoveArea.top+150+"px";
+					global.mainTitleEn.src="images/background/mainTitleEn.gif";
+					
+					document.body.appendChild(global.mainTitleCh);
+					document.body.appendChild(global.mainTitleEn);
+					
+					updateMainPicture();
+					initializeMenu();
+				}
+				global.mainPicture.src="images/background/mainPicture.gif";
+				document.body.appendChild(global.mainPicture);
+			};
+			
+			function updateMainPicture()
+			{
+				global.mainTitleEn.style.display="none";
+				global.mainTitleCh.style.display="none";
+				eval("global."+global.languageResource.mainPictureTitle+".style.display='block';");
+			};
+
+
+		</script>
+	</head>
+	<body bgColor="#000000" onLoad="initialize()">
+    
+		<div id="progress">
+			<span id="proValue">0%</span>
+			<div id=proBarBorder>
+				<div id="proBar"></div>
+			</div>
+		</div>
+		<div id="plane1BombState"></div>
+		<div id="plane2BombState"></div>
+		<div id="plane1Count"></div>
+		<div id="plane2Count"></div>
+		<div id="plane1Score"></div>
+		<div id="plane2Score"></div>
+		<div style="text-align:center;">
+        <p>&#26469;&#28304;&#65306;</p>
+        </div>
+
+
+	</body>
+    
+</html>
