@@ -1,0 +1,134 @@
+@charset "utf-8";
+/* CSS Document */
+
+#pageTitle {
+	font-family:berkshire-swash;
+	font-size:20px;
+	height:40px;
+	color:#4913AB;
+	margin-top:10px;
+	letter-spacing:20px;
+}
+
+#blogTitle {
+	font-family:"宋体";
+	font-size:36px;
+}
+
+.praiseButton{
+    border-style:none;
+	height:50px;
+    padding:2px 10px;_padding:1px 10px;
+	line-height:24px;
+	color:#fff;
+	font-size:36px;
+	cursor:pointer;
+	margin-right:20px;
+
+}
+
+.communtname{
+	font-family:"宋体";
+	font-size:26px;
+	color:#F33665;
+}
+
+.commenttitle {
+	font-family:"宋体";
+	font-size:24px;
+	color:#B54ADD;
+	margin-bottom:10px;
+	
+}
+
+.conmitcontent {
+	margin-top:10px;
+}
+
+.allcommit {
+	border: 1px solid #1FE4FC;
+}
+
+#altercommunt {
+	margin-left:10px;
+	width:100%;
+	background-color:#34E8BE;
+	height:200px;
+}
+
+.praiseButton{
+	border:1px #ae7d0a solid;
+	-webkit-box-shadow:inset 0px 0px 1px #fff;
+	-moz-box-shadow:inset 0px 0px 1px #fff;
+	box-shadow:inset 0px 0px 1px #fff;/*鍐呭彂鍏夋晥鏋�*/
+	-webkit-border-radius:4px;
+	-moz-border-radius:4px;
+	border-radius:4px;/*杈规鍦嗚*/
+	text-shadow:1px 1px 0px #b67f01;/*瀛椾綋闃村奖鏁堟灉*/
+	background-color:#feb100;
+	background-image: -webkit-gradient(linear, 0 0%, 0 100%, from(#feb100), to(#e8a201));
+	background-image: -webkit-linear-gradient(top, #feb100 0%, #e8a201 100%);
+	background-image: -moz-linear-gradient(top, #feb100 0%, #e8a201 100%);
+	background-image: -ms-linear-gradient(top, #feb100 0%, #e8a201 100%);
+	background-image: -o-linear-gradient(top, #feb100 0%, #e8a201 100%);
+	background-image: linear-gradient(top, #feb100 0%, #e8a201 100%);/*棰滆壊娓愬彉鏁堟灉*/
+}
+.praiseButton:hover {
+	background-color:#e8a201;
+	background-image: -webkit-gradient(linear, 0 0%, 0 100%, from(#e8a201), to(#feb100));
+	background-image: -webkit-linear-gradient(top, #e8a201 0%, #feb100 100%);
+	background-image: -moz-linear-gradient(top, #e8a201 0%, #feb100 100%);
+	background-image: -ms-linear-gradient(top, #e8a201 0%, #feb100 100%);
+	background-image: -o-linear-gradient(top, #e8a201 0%, #feb100 100%);
+	background-image: linear-gradient(top, #e8a201 0%, #feb100 100%);
+}
+
+/* b-green */
+.commitButton{
+	font-family:Oswald;
+	-webkit-perspective:1000;
+	-webkit-backface-visibility:hidden;
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#008000', endColorstr='#00b300'); /*  IE */
+	background-image:linear-gradient(bottom, #008000 25%, #00b300 63%);
+	background-image:-o-linear-gradient(bottom, #008000 25%, #00b300 63%);
+	background-image:-moz-linear-gradient(bottom, #008000 25%, #00b300 63%);
+	background-image:-webkit-linear-gradient(bottom, #008000 25%, #00b300 63%);
+	background-image:-ms-linear-gradient(bottom, #008000 25%, #00b300 63%);
+	color:#fff;
+	width:120px;
+	text-align:center;
+	padding:10px 20px;
+	border-radius:5px;
+	border:2px solid #003400;
+	margin-left:700px;
+	box-shadow:0 10px 5px -5px rgba(0, 0, 0, 0.5), 0 5px 25px
+		rgba(0, 128, 0, 0.5);
+	transition:all 100ms ease;
+}
+.commitButton:hover{cursor:pointer;}
+.commitButton:active{
+	transform:translatey(2px);
+	box-shadow:0 8px 5px -5px rgba(0, 0, 0, 0.65), 0 3px 25px
+		rgba(0, 128, 0, 0.5);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#006700', endColorstr='#009a00'); /*  IE */
+	background-image:linear-gradient(bottom, #006700 25%, #009a00 63%);
+	background-image:-o-linear-gradient(bottom, #006700 25%, #009a00 63%);
+	background-image:-moz-linear-gradient(bottom, #006700 25%, #009a00 63%);
+	background-image:-webkit-linear-gradient(bottom, #006700 25%, #009a00 63%);
+	background-image:-ms-linear-gradient(bottom, #006700 25%, #009a00 63%);
+}
+
+.commitButton::selection{background:transparent;}
+
+
+/*表情框*/
+.com_form{width:100%; position:relative; margin-bottom:100px;}
+.input{width:99%; height:60px; border:1px solid #ccc}
+.com_form p{height:50px; line-height:20px; position:relative; margin-top:10px;}
+span.emotion{width:42px; height:20px; font-size:35px; padding-left:50px; cursor:pointer}
+span.emotion:hover{background-position:2px -28px}
+.qqFace{margin-top:4px;background:#fff;padding:2px;border:1px #dfe6f6 solid;}
+.qqFace table td{padding:0px;}
+.qqFace table td img{cursor:pointer;border:1px #fff solid;}
+.qqFace table td img:hover{border:1px #0066cc solid;}
+

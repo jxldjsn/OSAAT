@@ -1,0 +1,135 @@
+@charset "utf-8";
+/* CSS Document */
+@import url(http://fonts.googleapis.com/css?family=Cabin:400);
+#maincontent{
+	margin-top:0px;
+	padding-top:20px;
+	background-color:#222;
+}
+
+.contentpackage{
+	margin-top:30px;
+	height:100px;
+}
+
+.contentname{
+	margin-left:250px;
+	font-size:28px;
+	color:#fff;
+}
+
+ input {
+	background: #222;
+	background: -webkit-linear-gradient(#333, #222);	
+	background: -moz-linear-gradient(#333, #222);	
+	background: -o-linear-gradient(#333, #222);	
+	background: -ms-linear-gradient(#333, #222);	
+	background: linear-gradient(#333, #222);	
+	border: 1px solid #444;
+	border-radius: 0px 0 0 0px;
+	box-shadow: 0 2px 0 #000;
+	color: #888;
+	display: block;
+	float: left;
+	font-family: 'Cabin', helvetica, arial, sans-serif;
+	font-size: 24px;
+	font-weight: 400;
+	height: 60px;
+	margin: -48px auto auto 400px;
+	padding: 0 10px;
+	text-shadow: 0 -1px 0 #000;
+	width: 660px;
+}
+
+.ie input {
+	line-height: 60px;
+}
+
+input::-webkit-input-placeholder {
+   color: #888;
+}
+
+input:-moz-placeholder {
+   color: #888;
+}
+
+input:focus {
+	-webkit-animation: glow 800ms ease-out infinite alternate;
+	-moz-animation: glow 800ms ease-out infinite alternate;
+	-o-animation: glow 800ms ease-out infinite alternate;
+	-ms-animation: glow 800ms ease-out infinite alternate;
+	animation: glow 800ms ease-out infinite alternate;
+	background: #222922;
+	background: -webkit-linear-gradient(#333933, #222922);
+	background: -moz-linear-gradient(#333933, #222922);
+	background: -o-linear-gradient(#333933, #222922);
+	background: -ms-linear-gradient(#333933, #222922);
+	background: linear-gradient(#333933, #222922);
+	border-color: #393;
+	box-shadow: 0 0 5px rgba(0,255,0,.2), inset 0 0 5px rgba(0,255,0,.1), 0 2px 0 #000;
+	color: #efe;
+	outline: none;
+}
+
+input:focus::-webkit-input-placeholder { 
+	color: #efe;
+}
+
+input:focus:-moz-placeholder {
+	color: #efe;
+}
+
+@-webkit-keyframes glow {
+    0% {
+		border-color: #393;
+		box-shadow: 0 0 5px rgba(0,255,0,.2), inset 0 0 5px rgba(0,255,0,.1), 0 2px 0 #000;
+    }	
+    100% {
+		border-color: #6f6;
+		box-shadow: 0 0 20px rgba(0,255,0,.6), inset 0 0 10px rgba(0,255,0,.4), 0 2px 0 #000;
+    }
+}
+
+@-moz-keyframes glow {
+    0% {
+		border-color: #393;
+		box-shadow: 0 0 5px rgba(0,255,0,.2), inset 0 0 5px rgba(0,255,0,.1), 0 2px 0 #000;
+    }	
+    100% {
+		border-color: #6f6;
+		box-shadow: 0 0 20px rgba(0,255,0,.6), inset 0 0 10px rgba(0,255,0,.4), 0 2px 0 #000;
+    }
+}
+
+@-o-keyframes glow {
+    0% {
+		border-color: #393;
+		box-shadow: 0 0 5px rgba(0,255,0,.2), inset 0 0 5px rgba(0,255,0,.1), 0 2px 0 #000;
+    }	
+    100% {
+		border-color: #6f6;
+		box-shadow: 0 0 20px rgba(0,255,0,.6), inset 0 0 10px rgba(0,255,0,.4), 0 2px 0 #000;
+    }
+}
+
+@-ms-keyframes glow {
+    0% {
+		border-color: #393;
+		box-shadow: 0 0 5px rgba(0,255,0,.2), inset 0 0 5px rgba(0,255,0,.1), 0 2px 0 #000;
+    }	
+    100% {
+		border-color: #6f6;
+		box-shadow: 0 0 20px rgba(0,255,0,.6), inset 0 0 10px rgba(0,255,0,.4), 0 2px 0 #000;
+    }
+}
+
+@keyframes glow {
+    0% {
+		border-color: #393;
+		box-shadow: 0 0 5px rgba(0,255,0,.2), inset 0 0 5px rgba(0,255,0,.1), 0 2px 0 #000;
+    }	
+    100% {
+		border-color: #6f6;
+		box-shadow: 0 0 20px rgba(0,255,0,.6), inset 0 0 10px rgba(0,255,0,.4), 0 2px 0 #000;
+    }
+}

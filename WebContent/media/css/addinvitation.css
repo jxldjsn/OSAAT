@@ -1,0 +1,57 @@
+@charset "utf-8";
+/* CSS Document */
+
+/*复选框*/
+td select{
+	background-color: #FFFFFF;
+	border: 1px solid #2DB2FF;
+	box-shadow: 0 0 2px #2DB2FF;
+	border-radius: 5px;
+	font-size: 1.7em;
+	height: 35px;
+	position: relative;
+	margin-left:10px;
+	width: 200px;
+}
+
+/*按钮*/
+.button {
+ display: block;
+ position: relative;
+ background: #00B16A;
+ color: #fff;
+ width: 160px;
+ height: 50px;
+ line-height: 50px;
+ text-align: center;
+ font-family: 'Ubuntu', sans-serif;
+ font-size: 15px;
+ font-weight: bold;
+ text-decoration: none;
+ margin: 20px auto 0 10px;
+ border-radius: 2px;
+ overflow: hidden;
+ -webkit-transition: all 0.15s ease-in;
+ transition: all 0.15s ease-in;
+}
+.button:hover {
+ background: #26C281;
+}
+.button:before {
+ content: ' ';
+ position: absolute;
+ background: #fff;
+ width: 25px;
+ height: 50px;
+ top: 0;
+ left: -45px;
+ opacity: 0.3;
+ -webkit-transition: all 0.25s ease-out;
+ transition: all 0.25s ease-out;
+ -webkit-transform: skewX(-25deg);
+         transform: skewX(-25deg);
+}
+.button:hover:before {
+ width: 45px;
+ left: 205px;
+}

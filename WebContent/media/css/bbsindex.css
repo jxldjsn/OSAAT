@@ -1,0 +1,98 @@
+@charset "utf-8";
+/* CSS Document */
+
+.topview{
+	margin-left:auto;
+	margin-right:auto;
+	background-color:#7fdbff;
+	height:130px;
+	padding-left:42%;
+	padding-top:30px;
+	border-left:2px solid #FFF;
+}
+
+.invitationnum{
+	font:Gotham, "宋体", Helvetica, Arial, sans-serif;
+	font-size:30px;
+	font-style:inherit;
+	font-weight:bold;
+	color:#AE5FC0;
+}
+
+/*发帖按钮*/
+#invitationbutton button[type="submit"] { font:400 12px/16px "Open Sans", Helvetica, Arial, sans-serif; }
+#invitationbutton {
+	background:#F9F9F9;
+	padding:0px;
+	margin:5px 0;
+}
+#invitationbutton button[type="submit"] {
+	cursor:pointer;
+	width:100%;
+	border:none;
+	background:#0CF;
+	color:#FFF;
+	margin:0 0 5px;
+	padding:10px;
+	font-size:15px;
+}
+
+#invitationbutton button[type="submit"]:hover {
+	background:#09C;
+	-webkit-transition:background 0.3s ease-in-out;
+	-moz-transition:background 0.3s ease-in-out;
+	transition:background-color 0.3s ease-in-out;
+}
+#invitationbutton button[type="submit"]:active { box-shadow:inset 0 1px 3px rgba(0, 0, 0, 0.5); }
+
+
+
+/*帖子内容*/
+.invitationcontent{
+	margin-top:10px;
+	padding-top:10px;
+	padding-bottom:10px;
+	background-color:#4EE3DC;
+	border-bottom:#F4F4F4 solid 4px;
+}
+
+.tiezhuimg{
+	margin-top:10px;
+	margin-left:10px;
+	margin-bottom:10px;
+	width:100px;
+	height:100px;
+	
+}
+
+.invitationtitle{
+	font-family:"Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", "DejaVu Sans", Verdana, sans-serif;
+	font-size:20px;
+	color:#000000;
+}
+
+.displaytime{
+	margin-top:10px;
+	font-family:Constantia, "Lucida Bright", "DejaVu Serif", Georgia, serif;
+	font-size:16px;
+	color:#7D42E9;
+}
+
+.replycount{
+	font-size:24px;
+	color:#FF0000;
+}
+
+/*帖子左边*/
+.invatationmanu{
+	margin-top:10px;
+	margin-bottom:10px;
+	font-family:Cambria, "Hoefler Text", "Liberation Serif", Times, "Times New Roman", serif;
+	font-size:20px;
+	color:#33D8E0;
+}
+
+a:link {text-decoration: none;color:blue;}
+a:visited {color:green;text-decoration:none;}                
+a:hover  {color:red;text-decoration:none;}
+a:active {color:orange;text-decoration:blink;}

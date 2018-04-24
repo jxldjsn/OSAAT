@@ -1,0 +1,54 @@
+@charset "utf-8";
+/* CSS Document */
+.con4{
+     width: 300px;
+     height: auto;
+     overflow: hidden;
+     margin: 20px auto 20px 10px;
+     color: #FFFFFF;
+}
+.con4 .btn{
+     width: 100%;
+     height: 40px;
+     line-height: 40px;
+     text-align: center;
+     /*background: #d8b49c;*/
+	
+	 background: #00B7EE;
+     display: block;
+     font-size: 16px;
+     border-radius: 5px;
+}
+.upload{
+     float: left;
+     position: relative;
+	
+}
+.upload_pic{
+	cursor: pointer;
+     display: block;
+     width: 100%;
+     height: 40px;
+     position: absolute;
+     left: 0;
+     top: 0;
+     opacity: 0;
+     border-radius: 5px;
+}
+#cvs{
+	border: 1px solid #000;
+	margin:20px 0 20px 50px;
+}
+
+.en-markup-crop-options {
+    top: 18px !important;
+    left: 50% !important;
+    margin-left: -100px !important;
+    width: 200px !important;
+    border: 2px rgba(255,255,255,.38) solid !important;
+    border-radius: 4px !important;
+}
+
+.en-markup-crop-options div div:first-of-type {
+    margin-left: 0px !important;
+}

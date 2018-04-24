@@ -1,0 +1,55 @@
+@charset "utf-8";
+/* CSS Document */
+body{color:#000;background:#FFF;font:12px/1.6 Verdana, Helvetica, sans-serif;text-align:center;}
+*{margin:0;padding:0;}
+input,select{font-size:12px;vertical-align:middle;}
+body div{text-align:left;}
+textarea,input{word-wrap:break-word;word-break:break-all;padding:0px;}
+li{list-style-type:none;}
+img{border:0 none;}
+
+/*设置导航*/
+.f-r{
+	float: right;
+}
+
+li{
+	list-style: none;
+}
+
+li, div, ul{
+	*zoom:1;
+}
+li:after, div:after, ul:after{
+	content: '';
+	display: table;
+	clear: both;
+}
+
+.login-nav{
+	width: 100%;
+	height: 60px;
+	background-color: #29E2C4;
+	color: #fff;
+	border-bottom: 1px #c1c1c1 solid;
+}
+.login-nav ul{
+	width:700px;
+	padding-right: 40px;
+	
+}
+.login-nav li{
+	float: right;
+	font-size:18px;
+	line-height: 60px;
+	padding: 0 20px;
+}
+.login-nav li:hover{
+	text-decoration: underline;
+	background-color:#00FFFF;
+}
+.login-nav a:hover{
+	text-decoration: underline;
+	color:#FFFFFF;
+	/*background-color:#FF44F8;*/
+}

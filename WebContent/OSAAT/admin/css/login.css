@@ -1,0 +1,27 @@
+@charset "utf-8";
+/* CSS Document */
+
+body{ background:url(../image/login-bg.jpg) center -130px no-repeat; color:#FFF; font-family:"Microsoft Yahei"; overflow-y: hidden;}
+a{ text-decoration:none; cursor:pointer;}
+
+.container{ width:960px; margin:135px auto 0;  *zoom:1;}
+.container .secL{ float:left; font-weight:bold;clear:both; margin:90px 0 0 104px; color: darkslategrey;}
+.container .secR{ float:right; position:relative; padding:40px 35px 40px 45px; width:270px; height:330px;}
+.container .secL h2{ font-size:26px;}
+.container .secL p{ font-size:16px; line-height:40px; margin-top:30px;}
+
+.box-bg{ position:absolute; top:0; left:0; opacity:.8; filter:alpha(opacity=80); width:100%; height:100%; background-color:#141924;}
+.form{ position: absolute;}
+.form h1{ font-size:18px;}
+.form p{ font-size:14px; color:#e9e9e9; margin-top:15px;}
+.f9c442{ color:#f9c442;}
+.form .item{ margin-top:20px; width:255px;}
+.form .item label{ width:44px; height:44px; background:#aaabab url(../image/icologin.png) center 10px no-repeat; border:none; display:block; float:left;}
+.form .itempass label{ background-position:center -28px;}
+.form .itemRadio .radio{color:#e0e0e0;font-size:14px; width:0;height: 25px;}
+.form .itemRadio a{ color:#e0e0e0; width:68px; margin:2px 0px; height:25px; line-height:16px; font-size:14px; float:none;}
+.form .item input{ width:210px; height:30px; padding:7px 0; border:none; outline:none; font-size:14px; line-height:30px; text-indent:.5em; float:left; color:#333; font-weight:bold;}
+
+.form .item button{ width:255px; height:46px; background:url(../image/loginbtn.png) left top no-repeat; border:none; cursor:pointer; text-align:center; line-height:46px; font-size:16px; font-weight:bold; color:#FFF;}
+
+#bg{width:100%;height:100%;top:0px;left:0px;position:absolute;filter: Alpha(opacity=50);opacity:0.5; background:#000000; display:none;}

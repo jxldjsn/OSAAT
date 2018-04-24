@@ -1,0 +1,47 @@
+@charset "utf-8";
+/* CSS Document */
+
+.pwd {
+	width: 600px;
+	height: 400px;
+	margin-left: auto;
+	margin-right: auto;
+	background-color: #FFFFFF;
+	padding: 20px;
+}
+.pwdbut {
+	line-height: 36px;
+}
+.input-group, .input-group .form-control {
+	height: 50px
+}
+
+.input-group{
+	width: 560px;
+	float: left;
+}
+
+.input-group .form-control{
+	width: 455px;
+}
+
+#Button1{
+	border: #999999 1px solid;
+	color: #000000;
+}
+
+
+
+.pwdbut {
+	line-height: 36px;
+}
+.newpwd {
+	line-height: 50px;
+	height: 50px;
+	margin-bottom: 30px
+}
+h5 {
+	line-height: 30px;
+	color: #dc7373;
+	display: none;
+}

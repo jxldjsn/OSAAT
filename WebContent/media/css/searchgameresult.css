@@ -1,0 +1,60 @@
+@charset "utf-8";
+/* CSS Document */
+/*--team--*/
+
+.title1 {
+	padding-bottom:20px;
+}
+.team-grids {
+  position: relative;
+  margin-bottom:30px;
+}
+.team {
+    padding: 5em 0;
+}
+.team-grids a {
+	overflow: hidden;
+	position: relative;
+	display: block;
+}
+.captn h4 {
+    color: #fff;
+    font-size: 1.5em;
+    margin-top: 2px;
+}
+.captn p {
+	padding-top:10%;
+    font-size: 1.0em;
+    margin:0.5em 0;
+}
+.team-grids a .captn {
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+    color: #ffffff;
+    position: absolute;
+    bottom: -84%;
+    right: 0;
+    background-color: rgba(51, 51, 51, 0.68);
+    padding: 1% 10%;
+    text-align: center;
+    -o-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+    -webkit-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+.team-grids:hover .captn {
+  width: 100%;
+  bottom: 0%;
+  padding: 50% 10%;
+}
+ul.team-icons {
+    text-align: center;
+    padding:.5em .5em 0;
+    background: #F2AE11;
+}
+.team-grids:hover ul.team-icons {
+	background:#999;
+}
+/*--//team--*/

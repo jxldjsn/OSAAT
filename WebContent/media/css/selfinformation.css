@@ -1,0 +1,40 @@
+@CHARSET "UTF-8";
+/* CSS Document */
+#selftitle {
+	font-family:"宋体";
+	font-size:33px;
+	color:#FFFFFF;
+	margin-top:0px
+}
+
+.myinformationmenu {
+	font-family:"宋体";
+	font-size:26px;
+	color:#E6EC0B;
+}
+
+#pagetitle{
+	font-family:"宋体";
+	font-size:24px;
+	color:#FFFFFF;
+}
+a:hover { 
+color:#FFFFFF; 
+text-decoration:none; 
+} 
+
+.contentelement {
+	font-family:"宋体";
+	font-size:24px;
+	color:#A810E1;
+}
+
+.contentcontent {
+	font-family:"宋体";
+	font-size:20px;
+	color:#545454;
+}
+
+.lefttabletd{
+	border-left: 1px solid black;
+}

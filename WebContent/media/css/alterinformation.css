@@ -1,0 +1,111 @@
+@CHARSET "UTF-8";
+/* CSS Document */
+#selftitle {
+	font-family:"宋体";
+	font-size:33px;
+	margin-left:0px;
+	color:#FFFFFF;
+	margin-top:0px
+}
+
+.myinformationmenu {
+	margin-left:9px;
+	font-family:"宋体";
+	font-size:26px;
+	color:#E6EC0B;
+}
+
+#pagetitle{
+	font-family:"宋体";
+	font-size:24px;
+	color:#FFFFFF;
+}
+a:hover { 
+color:#FFFFFF; 
+text-decoration:none; 
+} 
+
+.contentelement {
+	font-family:"宋体";
+	font-size:24px;
+	color:#A810E1;
+}
+
+.contentcontent {
+	font-family:"宋体";
+	font-size:20px;
+	color:#545454;
+}
+
+#gender {
+	width:80%;
+	background-color:#1EF2DB;
+}
+
+#age {
+	width:80%;
+	background-color:#1EF2DB;
+}
+
+#address {
+	width:80%;
+	background-color:#1EF2DB;
+}
+
+#qq {
+	width:80%;
+	background-color:#1EF2DB;
+}
+
+#phone {
+	width:80%;
+	background-color:#1EF2DB;
+}
+
+#hobbies {
+	width:80%;
+	height:150px;
+	background-color:#1EF2DB;
+}
+
+#introduce {
+	width:80%;
+	height:150px;
+	background-color:#1EF2DB;
+}
+
+/*提交按钮的格式*/
+.submitinformation{
+	font-family:Oswald;
+	-webkit-perspective:1000;
+	-webkit-backface-visibility:hidden;
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#1e88c9', endColorstr='#39a1e1'); /*  IE */
+	background-image:linear-gradient(bottom, #1e88c9 25%, #39a1e1 63%);
+	background-image:-o-linear-gradient(bottom, #1e88c9 25%, #39a1e1 63%);
+	background-image:-moz-linear-gradient(bottom, #1e88c9 25%, #39a1e1 63%);
+	background-image:-webkit-linear-gradient(bottom, #1e88c9 25%, #39a1e1 63%);
+	background-image:-ms-linear-gradient(bottom, #1e88c9 25%, #39a1e1 63%);
+	color:#fff;
+	width:120px;
+	text-align:center;
+	padding:10px 20px;
+	border-radius:5px;
+	border:2px solid #145b86;
+	margin:50px 150px;
+	box-shadow:0 10px 5px -5px rgba(0, 0, 0, 0.5), 0 5px 25px
+		rgba(30, 136, 201, 0.5);
+	transition:all 100ms ease;
+}
+.submitinformation:hover{cursor:pointer;}
+.submitinformation:active{
+	transform:translatey(2px);
+	box-shadow:0 8px 5px -5px rgba(0, 0, 0, 0.65), 0 3px 25px
+		rgba(30, 136, 201, 0.5);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#1b79b3', endColorstr='#2297de'); /*  IE */
+	background-image:linear-gradient(bottom, #1b79b3 25%, #2297de 63%);
+	background-image:-o-linear-gradient(bottom, #1b79b3 25%, #2297de 63%);
+	background-image:-moz-linear-gradient(bottom, #1b79b3 25%, #2297de 63%);
+	background-image:-webkit-linear-gradient(bottom, #1b79b3 25%, #2297de 63%);
+	background-image:-ms-linear-gradient(bottom, #1b79b3 25%, #2297de 63%);
+}
+.submitinformation::selection{background:transparent;}

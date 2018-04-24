@@ -1,0 +1,392 @@
+@charset "utf-8";
+/* CSS Document */
+
+body { 
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+	background: #F1F2F3;
+	font-family: 'Open Sans';
+	font-weight: 100;
+	font-size:100%;
+	margin:0em;
+	padding:0em;
+}
+
+#WZYmusic {
+	position:relative;
+	width:960px;
+	margin:0px auto;
+	padding-top:30px;
+	padding-bottom:5px;
+	background:#39cccc;
+	font:Baskerville, "Palatino Linotype", Palatino, "Century Schoolbook L", "Times New Roman", serif;
+	font-size:45px;
+	color:#FFFFFF;
+	
+}
+
+#WZYmusicfoolter{
+	position:relative;
+	width:960px;
+	margin:50px auto 0px auto;
+	background:#dddddd;
+	font-family:Impact, Haettenschweiler, "Franklin Gothic Bold", "Arial Black", sans-serif;
+	font-size:40px;
+}
+
+#addMySong {
+	position:relative;
+	width:960px;
+	margin:0px auto;
+	background:#ffffff;
+}
+
+.fileupload{
+	position:relative;
+	width:960px;
+	margin:20px auto;
+}
+
+.songsubmit{
+	position:relative;
+	padding-right:30px;
+}
+
+/*上传button*/
+img {
+	 border:0px; vertical-align:middle; padding:0px; margin:0px;
+}
+input, button { 
+     font-family:"Arial", "Tahoma", "微软雅黑", "雅黑"; border:0; vertical-align:middle; margin:8px; line-height:18px;      font-size:18px 
+}
+.btns {
+	margin-top:-75px;
+	margin-left:50px;
+	  width:143px; height:40px; background: url(../Images/submit.jpg) no-repeat left top; color:#FFF;
+	  cursor: pointer; 
+}
+
+
+/*选择音乐文件*/
+.uploader{
+position:relative;
+display:inline-block;
+overflow:hidden;
+cursor:default;
+padding:0;
+margin:20px 20px;
+-moz-box-shadow:0px 0px 5px #ddd;
+-webkit-box-shadow:0px 0px 5px #ddd;
+box-shadow:0px 0px 5px #ddd;
+
+-moz-border-radius:5px;
+-webkit-border-radius:5px;
+border-radius:5px;
+}
+
+.filename{
+float:left;
+display:inline-block;
+outline:0 none;
+height:50px;
+width:700px;
+margin:0;
+padding:10px 10px;
+overflow:hidden;
+cursor:default;
+border:1px solid;
+border-right:0;
+font:9pt/100% Arial, Helvetica, sans-serif; color:#777;
+text-shadow:1px 1px 0px #fff;
+text-overflow:ellipsis;
+white-space:nowrap;
+
+-moz-border-radius:5px 0px 0px 5px;
+-webkit-border-radius:5px 0px 0px 5px;
+border-radius:5px 0px 0px 5px;
+
+background:#f5f5f5;
+background:-moz-linear-gradient(top, #fafafa 0%, #eee 100%);
+background:-webkit-gradient(linear, left top, left bottom, color-stop(0%,#fafafa), color-stop(100%,#f5f5f5));
+filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#fafafa', endColorstr='#f5f5f5',GradientType=0);
+border-color:#ccc;
+
+-moz-box-shadow:0px 0px 1px #fff inset;
+-webkit-box-shadow:0px 0px 1px #fff inset;
+box-shadow:0px 0px 1px #fff inset;
+
+-moz-box-sizing:border-box;
+-webkit-box-sizing:border-box;
+box-sizing:border-box;
+
+}
+
+.button{
+float:left;
+height:50px;
+display:inline-block;
+outline:0 none;
+padding:8px 12px;
+margin:0;
+cursor:pointer;
+border:1px solid;
+font:bold 9pt/100% Arial, Helvetica, sans-serif;
+
+-moz-border-radius:0px 5px 5px 0px;
+-webkit-border-radius:0px 5px 5px 0px;
+border-radius:0px 5px 5px 0px;
+
+-moz-box-shadow:0px 0px 1px #fff inset;
+-webkit-box-shadow:0px 0px 1px #fff inset;
+box-shadow:0px 0px 1px #fff inset;
+}
+
+
+.uploader input[type=file]{
+position:absolute;
+top:0; right:0; bottom:0;
+border:0;
+padding:0; margin:0;
+height:50px;
+cursor:pointer;
+filter:alpha(opacity=0);
+-moz-opacity:0;
+-khtml-opacity: 0;
+opacity:0;
+}
+
+input[type=button]::-moz-focus-inner{padding:0; border:0 none; -moz-box-sizing:content-box;}
+input[type=button]::-webkit-focus-inner{padding:0; border:0 none; -webkit-box-sizing:content-box;}
+input[type=text]::-moz-focus-inner{padding:0; border:0 none; -moz-box-sizing:content-box;}
+input[type=text]::-webkit-focus-inner{padding:0; border:0 none; -webkit-box-sizing:content-box;}
+
+/* White Color Scheme ------------------------ */
+
+.white .button{
+color:#555;
+text-shadow:1px 1px 0px #fff;
+background:#ddd;
+background:-moz-linear-gradient(top, #eeeeee 0%, #dddddd 100%);
+background:-webkit-gradient(linear, left top, left bottom, color-stop(0%,#eeeeee), color-stop(100%,#dddddd));
+filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#eeeeee', endColorstr='#dddddd',GradientType=0);
+border-color:#ccc;
+}
+
+.white:hover .button{
+background:#eee;
+background:-moz-linear-gradient(top, #dddddd 0%, #eeeeee 100%);
+background:-webkit-gradient(linear, left top, left bottom, color-stop(0%,#dddddd), color-stop(100%,#eeeeee));
+filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#dddddd', endColorstr='#eeeeee',GradientType=0);
+}
+
+
+/*导航按钮*/
+.twitter{background: #ea4c89;}
+.btn{
+  font-size:16px;
+  display: block;
+  float: right;
+  width: 100px;height: 40px;
+  background-color:#66cccc;
+  text-align: center;
+  line-height: 40px;
+  position: relative;
+  text-decoration: none;
+  margin: 20px;
+  overflow: hidden;
+  border:1px solid #FFFFFF;
+}
+
+/*信息表单*/
+.input {
+	position: relative;
+	z-index: 1;
+	display: inline-block;
+	margin: 5em;
+	max-width: 800px;
+	width: calc(100% - 2em);
+	vertical-align: top;
+}
+
+.input__field {
+	position: relative;
+	display: block;
+	float: right;
+	padding: 0.8em;
+	width: 60%;
+	border: none;
+	border-radius: 0;
+	background: #f0f0f0;
+	color: #aaa;
+	font-weight: bold;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	-webkit-appearance: none; /* for box shadows to show on iOS */
+}
+
+.input__field:focus {
+	outline: none;
+}
+
+.input__label {
+	display: inline-block;
+	float: right;
+	padding: 0 1em;
+	width: 40%;
+	color: #6a7989;
+	font-weight: bold;
+	font-size: 70.25%;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+.input__label-content {
+	position: relative;
+	display: block;
+	padding: 1.6em 0;
+	width: 100%;
+}
+
+.graphic {
+	position: absolute;
+	top: 0;
+	left: 0;
+	fill: none;
+}
+
+.icon {
+	color: #ddd;
+	font-size: 150%;
+}
+
+/* Individual styles */
+
+/* Yoko */
+.input__field--yoko {
+	z-index: 10;
+	width: 100%;
+	background: transparent;
+	color: #f5f5f5;
+	opacity: 0;
+	-webkit-transition: opacity 0.3s;
+	transition: opacity 0.3s;
+}
+
+.input__label--yoko {
+	position: relative;
+	width: 100%;
+	color: #b04b40;
+	text-align: left;
+}
+
+.input__label--yoko::before {
+	content: '';
+	position: absolute;
+	bottom: 100%;
+	left: 0;
+	width: 100%;
+	height: 4em;
+	background: #c5564a;
+	-webkit-transform: perspective(1000px) rotate3d(1, 0, 0, 90deg);
+	transform: perspective(1000px) rotate3d(1, 0, 0, 90deg);
+	-webkit-transform-origin: 50% 100%;
+	transform-origin: 50% 100%;
+	-webkit-transition: -webkit-transform 0.3s;
+	transition: transform 0.3s;
+}
+
+.input__label--yoko::after {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 0.25em;
+	background: #ad473c;
+	-webkit-transform-origin: 50% 0%;
+	transform-origin: 50% 0%;
+	-webkit-transition: -webkit-transform 0.3s;
+	transition: transform 0.3s;
+}
+
+.input__label-content--yoko {
+	padding: 0.75em 0;
+}
+
+.input__field--yoko:focus,
+.input--filled .input__field--yoko {
+	opacity: 1;
+	-webkit-transition-delay: 0.3s;
+	transition-delay: 0.3s;
+}
+
+.input__field--yoko:focus + .input__label--yoko::before,
+.input--filled .input__label--yoko::before {
+	-webkit-transform: perspective(1000px) rotate3d(1, 0, 0, 0deg);
+	transform: perspective(1000px) rotate3d(1, 0, 0, 0deg);
+}
+
+.input__field--yoko:focus + .input__label--yoko,
+.input--filled .input__label--yoko {
+	pointer-events: none;
+}
+
+.input__field--yoko:focus + .input__label--yoko::after,
+.input--filled .input__label--yoko::after {
+	-webkit-transform: perspective(1000px) rotate3d(1, 0, 0, -90deg);
+	transform: perspective(1000px) rotate3d(1, 0, 0, -90deg);
+}
+
+/* Kyo */
+.input--kyo {
+	z-index: auto;
+}
+
+.input__field--kyo {
+	padding: 0.85em 1.5em;
+	width: 100%;
+	border-radius: 2em;
+	background: #fff;
+	color: #535d92;
+}
+
+.input__label--kyo {
+	z-index: 0;
+	padding: 0 0 0 2em;
+	width: 100%;
+	text-align: left;
+}
+
+.input__label--kyo::after {
+	content: '';
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 1000;
+	width: 100%;
+	height: 100%;
+	background: rgba(11, 43, 205, 0.6);
+	opacity: 0;
+	-webkit-transition: opacity 0.3s;
+	transition: opacity 0.3s;
+	pointer-events: none;
+}
+
+.input__label-content--kyo {
+	padding: 0.5em 0;
+}
+
+.input__field--kyo:focus,
+.input__field--kyo:focus +  .input__label--kyo .input__label-content--kyo {
+	z-index: 10000;
+}
+
+.input__field--kyo:focus + .input__label--kyo {
+	color: #fff;
+}
+
+.input__field--kyo:focus + .input__label--kyo::after {
+	opacity: 1;
+}

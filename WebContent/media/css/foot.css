@@ -1,0 +1,24 @@
+
+
+div.share-coin > a>img{
+    margin: 30px 15px;
+}
+
+.footer{
+    background-color: #333333;
+    border-top: 1px solid #ddd;
+}
+.about-us > ul > li{
+    margin: 15px 15px;
+    font-size: 14px;
+    color: #999;
+}
+
+.about-us > ul > li:hover{
+    color: #e60000;
+    cursor: pointer;
+}
+.copyrighet{
+    font-size: 12px;
+    color: #999;
+}
